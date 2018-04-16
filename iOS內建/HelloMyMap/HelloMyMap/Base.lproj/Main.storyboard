@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="HelloMyMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fil-so-5tB">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="F7f-bL-hOK">
+                                <rect key="frame" x="50" y="30" width="220" height="29"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <segments>
+                                    <segment title="標準"/>
+                                    <segment title="衛星"/>
+                                    <segment title="混合"/>
+                                    <segment title="鳥瞰"/>
+                                </segments>
+                                <color key="tintColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="mapTypeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="1UB-mA-9tG"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4Cg-oh-De2">
+                                <rect key="frame" x="37.5" y="530" width="245" height="29"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <segments>
+                                    <segment title="無"/>
+                                    <segment title="追蹤"/>
+                                    <segment title="追蹤＆方向"/>
+                                </segments>
+                                <color key="tintColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="userTrackingModeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="lPC-Th-7m0"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="F7f-bL-hOK" secondAttribute="trailing" constant="50" id="0Le-MX-rSw"/>
+                            <constraint firstItem="fil-so-5tB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5G8-4P-6PR"/>
+                            <constraint firstItem="fil-so-5tB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="89u-VK-pmn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4Cg-oh-De2" secondAttribute="trailing" constant="37.5" id="DxY-fh-ekS"/>
+                            <constraint firstItem="4Cg-oh-De2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="37.5" id="Ihw-pe-rnG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4Cg-oh-De2" secondAttribute="bottom" constant="10" id="Jyp-2Q-VrQ"/>
+                            <constraint firstItem="fil-so-5tB" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XhG-K1-p0r"/>
+                            <constraint firstItem="fil-so-5tB" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Xhm-dZ-Mnw"/>
+                            <constraint firstItem="F7f-bL-hOK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" multiplier="3/3" id="lE1-R0-YSP"/>
+                            <constraint firstItem="4Cg-oh-De2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mE0-jI-ujl"/>
+                            <constraint firstItem="F7f-bL-hOK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="pxm-Hb-52Q"/>
+                            <constraint firstItem="F7f-bL-hOK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="tSd-5m-nv1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="mainMapView" destination="fil-so-5tB" id="s2M-1i-LGV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135" y="129.92957746478874"/>
+        </scene>
+    </scenes>
+</document>

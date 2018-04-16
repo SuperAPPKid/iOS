@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--AV Player View Controller-->
+        <scene sceneID="jxM-Mv-h06">
+            <objects>
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="xf5-yk-VDY" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HFb-1C-gKh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="852" y="130"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="HelloMtAV" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vHc-bQ-oe5">
+                                <rect key="frame" x="20" y="35" width="449" height="45"/>
+                                <color key="backgroundColor" red="0.97537476443070303" green="1" blue="0.23814832205956749" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="d9U-mn-VdN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="遠端影片"/>
+                                <connections>
+                                    <action selector="playRemoteMp4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="n9z-2l-W9y"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSS-x7-AeD">
+                                <rect key="frame" x="20" y="97" width="450" height="46"/>
+                                <color key="backgroundColor" red="0.97537476440000004" green="1" blue="0.2381483221" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="本地影片"/>
+                                <connections>
+                                    <action selector="playLocalMp4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M4G-Rn-gdQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gA-Mb-Khc">
+                                <rect key="frame" x="20" y="159" width="450" height="46"/>
+                                <color key="backgroundColor" red="0.97537476440000004" green="1" blue="0.2381483221" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="遠端mp3"/>
+                                <connections>
+                                    <action selector="playRemoteMp3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZLf-bW-m0v"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hh-cM-mOP">
+                                <rect key="frame" x="20" y="223" width="450" height="46"/>
+                                <color key="backgroundColor" red="0.97537476440000004" green="1" blue="0.2381483221" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="STOP"/>
+                                <connections>
+                                    <action selector="stop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l4c-P6-VhP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LKn-vd-um6">
+                                <rect key="frame" x="20" y="287" width="450" height="46"/>
+                                <color key="backgroundColor" red="0.97537476440000004" green="1" blue="0.2381483221" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="縮圖"/>
+                                <connections>
+                                    <action selector="thumbnail:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cGi-fV-EV8"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oFv-An-LQV">
+                                <rect key="frame" x="20" y="416" width="560" height="171"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaU-Vi-DYQ">
+                                <rect key="frame" x="20" y="351" width="449" height="46"/>
+                                <color key="backgroundColor" red="0.97537476440000004" green="1" blue="0.2381483221" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="全螢幕播放"/>
+                                <connections>
+                                    <segue destination="xf5-yk-VDY" kind="show" identifier="toFullScreen" id="aPq-F4-ogQ"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="HVG-uF-Qb1">
+                                <rect key="frame" x="244" y="35" width="123" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Library"/>
+                                    <segment title="Camera"/>
+                                </segments>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gZ-gY-in4">
+                                <rect key="frame" x="253" y="71" width="106" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="讀照片"/>
+                                <connections>
+                                    <action selector="takePicture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S7g-RG-rnO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1gA-Mb-Khc" firstAttribute="leading" secondItem="1hh-cM-mOP" secondAttribute="leading" id="3d3-pd-oe6"/>
+                            <constraint firstItem="1hh-cM-mOP" firstAttribute="trailing" secondItem="LKn-vd-um6" secondAttribute="trailing" id="7PE-Gv-Biz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QSS-x7-AeD" secondAttribute="trailing" constant="130" id="A2Y-LF-2L9"/>
+                            <constraint firstItem="1hh-cM-mOP" firstAttribute="leading" secondItem="LKn-vd-um6" secondAttribute="leading" id="L8b-4d-acF"/>
+                            <constraint firstItem="QSS-x7-AeD" firstAttribute="top" secondItem="vHc-bQ-oe5" secondAttribute="bottom" constant="17" id="PT8-7c-2fK"/>
+                            <constraint firstItem="QSS-x7-AeD" firstAttribute="trailing" secondItem="1gA-Mb-Khc" secondAttribute="trailing" id="Sij-nx-eQj"/>
+                            <constraint firstItem="oFv-An-LQV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UeI-OX-5ZN"/>
+                            <constraint firstItem="vHc-bQ-oe5" firstAttribute="leading" secondItem="TaU-Vi-DYQ" secondAttribute="leading" id="VrU-YL-d6P"/>
+                            <constraint firstItem="vHc-bQ-oe5" firstAttribute="trailing" secondItem="TaU-Vi-DYQ" secondAttribute="trailing" id="ZQh-dj-0Nh"/>
+                            <constraint firstItem="LKn-vd-um6" firstAttribute="top" secondItem="1hh-cM-mOP" secondAttribute="bottom" constant="18" id="a6j-Nz-cI4"/>
+                            <constraint firstItem="TaU-Vi-DYQ" firstAttribute="top" secondItem="LKn-vd-um6" secondAttribute="bottom" constant="18" id="bDh-nf-BSK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="oFv-An-LQV" secondAttribute="bottom" constant="13" id="d7M-PV-ZPm"/>
+                            <constraint firstItem="oFv-An-LQV" firstAttribute="top" secondItem="TaU-Vi-DYQ" secondAttribute="bottom" constant="19" id="eX6-Om-bha"/>
+                            <constraint firstItem="1gA-Mb-Khc" firstAttribute="trailing" secondItem="1hh-cM-mOP" secondAttribute="trailing" id="ejd-Vb-Hlv"/>
+                            <constraint firstItem="QSS-x7-AeD" firstAttribute="leading" secondItem="1gA-Mb-Khc" secondAttribute="leading" id="fbc-6v-0of"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vHc-bQ-oe5" secondAttribute="trailing" constant="131" id="nXE-ER-Z4x"/>
+                            <constraint firstItem="LKn-vd-um6" firstAttribute="leading" secondItem="oFv-An-LQV" secondAttribute="leading" id="pJb-88-m0b"/>
+                            <constraint firstItem="1gA-Mb-Khc" firstAttribute="top" secondItem="QSS-x7-AeD" secondAttribute="bottom" constant="16" id="sEm-PO-BXe"/>
+                            <constraint firstItem="oFv-An-LQV" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="u25-q8-sDe"/>
+                            <constraint firstItem="vHc-bQ-oe5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="vvm-6O-PE4"/>
+                            <constraint firstItem="1hh-cM-mOP" firstAttribute="top" secondItem="1gA-Mb-Khc" secondAttribute="bottom" constant="18" id="y3a-Go-ONW"/>
+                            <constraint firstItem="vHc-bQ-oe5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="yZs-K0-GPt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="resultImageView" destination="oFv-An-LQV" id="Yk9-hv-zek"/>
+                        <outlet property="sourcetypeSegment" destination="HVG-uF-Qb1" id="f5h-fp-0wq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="129.98500749625188"/>
+        </scene>
+    </scenes>
+</document>

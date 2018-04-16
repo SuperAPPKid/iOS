@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Xcu-yi-4VZ">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--FB_DEMO-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="sSV-9a-aad" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="15" y="478" width="290" height="60"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="loginButton_click:" destination="BYZ-38-t0r" eventType="valueChanged" id="TNb-lw-5Dj"/>
+                                </connections>
+                            </view>
+                            <view clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="LL6-el-Psq" customClass="FBSDKProfilePictureView">
+                                <rect key="frame" x="15" y="146" width="169" height="167"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGJ-lu-os5">
+                                <rect key="frame" x="202" y="146" width="100" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.94210821881594053" blue="0.11984249972797134" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="1wn-hV-dPj"/>
+                                    <constraint firstAttribute="width" constant="100" id="jux-BW-EaW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LL6-el-Psq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="4gE-09-vDW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sSV-9a-aad" secondAttribute="bottom" constant="30" id="AYp-MM-dxR"/>
+                            <constraint firstItem="LL6-el-Psq" firstAttribute="top" secondItem="dGJ-lu-os5" secondAttribute="top" id="Ai0-bu-14L"/>
+                            <constraint firstItem="LL6-el-Psq" firstAttribute="leading" secondItem="sSV-9a-aad" secondAttribute="leading" id="HaC-YY-pu4"/>
+                            <constraint firstItem="sSV-9a-aad" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="478" id="MQp-4h-TQt"/>
+                            <constraint firstItem="sSV-9a-aad" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Pab-3d-nTd"/>
+                            <constraint firstItem="dGJ-lu-os5" firstAttribute="leading" secondItem="LL6-el-Psq" secondAttribute="trailing" constant="18" id="dkj-3Z-cNv"/>
+                            <constraint firstAttribute="bottom" secondItem="LL6-el-Psq" secondAttribute="bottom" constant="255" id="kpQ-GX-is9"/>
+                            <constraint firstItem="LL6-el-Psq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="uAy-ih-4RZ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dGJ-lu-os5" secondAttribute="trailing" constant="18" id="z6n-jx-mny"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="FB_DEMO" id="yte-et-J8U">
+                        <barButtonItem key="backBarButtonItem" title="上一頁" id="gRY-jz-dMp"/>
+                        <barButtonItem key="leftBarButtonItem" title="Messenger" id="kli-cg-7c7">
+                            <connections>
+                                <action selector="messenger:" destination="BYZ-38-t0r" id="jq9-gm-vNA"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="PO文" id="XPn-h9-p9b">
+                            <connections>
+                                <action selector="post:" destination="BYZ-38-t0r" id="3lf-lE-rwD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="loginButton" destination="sSV-9a-aad" id="TaX-9R-dpQ"/>
+                        <outlet property="nameLabel" destination="dGJ-lu-os5" id="QmS-ku-HKK"/>
+                        <outlet property="pictureView" destination="LL6-el-Psq" id="Itz-rj-Jug"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="474.375" y="123.59154929577466"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ILt-Zt-QWt">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xcu-yi-4VZ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="1zj-c0-Ovn">
+                        <rect key="frame" x="0.0" y="20" width="320" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.94210821879999995" blue="0.11984249969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" red="1" green="0.94210821879999995" blue="0.11984249969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="5R9-XP-8nB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xzU-Qo-roo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-235.19999999999999" y="97.151424287856074"/>
+        </scene>
+    </scenes>
+    <color key="tintColor" red="1" green="0.94210821879999995" blue="0.11984249969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+</document>
