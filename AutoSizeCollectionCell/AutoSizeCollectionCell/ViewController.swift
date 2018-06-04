@@ -47,7 +47,6 @@ class ViewController: UIViewController {
             let square = MyCollectionViewSquareLayout(columnCount: column)
             square.delegate = self
             collectionView.setCollectionViewLayout(square, animated: false)
-            collectionView.reloadData()
             break
         case 2:
             layout = LayoutMode.WaterFall
@@ -56,19 +55,18 @@ class ViewController: UIViewController {
             waterFall.delegate = self
             collectionView.setCollectionViewLayout(waterFall, animated: false)
             collectionView.contentOffset = CGPoint(x: 0, y: 0)
-            collectionView.reloadData()
             break
         case 3:
             layout = LayoutMode.Line
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: [.transitionCurlDown], animations: {
                 self.collectionView.setCollectionViewLayout(MyCollectionViewLineLayout(), animated: false)
             }, completion: nil)
-            collectionView.reloadData()
             break
         default:
             layout = LayoutMode.Default
             self.setDefaultLayout()
         }
+        collectionView.reloadData()
     }
     
     func setDefaultLayout() -> Void {
@@ -90,16 +88,35 @@ extension ViewController:UICollectionViewDataSource,UICollectionViewDelegate{
         cell.thumbView.image = UIImage(named: cellModel[indexPath.row].imgName)
         return cell
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if layout == .Square && !cellModel[indexPath.row].isBig {
-            for i in 0..<cellModel.count{
-                cellModel[i].isBig = false
-            }
-            cellModel[indexPath.row].isBig = true
-            collectionView.reloadData()
-        } else {
-            performSegue(withIdentifier: "toDetail", sender: nil)
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MyCell else {
+            return
         }
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveLinear, animations: {
+            cell.thumbView.transform = .init(scaleX: 0.5, y: 0.5)
+        })
+        return
+    }
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MyCell else {
+            return
+        }
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
+            cell.thumbView.transform = .init(scaleX: 1, y: 1)
+        }, completion: { (success) in
+            if self.layout == .Square && !self.cellModel[indexPath.row].isBig {
+                for i in 0..<self.cellModel.count{
+                    self.cellModel[i].isBig = false
+                }
+                self.cellModel[indexPath.row].isBig = true
+                collectionView.collectionViewLayout.invalidateLayout()
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveLinear, animations: {
+                        self.collectionView.layoutIfNeeded() 
+                })
+            } else {
+                self.performSegue(withIdentifier: "toDetail", sender: nil)
+            }})
+        return
     }
 }
 extension ViewController:MyCollectionViewSquareLayoutDelegate{
