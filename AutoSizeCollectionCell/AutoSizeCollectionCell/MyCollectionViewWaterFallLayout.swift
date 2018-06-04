@@ -63,7 +63,7 @@ class MyCollectionViewWaterFallLayout: UICollectionViewLayout {
         let attrs = UICollectionViewLayoutAttributes(forCellWith: indexPath)
         //Set Cell Frame
         let cellW = (collectionViewWidth - edgeInsets.left - edgeInsets.right - CGFloat(columnCount - 1) * rowMargin) / CGFloat(columnCount)
-        let cellH = delegate!.heightForCell(at: indexPath)
+        let cellH = delegate.heightForCell(at: indexPath)
         var minColumnIndex = 0
         var minColumnHeight = columnHeights[minColumnIndex]
         for i in 0..<columnCount {
