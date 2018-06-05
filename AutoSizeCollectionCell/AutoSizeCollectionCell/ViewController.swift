@@ -20,12 +20,12 @@ class ViewController: UIViewController {
     var column:CGFloat = 3
     var layout:LayoutMode = .Default
     var cellModel:[Model] = [Model(imgName: "1", isBig: true),Model(imgName: "2", isBig: false),Model(imgName: "3", isBig: false),Model(imgName: "4", isBig: false),Model(imgName: "5", isBig: false),Model(imgName: "6", isBig: false),Model(imgName: "7", isBig: false),Model(imgName: "8", isBig: false),Model(imgName: "9", isBig: false),Model(imgName: "10", isBig: false),Model(imgName: "1", isBig: false),Model(imgName: "2", isBig: false),Model(imgName: "3", isBig: false),Model(imgName: "4", isBig: false),Model(imgName: "5", isBig: false),Model(imgName: "6", isBig: false),Model(imgName: "7", isBig: false),Model(imgName: "8", isBig: false),Model(imgName: "9", isBig: false),Model(imgName: "10", isBig: false),Model(imgName: "1", isBig: false),Model(imgName: "2", isBig: false),Model(imgName: "3", isBig: false),Model(imgName: "4", isBig: false),Model(imgName: "5", isBig: false),Model(imgName: "6", isBig: false),Model(imgName: "7", isBig: false),Model(imgName: "8", isBig: false),Model(imgName: "9", isBig: false),Model(imgName: "10", isBig: false),Model(imgName: "1", isBig: false),Model(imgName: "2", isBig: false),Model(imgName: "3", isBig: false),Model(imgName: "4", isBig: false),Model(imgName: "5", isBig: false),Model(imgName: "6", isBig: false),Model(imgName: "7", isBig: false),Model(imgName: "8", isBig: false),Model(imgName: "9", isBig: false),Model(imgName: "10", isBig: false)]
-    let cellHeights:[CGFloat] = [150,280,350,150,180,
+    let cellHeights:[CGFloat] = [150,280,350,550,180,
                                  350,180,250,150,280,
-                                 250,180,150,150,180,
+                                 250,180,150,550,180,
                                  150,280,350,250,280,
-                                 250,180,250,150,180,
-                                 350,380,150,250,180,
+                                 250,380,250,150,180,
+                                 350,380,450,250,180,
                                  450,180,350,150,380,
                                  150,280,150,250,180]
     
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         square.delegate = self
         collectionView.setCollectionViewLayout(square, animated: true)
     }
-
+    
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 1:
@@ -93,7 +93,7 @@ extension ViewController:UICollectionViewDataSource,UICollectionViewDelegate{
             return
         }
         UIView.animate(withDuration: 0.1, delay: 0, options: .curveLinear, animations: {
-            cell.thumbView.transform = .init(scaleX: 0.5, y: 0.5)
+            cell.transform = .init(scaleX: 0.5, y: 0.5)
         })
         return
     }
@@ -102,21 +102,51 @@ extension ViewController:UICollectionViewDataSource,UICollectionViewDelegate{
             return
         }
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
-            cell.thumbView.transform = .init(scaleX: 1, y: 1)
+            cell.transform = .init(scaleX: 1, y: 1)
         }, completion: { (success) in
             if self.layout == .Square && !self.cellModel[indexPath.row].isBig {
                 for i in 0..<self.cellModel.count{
                     self.cellModel[i].isBig = false
                 }
                 self.cellModel[indexPath.row].isBig = true
-                collectionView.collectionViewLayout.invalidateLayout()
-                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveLinear, animations: {
-                        self.collectionView.layoutIfNeeded() 
-                })
+                self.animeInvaliateLayout()
             } else {
                 self.performSegue(withIdentifier: "toDetail", sender: nil)
             }})
         return
+    }
+    func animeInvaliateLayout() {
+        guard let squareLayout = collectionView.collectionViewLayout as? MyCollectionViewSquareLayout else {
+            return
+        }
+        let oldAttrsArr = squareLayout.attrsArray
+        collectionView.collectionViewLayout.invalidateLayout()
+        self.collectionView.layoutIfNeeded()
+        let newAttrsArr = squareLayout.attrsArray
+        var oldChangedAttrsArr:[UICollectionViewLayoutAttributes] = []
+        var newChangedAttrsArr:[UICollectionViewLayoutAttributes] = []
+        for oldAttrs in oldAttrsArr {
+            for newAttrs in newAttrsArr {
+                if oldAttrs.indexPath == newAttrs.indexPath && oldAttrs.frame != newAttrs.frame{
+                    oldChangedAttrsArr.append(oldAttrs)
+                    newChangedAttrsArr.append(newAttrs)
+                }
+            }
+        }
+        for (index, value) in newChangedAttrsArr.enumerated() {
+            if let cell = collectionView.cellForItem(at: value.indexPath) as? MyCell {
+                
+                cell.transform = .init(a: oldChangedAttrsArr[index].frame.width / newChangedAttrsArr[index].frame.width,
+                                       b: 0,
+                                       c: 0,
+                                       d: oldChangedAttrsArr[index].frame.height / newChangedAttrsArr[index].frame.height,
+                                       tx: oldChangedAttrsArr[index].center.x - newChangedAttrsArr[index].center.x,
+                                       ty: oldChangedAttrsArr[index].center.y - newChangedAttrsArr[index].center.y)
+                UIView.animate(withDuration: 0.25, delay: Double(index) * 0.001, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveLinear, animations: {
+                    cell.transform = .identity
+                })
+            }
+        }
     }
 }
 extension ViewController:MyCollectionViewSquareLayoutDelegate{

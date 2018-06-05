@@ -72,14 +72,14 @@ class MyCollectionViewSquareLayout: UICollectionViewLayout {
                 var cellY:CGFloat = 0
                 if i == bigGroup {
                     if j == bigIndexPath.row {
-                        if bigIndexPath.row % Int(columnCount) <= Int(columnCount) / 2 {
+                        if bigIndexPath.row % Int(columnCount) < Int(columnCount) / 2 {
                             cellX = edgeInsets.left
                         } else {
                             cellX = collectionViewContentW - edgeInsets.right - cellSize.width
                         }
                         cellY = oldCollectionViewContentH
                     } else {
-                        if bigIndexPath.row % Int(columnCount) <= Int(columnCount) / 2 {
+                        if bigIndexPath.row % Int(columnCount) < Int(columnCount) / 2 {
                             cellX = collectionViewContentW - edgeInsets.right - cellSize.width
                         } else {
                             cellX = edgeInsets.left
