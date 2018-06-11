@@ -135,14 +135,13 @@ extension ViewController:UICollectionViewDataSource,UICollectionViewDelegate{
         }
         for (index, value) in newChangedAttrsArr.enumerated() {
             if let cell = collectionView.cellForItem(at: value.indexPath) as? MyCell {
-                
                 cell.transform = .init(a: oldChangedAttrsArr[index].frame.width / newChangedAttrsArr[index].frame.width,
                                        b: 0,
                                        c: 0,
                                        d: oldChangedAttrsArr[index].frame.height / newChangedAttrsArr[index].frame.height,
                                        tx: oldChangedAttrsArr[index].center.x - newChangedAttrsArr[index].center.x,
                                        ty: oldChangedAttrsArr[index].center.y - newChangedAttrsArr[index].center.y)
-                UIView.animate(withDuration: 0.25, delay: Double(index) * 0.001, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveLinear, animations: {
+                UIView.animate(withDuration: 0.25, delay: Double(index) * 0.001, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveLinear, animations:{
                     cell.transform = .identity
                 })
             }
