@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2701D50720D7BB9200158406 /* CATransitionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2701D50620D7BB9200158406 /* CATransitionVC.swift */; };
+		277C39BC20D57FE4003B1655 /* ChildVC_transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277C39BB20D57FE4003B1655 /* ChildVC_transition.swift */; };
 		367CDFA020D263DE006CA74A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367CDF9F20D263DE006CA74A /* AppDelegate.swift */; };
 		367CDFA520D263DE006CA74A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 367CDFA320D263DE006CA74A /* Main.storyboard */; };
 		367CDFA720D263DF006CA74A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 367CDFA620D263DF006CA74A /* Assets.xcassets */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2701D50620D7BB9200158406 /* CATransitionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CATransitionVC.swift; sourceTree = "<group>"; };
+		277C39BB20D57FE4003B1655 /* ChildVC_transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVC_transition.swift; sourceTree = "<group>"; };
 		367CDF9C20D263DE006CA74A /* DoSomeTransition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoSomeTransition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		367CDF9F20D263DE006CA74A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		367CDFA420D263DE006CA74A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 				367CDFA620D263DF006CA74A /* Assets.xcassets */,
 				367CDFA820D263DF006CA74A /* LaunchScreen.storyboard */,
 				367CDFAB20D263DF006CA74A /* Info.plist */,
+				277C39BB20D57FE4003B1655 /* ChildVC_transition.swift */,
+				2701D50620D7BB9200158406 /* CATransitionVC.swift */,
 			);
 			path = DoSomeTransition;
 			sourceTree = "<group>";
@@ -135,8 +141,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2701D50720D7BB9200158406 /* CATransitionVC.swift in Sources */,
 				367CDFA020D263DE006CA74A /* AppDelegate.swift in Sources */,
 				36FD60BA20D276AF00978A93 /* TableViewController.swift in Sources */,
+				277C39BC20D57FE4003B1655 /* ChildVC_transition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
