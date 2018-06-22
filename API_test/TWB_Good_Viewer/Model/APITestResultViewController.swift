@@ -10,9 +10,17 @@ import UIKit
 
 class APITestResultViewController: UIViewController {
     @IBOutlet weak var responseView: UITextView!
+    @IBOutlet weak var imageViewContainer: UIStackView!
+    @IBOutlet weak var progressBar: UIProgressView!
+    
     var response:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         responseView.text = response
+    }
+    
+    func setProgressHidden(setHidden:Bool) {
+        self.progressBar.isHidden = setHidden ? true:false
     }
 }

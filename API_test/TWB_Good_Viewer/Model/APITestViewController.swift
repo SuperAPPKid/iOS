@@ -85,11 +85,35 @@ class APITestViewController: UITableViewController {
                 }
                 break
             case .POST_FormData:
-                
-                break
+                let dataPath:[String : Data] = ["file":UIImageJPEGRepresentation(UIImage(named: "1")!, 0.5)!]
+                API.shared.requestWithFormData(urlString: basePostURL, parameters: postFormData, dataPath: dataPath, completion: { (data) in
+                    guard let response:NSDictionary = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? NSDictionary else { return }
+                    DispatchQueue.main.async {
+                        self.showResponse(response: response.description )
+                    }
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
             case .Download:
+                let config = URLSessionConfiguration.default
+                config.timeoutIntervalForResource = .infinity
+                API.shared.customizeSessionManager(with: config, delegate: self, delegateQueue: nil)
                 break
             }
         }
     }
 }
+
+extension APITestViewController:URLSessionDownloadDelegate {
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {}
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+        
+    }
+}
+

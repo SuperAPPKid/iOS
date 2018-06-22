@@ -8,10 +8,23 @@
 
 import UIKit
 
-class API: NSObject {
+class API:NSObject {
     static let shared = API()
+    private var sessionManager:URLSession!
+    var downloadCompletion:((Data) -> Void)?
+    var downloadErrorHandler:((Error) -> Void)?
     
-    private override init() {}
+    private override init() {
+        super.init()
+        print("New Api")
+        let config:URLSessionConfiguration = .default
+        self.sessionManager = URLSession(configuration: config, delegate: self, delegateQueue: nil)
+    }
+    
+    func customizeSessionManager(with config:URLSessionConfiguration = .default,delegate:URLSessionTaskDelegate?,delegateQueue:OperationQueue? = nil) {
+        self.sessionManager.finishTasksAndInvalidate()
+        self.sessionManager = URLSession(configuration: config, delegate: delegate ?? self, delegateQueue: delegateQueue)
+    }
     
     func requestWithURL(urlString: String, parameters: [String: Any], completion: @escaping (Data) -> Void, errorHandler: @escaping (Error) -> Void) {
         var urlComponents = URLComponents(string: urlString)
@@ -55,12 +68,51 @@ class API: NSObject {
         var request = URLRequest(url: url)
         request.httpBody = parameters.data(using: .utf8)
         request.httpMethod = "POST"
-        request.setValue("pplication/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         fetchedDataByDataTask(from: request, completion: completion, errorHandler: errorHandler)
     }
     
+    func requestWithFormData(urlString: String, parameters: [String: Any], dataPath: [String: Data], completion: @escaping (Data) -> Void, errorHandler: @escaping (Error) -> Void) {
+        guard let url = URL(string: urlString) else { return }
+        var request = URLRequest(url: url)
+        let boundary = "ABCDEFG"
+        var body:Data = Data()
+        
+        request.setValue("multipart/form-data; boundary = \(boundary)", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        
+        for (key, value) in parameters {
+            body.appendString(string: "--\(boundary)\r\n")
+            body.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+            body.appendString(string: "\(value)\r\n")
+        }
+        for (key, value) in dataPath {
+            body.appendString(string: "--\(boundary)\r\n")
+            body.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(key).jpeg\"\r\n")
+            body.appendString(string: "Content-Type: image/jpeg\r\n\r\n")
+            body.append(value)
+            body.appendString(string: "\r\n")
+        }
+        body.appendString(string: "--\(boundary)--\r\n")
+        request.httpBody = body
+        
+        fetchedDataByDataTask(from: request, completion: completion, errorHandler: errorHandler)
+    }
+    
+    
+    private func downloadByDownloadTask(from urlString: String, downloadCompletion: ((Data) -> Void)?, downloadErrorHandler: ((Error) -> Void)?) {
+        guard let url = URL(string: urlString) else { return }
+        let task = self.sessionManager.downloadTask(with:url)
+        self.downloadCompletion = downloadCompletion
+        self.downloadErrorHandler = downloadErrorHandler
+        task.resume()
+    }
+    
     private func fetchedDataByDataTask(from request: URLRequest, completion: @escaping (Data) -> Void, errorHandler: @escaping (Error) -> Void) {
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        let task = self.sessionManager.dataTask(with: request) { (data, response, error) in
+            if let response = response as? HTTPURLResponse {
+                print(response)
+            }
             if let error = error {
                 errorHandler(error)
                 return
@@ -73,7 +125,7 @@ class API: NSObject {
     }
     
     func cancelAllTask() {
-        URLSession.shared.getTasksWithCompletionHandler { (dataTask, uploadTask, downloadTask) in
+        self.sessionManager.getTasksWithCompletionHandler { (dataTask, uploadTask, downloadTask) in
             if (dataTask.isEmpty) {
                 return
             }
@@ -81,5 +133,38 @@ class API: NSObject {
                 task.cancel()
             }
         }
+    }
+    
+}
+
+extension API:URLSessionDownloadDelegate {
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        do {
+            let data = try Data(contentsOf: location)
+            guard let completionHandler = self.downloadCompletion else {
+                return
+            }
+            completionHandler(data)
+        } catch {
+            guard let errorHandler = self.downloadErrorHandler else {
+                return
+            }
+            errorHandler(error)
+        }
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+        
+    }
+}
+
+extension Data{
+    mutating func appendString(string: String) {
+        guard let data = string.data(using: .utf8, allowLossyConversion: true) else { return }
+        append(data)
     }
 }
