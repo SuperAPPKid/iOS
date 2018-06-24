@@ -11,8 +11,9 @@ import UIKit
 class API:NSObject {
     static let shared = API()
     private var sessionManager:URLSession!
-    var downloadCompletion:((Data) -> Void)?
-    var downloadErrorHandler:((Error) -> Void)?
+    private var downloadCompletion:((Data) -> Void)?
+    private var downloadErrorHandler:((Error) -> Void)?
+    public private(set) var downloadCount = 0
     
     private override init() {
         super.init()
@@ -100,11 +101,12 @@ class API:NSObject {
     }
     
     
-    private func downloadByDownloadTask(from urlString: String, downloadCompletion: ((Data) -> Void)?, downloadErrorHandler: ((Error) -> Void)?) {
+    func downloadByDownloadTask(from urlString: String, downloadCompletion: ((Data) -> Void)? = nil, downloadErrorHandler: ((Error) -> Void)? = nil) {
         guard let url = URL(string: urlString) else { return }
         let task = self.sessionManager.downloadTask(with:url)
         self.downloadCompletion = downloadCompletion
         self.downloadErrorHandler = downloadErrorHandler
+        downloadCount += 1
         task.resume()
     }
     
@@ -125,6 +127,7 @@ class API:NSObject {
     }
     
     func cancelAllTask() {
+        self.downloadCount = 0
         self.sessionManager.getTasksWithCompletionHandler { (dataTask, uploadTask, downloadTask) in
             if (dataTask.isEmpty) {
                 return
@@ -154,7 +157,8 @@ extension API:URLSessionDownloadDelegate {
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        
+        let rate = String(format: "%.2f%%", Double(totalBytesWritten)/Double(totalBytesExpectedToWrite)*100)
+        print("totalBytesWritten:\(rate)")
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
