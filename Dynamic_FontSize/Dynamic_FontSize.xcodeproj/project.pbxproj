@@ -7,25 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36D3EB6320E5E66300AC6A0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D3EB6220E5E66300AC6A0B /* AppDelegate.swift */; };
-		36D3EB6520E5E66300AC6A0B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D3EB6420E5E66300AC6A0B /* ViewController.swift */; };
-		36D3EB6820E5E66300AC6A0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36D3EB6620E5E66300AC6A0B /* Main.storyboard */; };
-		36D3EB6A20E5E66500AC6A0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36D3EB6920E5E66500AC6A0B /* Assets.xcassets */; };
-		36D3EB6D20E5E66500AC6A0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36D3EB6B20E5E66500AC6A0B /* LaunchScreen.storyboard */; };
+		277314D920E8DE6A00B55072 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277314D820E8DE6A00B55072 /* AppDelegate.swift */; };
+		277314DB20E8DE6A00B55072 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277314DA20E8DE6A00B55072 /* ViewController.swift */; };
+		277314DE20E8DE6A00B55072 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 277314DC20E8DE6A00B55072 /* Main.storyboard */; };
+		277314E020E8DE6C00B55072 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 277314DF20E8DE6C00B55072 /* Assets.xcassets */; };
+		277314E320E8DE6C00B55072 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 277314E120E8DE6C00B55072 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		36D3EB5F20E5E66300AC6A0B /* AutosizeLabel_and_FontSize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutosizeLabel_and_FontSize.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		36D3EB6220E5E66300AC6A0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		36D3EB6420E5E66300AC6A0B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		36D3EB6720E5E66300AC6A0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		36D3EB6920E5E66500AC6A0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		36D3EB6C20E5E66500AC6A0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		36D3EB6E20E5E66500AC6A0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		277314D520E8DE6A00B55072 /* Dynamic_FontSize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dynamic_FontSize.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		277314D820E8DE6A00B55072 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		277314DA20E8DE6A00B55072 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		277314DD20E8DE6A00B55072 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		277314DF20E8DE6C00B55072 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		277314E220E8DE6C00B55072 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		277314E420E8DE6C00B55072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		36D3EB5C20E5E66300AC6A0B /* Frameworks */ = {
+		277314D220E8DE6A00B55072 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -35,71 +35,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		36D3EB5620E5E66300AC6A0B = {
+		277314CC20E8DE6A00B55072 = {
 			isa = PBXGroup;
 			children = (
-				36D3EB6120E5E66300AC6A0B /* AutosizeLabel_and_FontSize */,
-				36D3EB6020E5E66300AC6A0B /* Products */,
+				277314D720E8DE6A00B55072 /* Dynamic_FontSize */,
+				277314D620E8DE6A00B55072 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		36D3EB6020E5E66300AC6A0B /* Products */ = {
+		277314D620E8DE6A00B55072 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				36D3EB5F20E5E66300AC6A0B /* AutosizeLabel_and_FontSize.app */,
+				277314D520E8DE6A00B55072 /* Dynamic_FontSize.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		36D3EB6120E5E66300AC6A0B /* AutosizeLabel_and_FontSize */ = {
+		277314D720E8DE6A00B55072 /* Dynamic_FontSize */ = {
 			isa = PBXGroup;
 			children = (
-				36D3EB6220E5E66300AC6A0B /* AppDelegate.swift */,
-				36D3EB6420E5E66300AC6A0B /* ViewController.swift */,
-				36D3EB6620E5E66300AC6A0B /* Main.storyboard */,
-				36D3EB6920E5E66500AC6A0B /* Assets.xcassets */,
-				36D3EB6B20E5E66500AC6A0B /* LaunchScreen.storyboard */,
-				36D3EB6E20E5E66500AC6A0B /* Info.plist */,
+				277314D820E8DE6A00B55072 /* AppDelegate.swift */,
+				277314DA20E8DE6A00B55072 /* ViewController.swift */,
+				277314DC20E8DE6A00B55072 /* Main.storyboard */,
+				277314DF20E8DE6C00B55072 /* Assets.xcassets */,
+				277314E120E8DE6C00B55072 /* LaunchScreen.storyboard */,
+				277314E420E8DE6C00B55072 /* Info.plist */,
 			);
-			path = AutosizeLabel_and_FontSize;
+			path = Dynamic_FontSize;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		36D3EB5E20E5E66300AC6A0B /* AutosizeLabel_and_FontSize */ = {
+		277314D420E8DE6A00B55072 /* Dynamic_FontSize */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 36D3EB7120E5E66500AC6A0B /* Build configuration list for PBXNativeTarget "AutosizeLabel_and_FontSize" */;
+			buildConfigurationList = 277314E720E8DE6C00B55072 /* Build configuration list for PBXNativeTarget "Dynamic_FontSize" */;
 			buildPhases = (
-				36D3EB5B20E5E66300AC6A0B /* Sources */,
-				36D3EB5C20E5E66300AC6A0B /* Frameworks */,
-				36D3EB5D20E5E66300AC6A0B /* Resources */,
+				277314D120E8DE6A00B55072 /* Sources */,
+				277314D220E8DE6A00B55072 /* Frameworks */,
+				277314D320E8DE6A00B55072 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = AutosizeLabel_and_FontSize;
-			productName = AutosizeLabel_and_FontSize;
-			productReference = 36D3EB5F20E5E66300AC6A0B /* AutosizeLabel_and_FontSize.app */;
+			name = Dynamic_FontSize;
+			productName = Dynamic_FontSize;
+			productReference = 277314D520E8DE6A00B55072 /* Dynamic_FontSize.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		36D3EB5720E5E66300AC6A0B /* Project object */ = {
+		277314CD20E8DE6A00B55072 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0940;
-				ORGANIZATIONNAME = Hank_Zhong;
+				ORGANIZATIONNAME = zhong;
 				TargetAttributes = {
-					36D3EB5E20E5E66300AC6A0B = {
+					277314D420E8DE6A00B55072 = {
 						CreatedOnToolsVersion = 9.4;
 					};
 				};
 			};
-			buildConfigurationList = 36D3EB5A20E5E66300AC6A0B /* Build configuration list for PBXProject "AutosizeLabel_and_FontSize" */;
+			buildConfigurationList = 277314D020E8DE6A00B55072 /* Build configuration list for PBXProject "Dynamic_FontSize" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -107,54 +107,54 @@
 				en,
 				Base,
 			);
-			mainGroup = 36D3EB5620E5E66300AC6A0B;
-			productRefGroup = 36D3EB6020E5E66300AC6A0B /* Products */;
+			mainGroup = 277314CC20E8DE6A00B55072;
+			productRefGroup = 277314D620E8DE6A00B55072 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				36D3EB5E20E5E66300AC6A0B /* AutosizeLabel_and_FontSize */,
+				277314D420E8DE6A00B55072 /* Dynamic_FontSize */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		36D3EB5D20E5E66300AC6A0B /* Resources */ = {
+		277314D320E8DE6A00B55072 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36D3EB6D20E5E66500AC6A0B /* LaunchScreen.storyboard in Resources */,
-				36D3EB6A20E5E66500AC6A0B /* Assets.xcassets in Resources */,
-				36D3EB6820E5E66300AC6A0B /* Main.storyboard in Resources */,
+				277314E320E8DE6C00B55072 /* LaunchScreen.storyboard in Resources */,
+				277314E020E8DE6C00B55072 /* Assets.xcassets in Resources */,
+				277314DE20E8DE6A00B55072 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		36D3EB5B20E5E66300AC6A0B /* Sources */ = {
+		277314D120E8DE6A00B55072 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36D3EB6520E5E66300AC6A0B /* ViewController.swift in Sources */,
-				36D3EB6320E5E66300AC6A0B /* AppDelegate.swift in Sources */,
+				277314DB20E8DE6A00B55072 /* ViewController.swift in Sources */,
+				277314D920E8DE6A00B55072 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		36D3EB6620E5E66300AC6A0B /* Main.storyboard */ = {
+		277314DC20E8DE6A00B55072 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				36D3EB6720E5E66300AC6A0B /* Base */,
+				277314DD20E8DE6A00B55072 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		36D3EB6B20E5E66500AC6A0B /* LaunchScreen.storyboard */ = {
+		277314E120E8DE6C00B55072 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				36D3EB6C20E5E66500AC6A0B /* Base */,
+				277314E220E8DE6C00B55072 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -162,7 +162,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		36D3EB6F20E5E66500AC6A0B /* Debug */ = {
+		277314E520E8DE6C00B55072 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -222,7 +222,7 @@
 			};
 			name = Debug;
 		};
-		36D3EB7020E5E66500AC6A0B /* Release */ = {
+		277314E620E8DE6C00B55072 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -276,34 +276,34 @@
 			};
 			name = Release;
 		};
-		36D3EB7220E5E66500AC6A0B /* Debug */ = {
+		277314E820E8DE6C00B55072 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = AutosizeLabel_and_FontSize/Info.plist;
+				INFOPLIST_FILE = Dynamic_FontSize/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Hank-Zhong.AutosizeLabel-and-FontSize";
+				PRODUCT_BUNDLE_IDENTIFIER = "zhong.Dynamic-FontSize";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		36D3EB7320E5E66500AC6A0B /* Release */ = {
+		277314E920E8DE6C00B55072 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = AutosizeLabel_and_FontSize/Info.plist;
+				INFOPLIST_FILE = Dynamic_FontSize/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Hank-Zhong.AutosizeLabel-and-FontSize";
+				PRODUCT_BUNDLE_IDENTIFIER = "zhong.Dynamic-FontSize";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -313,25 +313,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		36D3EB5A20E5E66300AC6A0B /* Build configuration list for PBXProject "AutosizeLabel_and_FontSize" */ = {
+		277314D020E8DE6A00B55072 /* Build configuration list for PBXProject "Dynamic_FontSize" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				36D3EB6F20E5E66500AC6A0B /* Debug */,
-				36D3EB7020E5E66500AC6A0B /* Release */,
+				277314E520E8DE6C00B55072 /* Debug */,
+				277314E620E8DE6C00B55072 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		36D3EB7120E5E66500AC6A0B /* Build configuration list for PBXNativeTarget "AutosizeLabel_and_FontSize" */ = {
+		277314E720E8DE6C00B55072 /* Build configuration list for PBXNativeTarget "Dynamic_FontSize" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				36D3EB7220E5E66500AC6A0B /* Debug */,
-				36D3EB7320E5E66500AC6A0B /* Release */,
+				277314E820E8DE6C00B55072 /* Debug */,
+				277314E920E8DE6C00B55072 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 36D3EB5720E5E66300AC6A0B /* Project object */;
+	rootObject = 277314CD20E8DE6A00B55072 /* Project object */;
 }

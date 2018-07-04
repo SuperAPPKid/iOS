@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:AutosizeLabel_and_FontSize.xcodeproj">
+      location = "self:Dynamic_FontSize.xcodeproj">
    </FileRef>
 </Workspace>

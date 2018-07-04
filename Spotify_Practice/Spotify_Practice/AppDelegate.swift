@@ -16,6 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        window = UIWindow()
+        window?.makeKeyAndVisible()
+        let naVC = UINavigationController(rootViewController: TableViewController())
+        naVC.navigationBar.shadowImage = UIImage()
+        naVC.navigationBar.isTranslucent = false
+        naVC.navigationBar.backgroundColor = .white
+        window?.rootViewController = naVC
         return true
     }
 

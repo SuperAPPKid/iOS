@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TableViewSection" customModule="Spotify_Practice" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="470" height="148"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FHw-aO-6jP">
+                    <rect key="frame" x="0.0" y="0.0" width="470" height="148"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KuW-hj-BJY">
+                            <rect key="frame" x="0.0" y="0.0" width="470" height="74"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x7X-zJ-3Ev">
+                            <rect key="frame" x="117" y="0.0" width="235" height="148"/>
+                            <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="Button">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="Monaco"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </state>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="KuW-hj-BJY" firstAttribute="top" secondItem="FHw-aO-6jP" secondAttribute="top" id="AS6-VR-oBa"/>
+                        <constraint firstItem="KuW-hj-BJY" firstAttribute="height" secondItem="FHw-aO-6jP" secondAttribute="height" multiplier="0.5" id="Dcd-nw-tOu"/>
+                        <constraint firstItem="x7X-zJ-3Ev" firstAttribute="width" secondItem="FHw-aO-6jP" secondAttribute="width" multiplier="0.5" id="NDh-ZP-Rto"/>
+                        <constraint firstItem="x7X-zJ-3Ev" firstAttribute="top" secondItem="FHw-aO-6jP" secondAttribute="top" id="Sgi-RY-opn"/>
+                        <constraint firstItem="x7X-zJ-3Ev" firstAttribute="centerX" secondItem="FHw-aO-6jP" secondAttribute="centerX" id="VpL-Fw-S6Q"/>
+                        <constraint firstItem="KuW-hj-BJY" firstAttribute="leading" secondItem="FHw-aO-6jP" secondAttribute="leading" id="Xph-gJ-Iig"/>
+                        <constraint firstAttribute="bottom" secondItem="x7X-zJ-3Ev" secondAttribute="bottom" id="ZJL-gH-4kK"/>
+                        <constraint firstAttribute="trailing" secondItem="KuW-hj-BJY" secondAttribute="trailing" id="oSG-Ve-ubn"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="FHw-aO-6jP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="6KK-QA-p8l"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="FHw-aO-6jP" secondAttribute="bottom" id="M52-8v-ofQ"/>
+                <constraint firstItem="FHw-aO-6jP" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="P3m-kW-cAS"/>
+                <constraint firstItem="FHw-aO-6jP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Uae-zW-g1d"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="button" destination="x7X-zJ-3Ev" id="ew0-om-m1t"/>
+                <outlet property="buttonDidClick" destination="x7X-zJ-3Ev" id="XyF-dw-cet"/>
+                <outlet property="gradientView" destination="KuW-hj-BJY" id="yP9-To-OYN"/>
+            </connections>
+            <point key="canvasLocation" x="-46" y="-77"/>
+        </view>
+    </objects>
+</document>

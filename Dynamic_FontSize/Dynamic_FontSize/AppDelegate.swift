@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  AutosizeLabel_and_FontSize
+//  Dynamic_FontSize
 //
-//  Created by Hank_Zhong on 2018/6/29.
-//  Copyright © 2018年 Hank_Zhong. All rights reserved.
+//  Created by zhong on 2018/7/1.
+//  Copyright © 2018年 zhong. All rights reserved.
 //
 
 import UIKit
