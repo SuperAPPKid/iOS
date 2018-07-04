@@ -20,7 +20,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FHw-aO-6jP">
                     <rect key="frame" x="0.0" y="0.0" width="470" height="148"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KuW-hj-BJY">
+                        <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KuW-hj-BJY">
                             <rect key="frame" x="0.0" y="0.0" width="470" height="74"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -38,6 +38,9 @@
                                     </fragment>
                                 </attributedString>
                             </state>
+                            <connections>
+                                <action selector="click:" destination="iN0-l3-epB" eventType="touchUpInside" id="nky-5P-qvd"/>
+                            </connections>
                         </button>
                     </subviews>
                     <constraints>
@@ -62,7 +65,6 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="button" destination="x7X-zJ-3Ev" id="ew0-om-m1t"/>
-                <outlet property="buttonDidClick" destination="x7X-zJ-3Ev" id="XyF-dw-cet"/>
                 <outlet property="gradientView" destination="KuW-hj-BJY" id="yP9-To-OYN"/>
             </connections>
             <point key="canvasLocation" x="-46" y="-77"/>

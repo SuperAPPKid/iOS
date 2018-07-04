@@ -39,12 +39,13 @@ class TableViewController: UITableViewController {
         tableView.sectionHeaderHeight = 45
         tableView.rowHeight = 60
         tableView.showsVerticalScrollIndicator = false
-        let view = UINib(nibName: "TableHeader", bundle: nil).instantiate(withOwner: nil, options: nil).first as! TableHeader
-        view.frame = CGRect(x: 0, y: 0, width: 0, height: 300)
-        print(view.frame)
-        tableView.tableHeaderView = view
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 300))
+        let sub = UINib(nibName: "TableHeader", bundle: nil).instantiate(withOwner: nil, options: nil).first as! TableHeader
+        sub.backgroundColor = .clear
+        sub.frame = header.bounds
+        header.addSubview(sub)
+        tableView.tableHeaderView = header
         tableView.tableHeaderView?.backgroundColor = .clear
-        print(tableView.tableHeaderView?.frame ?? 0)
     }
 
     // MARK: - Table view data source
@@ -73,7 +74,7 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewSection.identifier) as! TableViewSection
-        sectionView.gradientView.isHidden = true
+        sectionView.gradientView.alpha = 0
         return sectionView
     }
     
@@ -83,9 +84,15 @@ class TableViewController: UITableViewController {
             return
         }
         if tableView.contentOffset.y > 300 {
-            sectionView.gradientView.isHidden = false
+            if sectionView.gradientView.alpha != 1{
+                sectionView.gradientView.transform = CGAffineTransform(translationX: 0, y: -20)
+                UIView.animate(withDuration: 0.15) {
+                    sectionView.gradientView.transform = CGAffineTransform(translationX: 0, y: 0)
+                }
+                sectionView.gradientView.alpha = 1
+            }
         } else {
-            sectionView.gradientView.isHidden = true
+            sectionView.gradientView.alpha = 0
         }
     }
 }

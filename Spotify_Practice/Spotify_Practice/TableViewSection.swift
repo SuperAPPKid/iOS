@@ -26,6 +26,9 @@ class TableViewSection: UITableViewHeaderFooterView {
         button.clipsToBounds = true
         button.layer.cornerRadius = 22.5
     }
+
+    @IBAction func click(_ sender: UIButton) {
+        print("click")
+    }
     
-    @IBOutlet weak var buttonDidClick: UIButton!
 }

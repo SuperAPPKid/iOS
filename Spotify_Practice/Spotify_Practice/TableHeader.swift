@@ -15,6 +15,8 @@ class TableHeader: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        thumbView.clipsToBounds = true
+        thumbView.layer.cornerRadius = 75
 //        print("awake")
     }
     
@@ -29,7 +31,7 @@ class TableHeader: UIView {
     }
 
     @IBAction func didSlide(_ sender: UISlider) {
-//         print("slide~")
+        pageControl.currentPage = Int(sender.value * 5.0)
     }
     
     
