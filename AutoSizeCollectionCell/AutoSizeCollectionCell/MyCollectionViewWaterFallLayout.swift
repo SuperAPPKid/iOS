@@ -18,7 +18,6 @@ class MyCollectionViewWaterFallLayout: UICollectionViewLayout {
     var edgeInsets:UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     var columnHeights:[CGFloat] = [CGFloat]()
     var attrsArray:[UICollectionViewLayoutAttributes] = [UICollectionViewLayoutAttributes]()
-    
     var collectionViewWidth:CGFloat {
         guard let width = collectionView?.frame.width else {
             return 0

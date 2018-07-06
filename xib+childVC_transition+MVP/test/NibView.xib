@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="NibView" customModule="test" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fF0-59-gOa">
+                    <rect key="frame" x="10" y="30" width="355" height="627"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bch-Ux-PSu">
+                            <rect key="frame" x="154.5" y="50" width="46" height="30"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="click:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="wvt-5C-80b"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="bch-Ux-PSu" firstAttribute="centerX" secondItem="fF0-59-gOa" secondAttribute="centerX" id="jRh-lo-41I"/>
+                        <constraint firstItem="bch-Ux-PSu" firstAttribute="top" secondItem="fF0-59-gOa" secondAttribute="top" constant="50" id="n9s-g9-TFv"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fF0-59-gOa" secondAttribute="trailing" constant="10" id="5J2-mq-Wxe"/>
+                <constraint firstItem="fF0-59-gOa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="Tm4-TQ-eef"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fF0-59-gOa" secondAttribute="bottom" constant="10" id="X1G-dP-Xno"/>
+                <constraint firstItem="fF0-59-gOa" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="pTE-0H-TeN"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <connections>
+                <outlet property="squareView" destination="fF0-59-gOa" id="Tgl-ey-51a"/>
+            </connections>
+            <point key="canvasLocation" x="22.5" y="221.5"/>
+        </view>
+    </objects>
+</document>
