@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol MVP_HomePresenterProtocol {
-    func getTextField(text:String?)
-}
-
 class MVP_HomePresenter: MVP_HomePresenterProtocol {
     unowned let view:MVP_HomeViewController
     let data = Model.shared.people
@@ -20,7 +16,7 @@ class MVP_HomePresenter: MVP_HomePresenterProtocol {
         self.view = view
     }
     
-    func getTextField(text:String?) {
+    func showAlert(text:String?) {
         guard let text = text else { return }
         let index = Int(text)
         var ansStr:String

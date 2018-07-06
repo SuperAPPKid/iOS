@@ -8,24 +8,21 @@
 
 import UIKit
 
-class MVVM_HomeViewModel:MVVM_HomeViewProtocol {
+struct MVVM_HomeViewModel {
     let data = Model.shared.people
     
-    var showResponse:((String)->())?
-    var responseText:String = "" {
+    var responseTextDidSet:((String)->())?
+    var responseText:String? {
         didSet {
-            self.showResponse?(responseText)
+            guard let text = responseText else { return }
+            let index = Int(text)
+            
+            if let index = index,index < data.count {
+                responseTextDidSet?("\(data[index].name) - \(data[index].age)")
+            } else {
+                responseTextDidSet?( "~Error~")
+            }
         }
     }
     
-    func getTextfieldText(text: String?) {
-        guard let text = text else { return }
-        let index = Int(text)
-        
-        if let index = index,index < data.count {
-            responseText = "\(data[index].name) - \(data[index].age)"
-        } else {
-            responseText = "~Error~"
-        }
-    }
 }

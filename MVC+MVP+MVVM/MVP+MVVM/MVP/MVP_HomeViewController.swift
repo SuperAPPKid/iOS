@@ -8,6 +8,11 @@
 
 import UIKit
 
+
+protocol MVP_HomePresenterProtocol {
+    func showAlert(text:String?)
+}
+
 class MVP_HomeViewController: UIViewController {
     let textField:UITextField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 80))
     let button:UIButton = UIButton(type: UIButtonType(rawValue: 1)!)
@@ -47,7 +52,7 @@ class MVP_HomeViewController: UIViewController {
     }
     
     @objc func buttonDidTouchUpInside() {
-        self.presenter.getTextField(text: self.textField.text)
+        self.presenter.showAlert(text: self.textField.text)
     }
     
 }

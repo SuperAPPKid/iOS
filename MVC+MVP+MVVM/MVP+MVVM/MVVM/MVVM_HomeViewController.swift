@@ -7,19 +7,24 @@
 //
 
 import UIKit
-protocol MVVM_HomeViewProtocol {
-    func getTextfieldText(text:String?)
-}
+
 class MVVM_HomeViewController: UIViewController {
-    var delegate:MVVM_HomeViewProtocol?
     let textField:UITextField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 80))
     let button:UIButton = UIButton(type: UIButtonType(rawValue: 1)!)
-    lazy var viewModel = MVVM_HomeViewModel()
+    lazy var viewModel:MVVM_HomeViewModel = {
+        var instance = MVVM_HomeViewModel()
+        instance.responseTextDidSet = { [weak self] response in
+            let alert = UIAlertController(title: response, message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self?.present(alert, animated: true, completion: nil)
+        }
+        return instance
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSubView()
-        configureViewModel()
     }
     
     func configureSubView() {
@@ -44,17 +49,8 @@ class MVVM_HomeViewController: UIViewController {
         textField.heightAnchor.constraint(equalToConstant: 100).isActive = true
         button.addTarget(self, action: #selector(buttonDidTouchUpInside), for: .touchUpInside)
     }
-
-    func configureViewModel() {
-        delegate = viewModel
-        viewModel.showResponse = { [weak self] response in
-            let alert = UIAlertController(title: response, message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self?.present(alert, animated: true, completion: nil)
-        }
-    }
     
     @objc func buttonDidTouchUpInside() {
-        delegate?.getTextfieldText(text: textField.text)
+        viewModel.responseText = textField.text
     }
 }
