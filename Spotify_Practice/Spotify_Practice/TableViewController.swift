@@ -39,13 +39,11 @@ class TableViewController: UITableViewController {
         tableView.sectionHeaderHeight = 45
         tableView.rowHeight = 60
         tableView.showsVerticalScrollIndicator = false
-        let header = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 300))
-        let sub = UINib(nibName: "TableHeader", bundle: nil).instantiate(withOwner: nil, options: nil).first as! TableHeader
-        sub.backgroundColor = .clear
-        sub.frame = header.bounds
-        header.addSubview(sub)
+        let header = UINib(nibName: "TableHeader", bundle: nil).instantiate(withOwner: nil, options: nil).first as! TableHeader
+        header.frame = CGRect(x: 0, y: 0, width: 0, height: 350)
+        tableView.tableHeaderView?.translatesAutoresizingMaskIntoConstraints = false
         tableView.tableHeaderView = header
-        tableView.tableHeaderView?.backgroundColor = .clear
+        tableView.tableHeaderView?.backgroundColor = .yellow
     }
 
     // MARK: - Table view data source
@@ -83,7 +81,7 @@ class TableViewController: UITableViewController {
               let sectionView = tableView.headerView(forSection: 0) as? TableViewSection else {
             return
         }
-        if tableView.contentOffset.y > 300 {
+        if tableView.contentOffset.y > 322.5 {
             if sectionView.gradientView.alpha != 1{
                 sectionView.gradientView.transform = CGAffineTransform(translationX: 0, y: -20)
                 UIView.animate(withDuration: 0.15) {
