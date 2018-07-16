@@ -10,15 +10,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TableHeader" customModule="Spotify_Practice" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TableHeader" customModule="Spotify_Practice" customModuleProvider="target">
+        <view opaque="NO" contentMode="scaleToFill" id="iN0-l3-epB" customClass="TableHeader" customModule="Spotify_Practice" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="389" height="314"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Goats-maximili" translatesAutoresizingMaskIntoConstraints="NO" id="5Sc-wa-rMt">
-                    <rect key="frame" x="0.0" y="0.0" width="389" height="336.5"/>
-                </imageView>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="L6C-7h-0f3">
                     <rect key="frame" x="117.5" y="190" width="154" height="31"/>
                     <constraints>
@@ -50,12 +47,8 @@
                 <constraint firstItem="XD2-Yf-Cp4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="C1C-71-0UZ"/>
                 <constraint firstItem="mVe-eR-XPk" firstAttribute="top" secondItem="L6C-7h-0f3" secondAttribute="bottom" constant="15" id="GfU-zC-H7F"/>
                 <constraint firstItem="L6C-7h-0f3" firstAttribute="top" secondItem="XD2-Yf-Cp4" secondAttribute="bottom" constant="20" id="H6z-OT-8KS"/>
-                <constraint firstItem="5Sc-wa-rMt" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="22.5" id="HgQ-bO-b2f"/>
                 <constraint firstItem="XD2-Yf-Cp4" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="XR0-gP-gG8"/>
-                <constraint firstItem="5Sc-wa-rMt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="YFh-Os-OtQ"/>
                 <constraint firstItem="mVe-eR-XPk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="fdD-vL-59s"/>
-                <constraint firstItem="5Sc-wa-rMt" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="jQu-C4-pDc"/>
-                <constraint firstItem="5Sc-wa-rMt" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="jeF-bT-I3a"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -66,7 +59,4 @@
             <point key="canvasLocation" x="131.5" y="465"/>
         </view>
     </objects>
-    <resources>
-        <image name="Goats-maximili" width="1000" height="669"/>
-    </resources>
 </document>

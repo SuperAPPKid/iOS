@@ -29,9 +29,15 @@ class TableViewController: UITableViewController {
                        Item(Title:"Cat cute",Selected:false),
                        Item(Title:"Meow Meow",Selected:false),
                        Item(Title:"!!!!!!!!",Selected:false)]
-
+    var imageView:UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Spotify"
+        imageView = UIImageView(image: #imageLiteral(resourceName: "Goats-maximili"))
+        imageView.contentMode = .scaleAspectFill
+        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 375)
+        view.addSubview(imageView)
         tableView.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.identifier)
         tableView.register(TableViewSection.nib, forHeaderFooterViewReuseIdentifier: TableViewSection.identifier)
         tableView.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
@@ -45,7 +51,7 @@ class TableViewController: UITableViewController {
         header.frame = headerContainer.bounds
         tableView.tableHeaderView?.translatesAutoresizingMaskIntoConstraints = false
         tableView.tableHeaderView = headerContainer
-        tableView.tableHeaderView?.backgroundColor = .yellow
+        tableView.tableHeaderView?.backgroundColor = .clear
     }
 
     // MARK: - Table view data source
@@ -74,7 +80,7 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewSection.identifier) as! TableViewSection
-        sectionView.gradientView.alpha = 0
+        sectionView.gradientView.alpha = tableView.contentOffset.y > 350 ? 1:0
         return sectionView
     }
     
@@ -83,16 +89,26 @@ class TableViewController: UITableViewController {
               let sectionView = tableView.headerView(forSection: 0) as? TableViewSection else {
             return
         }
-        if tableView.contentOffset.y > 350 {
-            if sectionView.gradientView.alpha != 1{
+        let y = tableView.contentOffset.y
+        if y > 350 {
+            if sectionView.gradientView.alpha != 1 {
+                sectionView.gradientView.alpha = 1
                 sectionView.gradientView.transform = CGAffineTransform(translationX: 0, y: -20)
                 UIView.animate(withDuration: 0.15) {
                     sectionView.gradientView.transform = CGAffineTransform(translationX: 0, y: 0)
+                    sectionView.button.transform = CGAffineTransform(a: 1.2, b: 0, c: 0, d: 1.2, tx: 0, ty: sectionView.button.frame.height * 0.2)
                 }
-                sectionView.gradientView.alpha = 1
             }
         } else {
+            UIView.animate(withDuration: 0.15) {
+                sectionView.button.transform = .identity
+            }
             sectionView.gradientView.alpha = 0
+        }
+        if y < 0 {
+            imageView.frame.size = .init(width: view.frame.width * (1-y/375), height: 375 - y)
+            imageView.frame.origin.y = y
+            imageView.center.x = view.center.x
         }
     }
 }
