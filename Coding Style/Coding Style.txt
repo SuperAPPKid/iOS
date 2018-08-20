@@ -1,0 +1,28 @@
+1.  使用MVVM架構(Model、View(Controller)、ViewModel)
+2.  協定、泛型、擴充功能(檔案名：類別+方法名.swift)另開資料夾
+3.  將Service與Model分離
+4.  config另開資料夾並加入.xcconfig檔
+
+5.  struct, enum, class, typedef, associatedtype, protocol宣告採大駝峰式命名
+6.  全域變數宣告採大寫搭配底線命名
+7.  屬性、方法、區域變數宣告採小駝峰式命名
+8.  協定方法命名請使用iOS預設delegate(參考DetailViewControllerDelegate)
+9.  取名方式請參考https://swift.org/documentation/api-design-guidelines/
+10. 非UIKIT變數宣告及客製化屬性請加入註解
+
+11. 方法盡量控制在60行以內，類別控制在600行以內
+12. 將(life cycle、代理實作、事件處理、相關業務邏輯)使用extension分段並加入//MARK:標籤
+13. self如有必要才使用
+14. 除了以identifier初始化物件可使用!，其餘情形優先使用guard let才使用 if let
+15. 勿使用try!和try?
+16. 顏色設置可使用color literal
+17. compute property如為唯讀則加入get(請參考Theme)
+18. 單個方法使用closure(勿使用self?)、多組方法使用delegate
+19. 優先使用for in才使用 while
+20. layer繪製放在draw(_rect)
+
+20. 畫面配置及頁面跳轉架構使用storyboard
+21. 實際頁面跳轉使用程式碼控制(請參考TableViewController didSelectRowAt方法)
+22. 客製化cell使用xib
+23. UIKIT元件屬性可使用storyboard拉、事件處理使用程式碼加入(請參考DetailViewController)
+
