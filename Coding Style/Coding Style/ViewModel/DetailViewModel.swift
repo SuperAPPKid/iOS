@@ -11,7 +11,7 @@ class DetailViewModel {
     let title: String
     let imageName: String
     let detail: String
-    var isGreen: Bool = false
+    var isSelect: Bool = false
     init(title: String, imageName: String, detail: String) {
         self.title = title
         self.imageName = imageName

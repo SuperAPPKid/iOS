@@ -17,27 +17,29 @@ class CustomTableViewCell: UITableViewCell, XibCell {
         didSet {
             thumbImageView.image = UIImage(named: cellViewModel.imageName)?.scaleTo(size: thumbImageView.frame.size, needTrim: true, renderMode: .alwaysOriginal)
             titleLabel.text = cellViewModel.title
-            greenLayer.isHidden = !cellViewModel.isGreen
+            greenLayer.isHidden = !cellViewModel.isSelect //設置select
         }
     }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        thumbImageView.layer.cornerRadius = 30
+        thumbImageView.layer.cornerRadius = 30 //圓形thumb
+        
+        //select 狀態 layer
         greenLayer.frame = CGRect(x: 0, y: 0, width: 10, height: 80)
-        greenLayer.backgroundColor = #colorLiteral(red: 0.6089995114, green: 1, blue: 0.3493120194, alpha: 1)
+        greenLayer.backgroundColor = Theme.SELECTED_COLOR.cgColor
         layer.addSublayer(greenLayer)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        accessoryType = .disclosureIndicator
-        selectionStyle = .none
+        accessoryType = .disclosureIndicator // >符號
+        selectionStyle = .none // 取消預設選取色
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        backgroundColor = isHighlighted ? #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1):#colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
+        backgroundColor = isHighlighted ? Theme.HIGHTLIGHT_COLOR.YES: Theme.HIGHTLIGHT_COLOR.NO //設置highlight
     }
     
 }

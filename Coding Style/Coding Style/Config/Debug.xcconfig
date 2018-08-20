@@ -1,0 +1,11 @@
+//
+//  Debug.xcconfig
+//  Coding Style
+//
+//  Created by Hank_Zhong on 2018/8/20.
+//  Copyright © 2018年 Hank_Zhong. All rights reserved.
+//
+APP_NAME = Coding Style Debug
+APP_VERSION = 0.1
+APP_BUNDLE_ID = com.Hank-Zhong.Coding-StyleDebug
+APP_THEME = green

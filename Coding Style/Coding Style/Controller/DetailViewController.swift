@@ -20,9 +20,12 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var colorSwitch: UISwitch!
     
     var detailViewModel: DetailViewModel!
-    var colorSwitchToLight: ((Bool) -> (Void))?
+    var colorSwitchChanged: ((Bool) -> (Void))? //觸發switch
     weak var delegate: DetailViewControllerDelegate?
-    
+}
+
+//MARK: Lifecycle
+extension DetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = detailViewModel.title
@@ -31,7 +34,7 @@ class DetailViewController: UIViewController {
         
         textView.text = detailViewModel.detail
         
-        colorSwitch.isOn = detailViewModel.isGreen
+        colorSwitch.isOn = detailViewModel.isSelect //右上按鈕選取狀態
         colorSwitch.addTarget(self, action: #selector(colorSwitchChanged(_:)), for: .valueChanged)
         
         setupGestures()
@@ -41,16 +44,16 @@ class DetailViewController: UIViewController {
 //MARK: Setup
 extension DetailViewController {
     private func setupGestures() {
-        let oneSingleTap = UITapGestureRecognizer(target: self, action: #selector(imageViewOneSingleTap(_:)))
-        oneSingleTap.numberOfTapsRequired = 1
-        oneSingleTap.numberOfTouchesRequired = 1
+        let oneSingleTap = UITapGestureRecognizer(target: self, action: #selector(imageViewOneSingleTap(_:))) //單指單擊手勢
+        oneSingleTap.numberOfTapsRequired = 1 //單擊
+        oneSingleTap.numberOfTouchesRequired = 1 //1指
         
-        let twoSingleTap = UITapGestureRecognizer(target: self, action: #selector(imageViewTwoSingleTap(_:)))
-        twoSingleTap.numberOfTapsRequired = 2
-        twoSingleTap.numberOfTouchesRequired = 1
-        oneSingleTap.require(toFail: twoSingleTap)
+        let twoSingleTap = UITapGestureRecognizer(target: self, action: #selector(imageViewTwoSingleTap(_:))) //單指雙擊手勢
+        twoSingleTap.numberOfTapsRequired = 2 //雙擊
+        twoSingleTap.numberOfTouchesRequired = 1 //1指
+        oneSingleTap.require(toFail: twoSingleTap) //確定雙擊手勢失敗才觸發單擊手勢
         
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(imageViewOneLongPress(_:)))
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(imageViewOneLongPress(_:))) //長按手勢
         
         imageView.addGestureRecognizer(oneSingleTap)
         imageView.addGestureRecognizer(twoSingleTap)
@@ -62,8 +65,8 @@ extension DetailViewController {
 //MARK: Interaction Handler
 extension DetailViewController {
     @objc func colorSwitchChanged(_ sender: UISwitch) {
-        detailViewModel.isGreen = sender.isOn
-        colorSwitchToLight?(sender.isOn)
+        detailViewModel.isSelect = sender.isOn
+        colorSwitchChanged?(sender.isOn)
     }
     
     @objc func imageViewOneSingleTap(_ sender: UITapGestureRecognizer) {

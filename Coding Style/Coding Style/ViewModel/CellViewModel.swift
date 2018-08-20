@@ -10,5 +10,5 @@ import Foundation
 struct CellViewModel {
     let title: String
     let imageName: String
-    var isGreen: Bool
+    var isSelect: Bool
 }

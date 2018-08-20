@@ -25,7 +25,7 @@ class Coding_StyleTests: XCTestCase {
         let cellViewModels = tableVC.cellViewModels
         let detailViewModels = tableVC.detailViewModels
         for (i,cellViewModel) in cellViewModels.enumerated() {
-            XCTAssertEqual(cellViewModel.isGreen, detailViewModels[i].isGreen)
+            XCTAssertEqual(cellViewModel.isSelect, detailViewModels[i].isGreen)
             XCTAssertEqual(cellViewModel.title, detailViewModels[i].title)
             XCTAssertEqual(cellViewModel.imageName, detailViewModels[i].imageName)
         }

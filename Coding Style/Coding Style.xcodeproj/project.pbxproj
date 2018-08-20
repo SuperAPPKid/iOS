@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		360CF504212A59D2002B1300 /* Coding_StyleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360CF503212A59D2002B1300 /* Coding_StyleTests.swift */; };
+		360CF50F212AA1CC002B1300 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360CF50E212AA1CC002B1300 /* Theme.swift */; };
 		366CD19C2126602000268D6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366CD19B2126602000268D6E /* AppDelegate.swift */; };
 		366CD1A12126602000268D6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 366CD19F2126602000268D6E /* Main.storyboard */; };
 		366CD1A32126602200268D6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 366CD1A22126602200268D6E /* Assets.xcassets */; };
@@ -19,7 +20,7 @@
 		366CD1BA2126683E00268D6E /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366CD1B92126683E00268D6E /* TableViewController.swift */; };
 		366CD1BC2126685100268D6E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366CD1BB2126685100268D6E /* DetailViewController.swift */; };
 		366CD1BF2126688400268D6E /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366CD1BE2126688400268D6E /* CustomTableViewCell.swift */; };
-		366CD1C1212668AD00268D6E /* UIImage+scaleTo_size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366CD1C0212668AD00268D6E /* UIImage+scaleTo_size.swift */; };
+		366CD1C1212668AD00268D6E /* UIImage+scaleTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366CD1C0212668AD00268D6E /* UIImage+scaleTo.swift */; };
 		366CD1C5212669AF00268D6E /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366CD1C4212669AF00268D6E /* CustomTableViewCell.xib */; };
 		366CD1C721266D8300268D6E /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366CD1C621266D8300268D6E /* CellViewModel.swift */; };
 		366CD1CA2126777B00268D6E /* Animals.json in Resources */ = {isa = PBXBuildFile; fileRef = 366CD1C92126777A00268D6E /* Animals.json */; };
@@ -40,6 +41,9 @@
 		360CF501212A59D2002B1300 /* Coding StyleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Coding StyleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		360CF503212A59D2002B1300 /* Coding_StyleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coding_StyleTests.swift; sourceTree = "<group>"; };
 		360CF505212A59D2002B1300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		360CF50B212A9A74002B1300 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		360CF50C212A9AA3002B1300 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		360CF50E212AA1CC002B1300 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		366CD1982126602000268D6E /* Coding Style.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Coding Style.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		366CD19B2126602000268D6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		366CD1A02126602000268D6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -53,7 +57,7 @@
 		366CD1B92126683E00268D6E /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		366CD1BB2126685100268D6E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		366CD1BE2126688400268D6E /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		366CD1C0212668AD00268D6E /* UIImage+scaleTo_size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+scaleTo_size.swift"; sourceTree = "<group>"; };
+		366CD1C0212668AD00268D6E /* UIImage+scaleTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+scaleTo.swift"; sourceTree = "<group>"; };
 		366CD1C4212669AF00268D6E /* CustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		366CD1C621266D8300268D6E /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		366CD1C92126777A00268D6E /* Animals.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Animals.json; sourceTree = "<group>"; };
@@ -85,6 +89,16 @@
 				360CF505212A59D2002B1300 /* Info.plist */,
 			);
 			path = "Coding StyleTests";
+			sourceTree = "<group>";
+		};
+		360CF50D212A9AB1002B1300 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				360CF50E212AA1CC002B1300 /* Theme.swift */,
+				360CF50B212A9A74002B1300 /* Debug.xcconfig */,
+				360CF50C212A9AA3002B1300 /* Release.xcconfig */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		366CD18F2126602000268D6E = {
@@ -122,6 +136,7 @@
 				366CD1B6212667A600268D6E /* Protocol */,
 				366CD1B52126678700268D6E /* Generic */,
 				366CD1AF2126638300268D6E /* Service */,
+				360CF50D212A9AB1002B1300 /* Config */,
 			);
 			path = "Coding Style";
 			sourceTree = "<group>";
@@ -179,7 +194,7 @@
 		366CD1C3212668C400268D6E /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				366CD1C0212668AD00268D6E /* UIImage+scaleTo_size.swift */,
+				366CD1C0212668AD00268D6E /* UIImage+scaleTo.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -304,7 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				366CD1C1212668AD00268D6E /* UIImage+scaleTo_size.swift in Sources */,
+				366CD1C1212668AD00268D6E /* UIImage+scaleTo.swift in Sources */,
 				366CD1B8212667C000268D6E /* XibCell.swift in Sources */,
 				366CD1BA2126683E00268D6E /* TableViewController.swift in Sources */,
 				366CD1C721266D8300268D6E /* CellViewModel.swift in Sources */,
@@ -312,6 +327,7 @@
 				366CD1AE212662FB00268D6E /* API_Service.swift in Sources */,
 				366CD1B42126674800268D6E /* Response.swift in Sources */,
 				366CD1B12126658300268D6E /* Item.swift in Sources */,
+				360CF50F212AA1CC002B1300 /* Theme.swift in Sources */,
 				366CD19C2126602000268D6E /* AppDelegate.swift in Sources */,
 				366CD1CC21267C6100268D6E /* DetailViewModel.swift in Sources */,
 				366CD1BC2126685100268D6E /* DetailViewController.swift in Sources */,
@@ -350,6 +366,7 @@
 /* Begin XCBuildConfiguration section */
 		360CF508212A59D2002B1300 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 360CF50B212A9A74002B1300 /* Debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -369,6 +386,7 @@
 		};
 		360CF509212A59D2002B1300 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 360CF50C212A9AA3002B1300 /* Release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -388,6 +406,7 @@
 		};
 		366CD1A82126602200268D6E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 360CF50B212A9A74002B1300 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -448,6 +467,7 @@
 		};
 		366CD1A92126602200268D6E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 360CF50C212A9AA3002B1300 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -502,6 +522,7 @@
 		};
 		366CD1AB2126602200268D6E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 360CF50B212A9A74002B1300 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -519,6 +540,7 @@
 		};
 		366CD1AC2126602200268D6E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 360CF50C212A9AA3002B1300 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

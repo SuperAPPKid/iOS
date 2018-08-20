@@ -11,7 +11,10 @@ import UIKit
 class TableViewController: UITableViewController {
     var cellViewModels: [CellViewModel] = []
     var detailViewModels: [DetailViewModel] = []
-    
+}
+
+//MARK: Lifecycle
+extension TableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationbar()
@@ -21,7 +24,7 @@ class TableViewController: UITableViewController {
                 print(error.localizedDescription)
             }
             self.cellViewModels = items.map {
-                CellViewModel(title: $0.title, imageName: $0.imageName, isGreen: false)
+                CellViewModel(title: $0.title, imageName: $0.imageName, isSelect: false)
             }
             self.detailViewModels = items.map {
                 DetailViewModel(title: $0.title, imageName: $0.imageName, detail: $0.detail)
@@ -34,13 +37,17 @@ class TableViewController: UITableViewController {
 extension TableViewController {
     private func setupNavigationbar() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.navigationBar.barTintColor = Theme.NAVIGATIONBAR_COLOR.TINT //bar tint
+        navigationController?.navigationBar.tintColor = Theme.NAVIGATIONBAR_COLOR.TITLE //back button顏色
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.NAVIGATIONBAR_COLOR.TITLE] //小title顏色
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.NAVIGATIONBAR_COLOR.TITLE] //大title顏色
     }
     
     private func setupTable() {
         tableView.register(CustomTableViewCell.nib, forCellReuseIdentifier: CustomTableViewCell.identifier)
-        tableView.rowHeight = 80
-        tableView.estimatedRowHeight = 80
-        tableView.separatorStyle = .none
+        tableView.rowHeight = 80 //列高
+        tableView.estimatedRowHeight = 80 //預估列高
+        tableView.separatorStyle = .none //無分隔線
     }
 }
 
@@ -52,10 +59,10 @@ extension TableViewController {
         }
         detailVC.detailViewModel = detailViewModels[indexPath.row]
         detailVC.delegate = self
-        detailVC.colorSwitchToLight = {
+        detailVC.colorSwitchChanged = {
             [weak self] isOn in
             guard let `self` = self else { return }
-            self.cellViewModels[indexPath.row].isGreen = isOn
+            self.cellViewModels[indexPath.row].isSelect = isOn
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         navigationController?.pushViewController(detailVC, animated: true)
