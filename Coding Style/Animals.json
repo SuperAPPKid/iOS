@@ -1,0 +1,66 @@
+{
+  "ApiName": "CuteAnimals",
+  "ErrorMsg": "000",
+  "Data": [
+    {
+      "title": "Fennec Fox",
+      "imageName": "Fennec Fox",
+      "detail": "Cute Fennec Fox !!!"
+    },
+    {
+      "title": "Giant Panda",
+      "imageName": "Giant Panda",
+      "detail": "Cute Giant Panda !!!"
+    },
+    {
+      "title": "Giraffe",
+      "imageName": "Giraffe",
+      "detail": "Cute Giraffe !!!"
+    },
+    {
+      "title": "Hedgehog",
+      "imageName": "Hedgehog",
+      "detail": "Cute Hedgehog !!!"
+    },
+    {
+      "title": "Hippo",
+      "imageName": "Hippo",
+      "detail": "Cute Hippo !!!"
+    },
+    {
+      "title": "Jaguar",
+      "imageName": "Jaguar",
+      "detail": "Cute Jaguar !!!"
+    },
+    {
+      "title": "Lion",
+      "imageName": "Lion",
+      "detail": "Cute Lion !!!"
+    },
+    {
+      "title": "Polar Bear",
+      "imageName": "Polar Bear",
+      "detail": "Cute Polar Bear !!!"
+    },
+    {
+      "title": "Red Panda",
+      "imageName": "Red Panda",
+      "detail": "Cute Red Panda !!!"
+    },
+    {
+      "title": "Rhinoceros",
+      "imageName": "Rhinoceros",
+      "detail": "Cute Rhinoceros !!!"
+    },
+    {
+      "title": "Tiger",
+      "imageName": "Tiger",
+      "detail": "Cute Tiger !!!"
+    },
+    {
+      "title": "Zebra",
+      "imageName": "Zebra",
+      "detail": "Cute Zebra !!!"
+    }
+  ]
+}
