@@ -8,10 +8,10 @@
 
 import Foundation
 class DetailViewModel {
-    let title: String
-    let imageName: String
-    let detail: String
-    var isSelect: Bool = false
+    let title: String // 子畫面標題
+    let imageName: String // 圖片名稱
+    let detail: String // 說明文字
+    var isSelect: Bool = false //右上switch選取狀態
     init(title: String, imageName: String, detail: String) {
         self.title = title
         self.imageName = imageName

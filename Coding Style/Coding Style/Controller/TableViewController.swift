@@ -35,14 +35,17 @@ extension TableViewController {
 
 //MARK: Setup
 extension TableViewController {
+    ///設定Navigationbar屬性
     private func setupNavigationbar() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationController?.navigationBar.barTintColor = Theme.NAVIGATIONBAR_COLOR.TINT //bar tint
-        navigationController?.navigationBar.tintColor = Theme.NAVIGATIONBAR_COLOR.TITLE //back button顏色
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.NAVIGATIONBAR_COLOR.TITLE] //小title顏色
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: Theme.NAVIGATIONBAR_COLOR.TITLE] //大title顏色
+        let navigationBar = navigationController?.navigationBar
+        navigationBar?.barTintColor = Theme.NAVIGATIONBAR_COLOR.TINT //bar tint
+        navigationBar?.tintColor = Theme.NAVIGATIONBAR_COLOR.TITLE //back button顏色
+        navigationBar?.titleTextAttributes = [.foregroundColor: Theme.NAVIGATIONBAR_COLOR.TITLE] //小title顏色
+        navigationBar?.largeTitleTextAttributes = [.foregroundColor: Theme.NAVIGATIONBAR_COLOR.TITLE] //大title顏色
     }
     
+    ///設定tableView屬性
     private func setupTable() {
         tableView.register(CustomTableViewCell.nib, forCellReuseIdentifier: CustomTableViewCell.identifier)
         tableView.rowHeight = 80 //列高
@@ -86,6 +89,7 @@ extension TableViewController {
     }
 }
 
+//MARK: DetailViewControllerDelegate
 extension TableViewController: DetailViewControllerDelegate {
     func detailImageViewDidOneSingleTap(_ detailVC: DetailViewController, action gesture: UITapGestureRecognizer) {
         navigationItem.title = "\(detailVC.detailViewModel.title) - one SingleTap"

@@ -14,6 +14,7 @@ final class APIService: NSObject {
         super.init()
     }
     
+    ///取得資料
     func fetchItems(APIName:String, completion: ([Item], Error?)->(Void)) {
         if let path = Bundle.main.path(forResource: APIName, ofType: "json") {
             do {

@@ -5,7 +5,7 @@
 //  Created by Hank_Zhong on 2018/8/20.
 //  Copyright © 2018年 Hank_Zhong. All rights reserved.
 //
-APP_NAME = Coding Style Debug
-APP_VERSION = 0.1
-APP_BUNDLE_ID = com.Hank-Zhong.Coding-StyleDebug
-APP_THEME = green
+APP_NAME = Coding Style Debug //APP名稱
+APP_VERSION = 0.1 //APP版本
+APP_BUNDLE_ID = com.Hank-Zhong.Coding-StyleDebug //APP BundleID
+APP_THEME = green //主題色

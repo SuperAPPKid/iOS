@@ -43,6 +43,7 @@ extension DetailViewController {
 
 //MARK: Setup
 extension DetailViewController {
+    ///設定及加入手勢
     private func setupGestures() {
         let oneSingleTap = UITapGestureRecognizer(target: self, action: #selector(imageViewOneSingleTap(_:))) //單指單擊手勢
         oneSingleTap.numberOfTapsRequired = 1 //單擊
@@ -62,23 +63,27 @@ extension DetailViewController {
     
 }
 
-//MARK: Interaction Handler
+//MARK: Event Handler
 extension DetailViewController {
+    ///切換switch
     @objc func colorSwitchChanged(_ sender: UISwitch) {
         detailViewModel.isSelect = sender.isOn
         colorSwitchChanged?(sender.isOn)
     }
     
+    ///圖片單指單擊
     @objc func imageViewOneSingleTap(_ sender: UITapGestureRecognizer) {
         navigationItem.title = "one SingleTap"
         delegate?.detailImageViewDidOneSingleTap(self, action: sender)
     }
     
+    ///圖片單指雙擊
     @objc func imageViewTwoSingleTap(_ sender: UITapGestureRecognizer) {
         navigationItem.title = "two SingleTap"
         delegate?.detailImageViewDidTwoSingleTap(self, action: sender)
     }
     
+    ///圖片長按
     @objc func imageViewOneLongPress(_ sender: UILongPressGestureRecognizer) {
         switch sender.state {
         case .began:

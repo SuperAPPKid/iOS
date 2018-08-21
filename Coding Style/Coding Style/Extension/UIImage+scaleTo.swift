@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIImage {
+    ///縮圖
     func scaleTo(size: CGSize, needTrim: Bool, renderMode: UIImageRenderingMode) -> UIImage? {
         //開啟畫布
         UIGraphicsBeginImageContextWithOptions(size, false, 0)

@@ -8,7 +8,7 @@
 
 import Foundation
 struct CellViewModel {
-    let title: String
-    let imageName: String
-    var isSelect: Bool
+    let title: String // 子畫面標題
+    let imageName: String // 圖片名稱
+    var isSelect: Bool //左方layer選取狀態
 }
