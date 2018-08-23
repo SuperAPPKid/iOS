@@ -14,6 +14,7 @@
 		36B2EB33212C20890000973C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36B2EB31212C20890000973C /* LaunchScreen.storyboard */; };
 		36B2EB3B212C246E0000973C /* TouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B2EB3A212C246E0000973C /* TouchView.swift */; };
 		36B2EB3F212C2CF50000973C /* ExpandTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B2EB3E212C2CF50000973C /* ExpandTouchView.swift */; };
+		36CE5C54212CFA370094B4B6 /* RedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CE5C53212CFA370094B4B6 /* RedTabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		36B2EB34212C20890000973C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36B2EB3A212C246E0000973C /* TouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchView.swift; sourceTree = "<group>"; };
 		36B2EB3E212C2CF50000973C /* ExpandTouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandTouchView.swift; sourceTree = "<group>"; };
+		36CE5C53212CFA370094B4B6 /* RedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedTabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				36B2EB2A212C20880000973C /* ViewController.swift */,
 				36B2EB3A212C246E0000973C /* TouchView.swift */,
 				36B2EB3E212C2CF50000973C /* ExpandTouchView.swift */,
+				36CE5C53212CFA370094B4B6 /* RedTabBar.swift */,
 				36B2EB2C212C20880000973C /* Main.storyboard */,
 				36B2EB2F212C20890000973C /* Assets.xcassets */,
 				36B2EB31212C20890000973C /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 				36B2EB3F212C2CF50000973C /* ExpandTouchView.swift in Sources */,
 				36B2EB2B212C20880000973C /* ViewController.swift in Sources */,
 				36B2EB3B212C246E0000973C /* TouchView.swift in Sources */,
+				36CE5C54212CFA370094B4B6 /* RedTabBar.swift in Sources */,
 				36B2EB29212C20880000973C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
