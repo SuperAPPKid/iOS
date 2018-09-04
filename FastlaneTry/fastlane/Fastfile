@@ -1,0 +1,17 @@
+fastlane_version "2.68.0"
+
+default_platform(:ios)
+
+platform :ios do
+  lane :beta do
+    # cocoapods
+    increment_build_number()
+    cert(development: false, output_path: "./fastlane/cer")
+    sigh(development: false, output_path: "./fastlane/cer")
+    
+    build_number = lane_context[:BUILD_NUMBER]
+    gym(configuration: "Debug",
+        export_method: "ad-hoc",
+        output_name: "FastLaneTest-build:#{build_number}.ipa")
+  end
+end
