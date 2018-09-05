@@ -12,9 +12,14 @@ class HZRippleView: UIView {
     @IBInspectable var rippleBackgroundColor: UIColor?
     @IBInspectable var rippleColor: UIColor?
     @IBInspectable var finalColor: UIColor?
-    @IBInspectable var rippleLayer: CAShapeLayer = CAShapeLayer()
-    @IBInspectable var rippleDiameter: Float = 0
-    @IBInspectable var canOverBorder: Bool = true
+    @IBInspectable var rippleRadius: Float = 0
+    @IBInspectable var canOverBorder: Bool = false {
+        didSet {
+            layer.masksToBounds = !canOverBorder
+        }
+    }
+    
+    var rippleLayer: CAShapeLayer = CAShapeLayer()
     private var initialBackgroundColor: UIColor?
     
     //MARK:- initiallizer
@@ -35,11 +40,8 @@ class HZRippleView: UIView {
     //MARK:- setup
     func setup() {
         initialBackgroundColor = backgroundColor
-        if canOverBorder {
-            layer.masksToBounds = false
-        } else {
-            layer.masksToBounds = true
-        }
+        layer.masksToBounds = true
+        isUserInteractionEnabled = false
     }
     
     //MARK:- trigger ripple anime
@@ -48,11 +50,12 @@ class HZRippleView: UIView {
     }
     
     func triggerRipple(at point: CGPoint) {
-        backgroundColor = rippleBackgroundColor
-        rippleLayer.removeAllAnimations()
+        //這種情況沒加這行也會移除動畫
+//        rippleLayer.removeAllAnimations()
         
-        let radius = rippleDiameter > 0 && canOverBorder ? CGFloat(rippleDiameter):point.distanceToFarCorner()
+        let radius = rippleRadius > 0 && canOverBorder ? CGFloat(rippleRadius) : (point.distanceToFarCorner(in: bounds.size) * 1.25)
         let path = UIBezierPath(arcCenter: .zero, radius: radius, startAngle: 0, endAngle: .pi*2, clockwise: true)
+        
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         rippleLayer.fillColor = rippleColor?.cgColor
@@ -61,40 +64,59 @@ class HZRippleView: UIView {
         CATransaction.commit()
         
         let scaleAnim = CABasicAnimation(keyPath: "transform.scale")
-        scaleAnim.speed = 0.5
-        scaleAnim.fromValue = 0
+        scaleAnim.fromValue = 0.1
         scaleAnim.toValue = 1
-        scaleAnim.delegate = self
-        rippleLayer.add(scaleAnim, forKey: "scaleAnim")
+        
+        let opacityAnim = CABasicAnimation(keyPath: "opacity")
+        opacityAnim.fromValue = 1
+        opacityAnim.toValue = 0
+        
+        let animGroup = CAAnimationGroup()
+        animGroup.animations = [scaleAnim, opacityAnim]
+        animGroup.duration = 0.5
+        animGroup.delegate = self
+        
+        rippleLayer.add(animGroup, forKey: "animGroup")
+        //如果rippleLayer已經加入，會變更ripple
         layer.addSublayer(rippleLayer)
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let point = touches.first?.location(in: self) {
-            triggerRipple(at: point)
-        }
-    }
+
+    //for test
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if let point = touches.first?.location(in: self) {
+//            triggerRipple(at: point)
+//        }
+//    }
 }
 
 extension HZRippleView: CAAnimationDelegate {
     func animationDidStart(_ anim: CAAnimation) {
-        
+        guard let rippleBackColor = rippleBackgroundColor else { return }
+        backgroundColor = rippleBackColor
+        let color = finalColor ?? initialBackgroundColor
+        UIView.animate(withDuration: 0.2, delay: 0.2, options: [.allowUserInteraction, .curveEaseInOut], animations: {
+            self.backgroundColor = color
+        }, completion: nil)
     }
+    
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if flag {
             rippleLayer.removeFromSuperlayer()
-            if let finalColor = finalColor {
-                backgroundColor = finalColor
-            } else {
-                backgroundColor = initialBackgroundColor
-            }
         }
     }
 }
 
 extension CGPoint {
-    
-    func distanceToFarCorner() -> CGFloat {
-        return 123
+    func distanceToFarCorner(in size:CGSize) -> CGFloat {
+        let height = size.height
+        let width = size.width
+        
+        let isUp = (self.y - height / 2) < 0
+        let isLeft = (self.x -  width / 2 ) < 0
+        
+        let horizonDistance = isUp ? (height - self.y) : (self.y)
+        let verticalDistance = isLeft ? (width - self.x) : (self.x)
+        
+        return (horizonDistance * horizonDistance + verticalDistance * verticalDistance).squareRoot()
     }
 }

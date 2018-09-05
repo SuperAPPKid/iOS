@@ -9,13 +9,62 @@
 import UIKit
 
 class HZRippleButton: UIButton {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    @IBInspectable var rippleColor: UIColor? {
+        didSet {
+            rippleView.rippleColor = rippleColor
+        }
     }
-    */
-
+    @IBInspectable var rippleRadius: Float = 0 {
+        didSet {
+            rippleView.rippleRadius = rippleRadius
+        }
+    }
+    @IBInspectable var canOverBorder: Bool = false {
+        didSet {
+            rippleView.canOverBorder = canOverBorder
+        }
+    }
+    @IBInspectable var finalColor: UIColor?
+    private let rippleView = HZRippleView()
+    private var cornerRadius:CGFloat = 0
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        cornerRadius = layer.cornerRadius
+        rippleView.frame = bounds
+        insertSubview(rippleView, at: 0)
+    }
+    
+    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        let touchPoint = touch.location(in: self)
+        let path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
+        
+        guard path.contains(touchPoint) else {
+            return false
+        }
+        
+        if canOverBorder {
+            rippleView.triggerRipple()
+        } else {
+            rippleView.triggerRipple(at: touchPoint)
+        }
+        
+        return super.beginTracking(touch, with: event)
+    }
+    
+    override open func cancelTracking(with event: UIEvent?) {
+        super.cancelTracking(with: event)
+        guard let finalColor = finalColor else { return }
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.allowUserInteraction, .curveEaseInOut], animations: {
+            self.backgroundColor = finalColor
+        }, completion: nil)
+    }
+    
+    override open func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        super.endTracking(touch, with: event)
+        guard let finalColor = finalColor else { return }
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.allowUserInteraction, .curveEaseInOut], animations: {
+            self.backgroundColor = finalColor
+        }, completion: nil)
+    }
 }
