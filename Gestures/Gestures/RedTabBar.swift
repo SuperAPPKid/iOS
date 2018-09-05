@@ -26,6 +26,7 @@ class RedTabBar: UITabBar {
         addSubview(centerBtn)
     }
     
+    //FIXME:- 刪掉draw
     override func draw(_ rect: CGRect) {
         centerBtn.layer.masksToBounds = true
         centerBtn.layer.cornerRadius = 40
