@@ -12,6 +12,7 @@
 		3639429F213FC47700D42D31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3639429D213FC47700D42D31 /* Main.storyboard */; };
 		363942A1213FC47800D42D31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 363942A0213FC47800D42D31 /* Assets.xcassets */; };
 		363942A4213FC47800D42D31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 363942A2213FC47800D42D31 /* LaunchScreen.storyboard */; };
+		3682602C2140FB1000CBCF0F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3682602B2140FB1000CBCF0F /* ListViewController.swift */; };
 		96181DFDF7F1454335B0592A /* Pods_EPUB_FolioReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ED1400762260FC4F9085D40 /* Pods_EPUB_FolioReader.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,10 @@
 		363942A0213FC47800D42D31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		363942A3213FC47800D42D31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		363942A5213FC47800D42D31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3682602B2140FB1000CBCF0F /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		36E405A521426E28005DE1C1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		36E405A721426ECD005DE1C1 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		36E405AB214270A6005DE1C1 /* libtidy.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libtidy.tbd; path = usr/lib/libtidy.tbd; sourceTree = SDKROOT; };
 		8ED1400762260FC4F9085D40 /* Pods_EPUB_FolioReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EPUB_FolioReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A53D30056C47CAD710C6A6B0 /* Pods-EPUB_FolioReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EPUB_FolioReader.release.xcconfig"; path = "Pods/Target Support Files/Pods-EPUB_FolioReader/Pods-EPUB_FolioReader.release.xcconfig"; sourceTree = "<group>"; };
 		EF9120381EB49FE31110E0D6 /* Pods-EPUB_FolioReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EPUB_FolioReader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EPUB_FolioReader/Pods-EPUB_FolioReader.debug.xcconfig"; sourceTree = "<group>"; };
@@ -63,6 +68,7 @@
 			children = (
 				36394299213FC47700D42D31 /* AppDelegate.swift */,
 				3639429B213FC47700D42D31 /* ViewController.swift */,
+				3682602B2140FB1000CBCF0F /* ListViewController.swift */,
 				3639429D213FC47700D42D31 /* Main.storyboard */,
 				363942A0213FC47800D42D31 /* Assets.xcassets */,
 				363942A2213FC47800D42D31 /* LaunchScreen.storyboard */,
@@ -74,6 +80,9 @@
 		52CFAA10A3027128D1749065 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				36E405AB214270A6005DE1C1 /* libtidy.tbd */,
+				36E405A721426ECD005DE1C1 /* libxml2.tbd */,
+				36E405A521426E28005DE1C1 /* libz.tbd */,
 				8ED1400762260FC4F9085D40 /* Pods_EPUB_FolioReader.framework */,
 			);
 			name = Frameworks;
@@ -122,6 +131,7 @@
 				TargetAttributes = {
 					36394295213FC47700D42D31 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 					};
 				};
 			};
@@ -164,29 +174,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-EPUB_FolioReader/Pods-EPUB_FolioReader-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AEXML/AEXML.framework",
-				"${BUILT_PRODUCTS_DIR}/FolioReaderKit/FolioReaderKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FontBlaster/FontBlaster.framework",
 				"${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework",
-				"${BUILT_PRODUCTS_DIR}/JSQWebViewController/JSQWebViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/MenuItemKit/MenuItemKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
-				"${BUILT_PRODUCTS_DIR}/ZFDragableModalTransition/ZFDragableModalTransition.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AEXML.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FolioReaderKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontBlaster.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCDWebServer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQWebViewController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MenuItemKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZFDragableModalTransition.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -220,6 +212,7 @@
 			files = (
 				3639429C213FC47700D42D31 /* ViewController.swift in Sources */,
 				3639429A213FC47700D42D31 /* AppDelegate.swift in Sources */,
+				3682602C2140FB1000CBCF0F /* ListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +289,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -350,7 +343,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -364,14 +357,18 @@
 			baseConfigurationReference = EF9120381EB49FE31110E0D6 /* Pods-EPUB_FolioReader.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FJ796T7KK8;
 				INFOPLIST_FILE = EPUB_FolioReader/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Hank-Zhong.EPUB-FolioReader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -382,8 +379,11 @@
 			baseConfigurationReference = A53D30056C47CAD710C6A6B0 /* Pods-EPUB_FolioReader.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FJ796T7KK8;
 				INFOPLIST_FILE = EPUB_FolioReader/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

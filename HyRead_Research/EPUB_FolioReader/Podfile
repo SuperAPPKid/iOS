@@ -8,6 +8,5 @@ target 'EPUB_FolioReader' do
   use_frameworks!
 
   # Pods for EPUB_FolioReader
-  pod 'FolioReaderKit'
   pod 'GCDWebServer/WebUploader'
 end
