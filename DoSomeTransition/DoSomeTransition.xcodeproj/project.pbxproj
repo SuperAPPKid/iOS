@@ -19,6 +19,11 @@
 		367CDFA520D263DE006CA74A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 367CDFA320D263DE006CA74A /* Main.storyboard */; };
 		367CDFA720D263DF006CA74A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 367CDFA620D263DF006CA74A /* Assets.xcassets */; };
 		367CDFAA20D263DF006CA74A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 367CDFA820D263DF006CA74A /* LaunchScreen.storyboard */; };
+		36854CA12154BEEF000E3D91 /* TabBarControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36854CA02154BEEF000E3D91 /* TabBarControllerDelegate.swift */; };
+		36854CA32154BF4A000E3D91 /* TabBarInteractAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36854CA22154BF4A000E3D91 /* TabBarInteractAnimation.swift */; };
+		36854CAC2154C4DC000E3D91 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36854CAB2154C4DC000E3D91 /* DetailViewController.swift */; };
+		36854CAE2154C6F7000E3D91 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36854CAD2154C6F7000E3D91 /* ListViewController.swift */; };
+		36854CB02154CF50000E3D91 /* UIImage+scaleTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36854CAF2154CF50000E3D91 /* UIImage+scaleTo.swift */; };
 		36FD60BA20D276AF00978A93 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FD60B920D276AF00978A93 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +42,11 @@
 		367CDFA620D263DF006CA74A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		367CDFA920D263DF006CA74A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		367CDFAB20D263DF006CA74A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36854CA02154BEEF000E3D91 /* TabBarControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerDelegate.swift; sourceTree = "<group>"; };
+		36854CA22154BF4A000E3D91 /* TabBarInteractAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarInteractAnimation.swift; sourceTree = "<group>"; };
+		36854CAB2154C4DC000E3D91 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		36854CAD2154C6F7000E3D91 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		36854CAF2154CF50000E3D91 /* UIImage+scaleTo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+scaleTo.swift"; path = "../../Coding Style/Coding Style/Extension/UIImage+scaleTo.swift"; sourceTree = "<group>"; };
 		36FD60B920D276AF00978A93 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,16 +86,77 @@
 				367CDFA620D263DF006CA74A /* Assets.xcassets */,
 				367CDFA820D263DF006CA74A /* LaunchScreen.storyboard */,
 				367CDFAB20D263DF006CA74A /* Info.plist */,
-				361E038821536C1B00D06DE0 /* PushViewController.swift */,
-				361E038A21536C2C00D06DE0 /* PopViewController.swift */,
-				361E038E2153717F00D06DE0 /* TabBarController.swift */,
-				361E0390215371CB00D06DE0 /* PresentingViewController.swift */,
-				361E0392215371D700D06DE0 /* PresentedViewController.swift */,
-				277C39BB20D57FE4003B1655 /* ChildVC_transition.swift */,
-				2701D50620D7BB9200158406 /* CATransitionVC.swift */,
+				36854CA62154C42E000E3D91 /* NavigationController transition */,
+				36854C9F2154BE65000E3D91 /* TabbarController transition */,
+				36854CA82154C48E000E3D91 /* Modal transition */,
+				36854CA42154C1FE000E3D91 /* Basic Default transition */,
 				361E03942153729C00D06DE0 /* RadiusButton.swift */,
+				36854CAF2154CF50000E3D91 /* UIImage+scaleTo.swift */,
 			);
 			path = DoSomeTransition;
+			sourceTree = "<group>";
+		};
+		36854C9E2154BE5D000E3D91 /* Move Elements transition */ = {
+			isa = PBXGroup;
+			children = (
+				36854CAD2154C6F7000E3D91 /* ListViewController.swift */,
+				36854CAB2154C4DC000E3D91 /* DetailViewController.swift */,
+			);
+			path = "Move Elements transition";
+			sourceTree = "<group>";
+		};
+		36854C9F2154BE65000E3D91 /* TabbarController transition */ = {
+			isa = PBXGroup;
+			children = (
+				36854CA72154C45A000E3D91 /* Interaction transition */,
+			);
+			path = "TabbarController transition";
+			sourceTree = "<group>";
+		};
+		36854CA42154C1FE000E3D91 /* Basic Default transition */ = {
+			isa = PBXGroup;
+			children = (
+				277C39BB20D57FE4003B1655 /* ChildVC_transition.swift */,
+				2701D50620D7BB9200158406 /* CATransitionVC.swift */,
+			);
+			path = "Basic Default transition";
+			sourceTree = "<group>";
+		};
+		36854CA52154C407000E3D91 /* Mask transition */ = {
+			isa = PBXGroup;
+			children = (
+				361E038821536C1B00D06DE0 /* PushViewController.swift */,
+				361E038A21536C2C00D06DE0 /* PopViewController.swift */,
+			);
+			path = "Mask transition";
+			sourceTree = "<group>";
+		};
+		36854CA62154C42E000E3D91 /* NavigationController transition */ = {
+			isa = PBXGroup;
+			children = (
+				36854CA52154C407000E3D91 /* Mask transition */,
+				36854C9E2154BE5D000E3D91 /* Move Elements transition */,
+			);
+			path = "NavigationController transition";
+			sourceTree = "<group>";
+		};
+		36854CA72154C45A000E3D91 /* Interaction transition */ = {
+			isa = PBXGroup;
+			children = (
+				361E038E2153717F00D06DE0 /* TabBarController.swift */,
+				36854CA02154BEEF000E3D91 /* TabBarControllerDelegate.swift */,
+				36854CA22154BF4A000E3D91 /* TabBarInteractAnimation.swift */,
+			);
+			path = "Interaction transition";
+			sourceTree = "<group>";
+		};
+		36854CA82154C48E000E3D91 /* Modal transition */ = {
+			isa = PBXGroup;
+			children = (
+				361E0390215371CB00D06DE0 /* PresentingViewController.swift */,
+				361E0392215371D700D06DE0 /* PresentedViewController.swift */,
+			);
+			path = "Modal transition";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,16 +231,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36854CB02154CF50000E3D91 /* UIImage+scaleTo.swift in Sources */,
+				36854CA32154BF4A000E3D91 /* TabBarInteractAnimation.swift in Sources */,
 				2701D50720D7BB9200158406 /* CATransitionVC.swift in Sources */,
 				367CDFA020D263DE006CA74A /* AppDelegate.swift in Sources */,
 				361E038B21536C2C00D06DE0 /* PopViewController.swift in Sources */,
+				36854CA12154BEEF000E3D91 /* TabBarControllerDelegate.swift in Sources */,
 				361E03952153729C00D06DE0 /* RadiusButton.swift in Sources */,
+				36854CAE2154C6F7000E3D91 /* ListViewController.swift in Sources */,
 				36FD60BA20D276AF00978A93 /* TableViewController.swift in Sources */,
 				361E038F2153717F00D06DE0 /* TabBarController.swift in Sources */,
 				361E0393215371D700D06DE0 /* PresentedViewController.swift in Sources */,
 				361E038921536C1B00D06DE0 /* PushViewController.swift in Sources */,
 				277C39BC20D57FE4003B1655 /* ChildVC_transition.swift in Sources */,
 				361E0391215371CB00D06DE0 /* PresentingViewController.swift in Sources */,
+				36854CAC2154C4DC000E3D91 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

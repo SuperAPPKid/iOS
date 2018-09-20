@@ -32,11 +32,6 @@ class PushViewController: UIViewController {
 }
 
 extension PushViewController: UINavigationControllerDelegate {
-    
-    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return nil
-    }
-    
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let anim = MaskAnimation(operation: operation)
         anim.startRect = pushBtn.frame
@@ -65,11 +60,11 @@ private class MaskAnimation: NSObject, UIViewControllerAnimatedTransitioning, CA
         let fromVC = transitionContext.viewController(forKey: .from)
         let toVC = transitionContext.viewController(forKey: .to)
         guard let fromView = fromVC?.view, let toView = toVC?.view else { return }
-        
-        UIView.animate(withDuration: 0.15, delay: 0.025, usingSpringWithDamping: 0.8, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {
-            toView.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
+        fromView.backgroundColor = [#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1),#colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1),#colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1),#colorLiteral(red: 0.5563425422, green: 0.9793455005, blue: 0, alpha: 1),#colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1),#colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1),#colorLiteral(red: 0.5818830132, green: 0.2156915367, blue: 1, alpha: 1)].randomElement()
+        UIView.animate(withDuration: 0.3, delay: 0.025, usingSpringWithDamping: 0.8, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {
+            toView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         }) { (finish) in
-            UIView.animate(withDuration: 0.05, animations: {
+            UIView.animate(withDuration: 0.2, animations: {
                 toView.transform = .identity
             })
         }
@@ -104,6 +99,6 @@ private class MaskAnimation: NSObject, UIViewControllerAnimatedTransitioning, CA
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         transitionContext?.viewController(forKey: .to)?.view.layer.mask = nil
-        transitionContext?.completeTransition(flag)
+        transitionContext?.completeTransition(true)
     }
 }

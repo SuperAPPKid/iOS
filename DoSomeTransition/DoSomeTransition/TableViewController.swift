@@ -13,6 +13,7 @@ enum Section:Int {
     case Tabbar
     case Modal
     case Default
+    case Custom
 }
 
 class TableViewController: UITableViewController {
@@ -33,18 +34,15 @@ class TableViewController: UITableViewController {
             break
         case .Default:
             switch indexPath.row {
-            case 0:
-                break
             case 1:
                 let transitionVC = CATransitionVC()
                 transitionVC.view.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
                 navigationController?.pushViewController(transitionVC, animated: true)
                 break
-            default:
-                break
-                
+            default: break
             }
-            
+            break
+        case .Custom:
             break
         }
     }
