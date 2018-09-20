@@ -20,14 +20,15 @@ class ChildVC_transition: UIViewController {
         childVC1.view.frame = containerView.bounds
         childVC2.view.frame = containerView.bounds
         
-        self.addChildViewController(childVC1)
+        self.addChild(childVC1)
+        childVC1.didMove(toParent: self)
         containerView.addSubview(childVC1.view)
         
     }
     
     @IBAction func toogle(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            self.addChildViewController(childVC1)
+            self.addChild(childVC1)
             self.transition(from: childVC2,
                             to: childVC1,
                             duration: 1.0,
@@ -35,13 +36,13 @@ class ChildVC_transition: UIViewController {
                                 
             }) { (complete) in
                 if complete {
-                    self.childVC1.didMove(toParentViewController: self)
-                    self.childVC2.willMove(toParentViewController: nil)
-                    self.childVC2.removeFromParentViewController()
+                    self.childVC1.didMove(toParent: self)
+                    self.childVC2.willMove(toParent: nil)
+                    self.childVC2.removeFromParent()
                 }
             }
         } else {
-            self.addChildViewController(childVC2)
+            self.addChild(childVC2)
             self.transition(from: childVC1,
                             to: childVC2,
                             duration: 1.0,
@@ -49,13 +50,11 @@ class ChildVC_transition: UIViewController {
                                 
             }) { (complete) in
                 if complete {
-                    self.childVC2.didMove(toParentViewController: self)
-                    self.childVC1.willMove(toParentViewController: nil)
-                    self.childVC1.removeFromParentViewController()
+                    self.childVC2.didMove(toParent: self)
+                    self.childVC1.willMove(toParent: nil)
+                    self.childVC1.removeFromParent()
                 }
             }
         }
     }
-    
-    
 }

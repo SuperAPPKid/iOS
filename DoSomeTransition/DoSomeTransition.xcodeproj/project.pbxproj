@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		2701D50720D7BB9200158406 /* CATransitionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2701D50620D7BB9200158406 /* CATransitionVC.swift */; };
 		277C39BC20D57FE4003B1655 /* ChildVC_transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277C39BB20D57FE4003B1655 /* ChildVC_transition.swift */; };
+		361E038921536C1B00D06DE0 /* PushViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E038821536C1B00D06DE0 /* PushViewController.swift */; };
+		361E038B21536C2C00D06DE0 /* PopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E038A21536C2C00D06DE0 /* PopViewController.swift */; };
+		361E038F2153717F00D06DE0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E038E2153717F00D06DE0 /* TabBarController.swift */; };
+		361E0391215371CB00D06DE0 /* PresentingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E0390215371CB00D06DE0 /* PresentingViewController.swift */; };
+		361E0393215371D700D06DE0 /* PresentedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E0392215371D700D06DE0 /* PresentedViewController.swift */; };
+		361E03952153729C00D06DE0 /* RadiusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E03942153729C00D06DE0 /* RadiusButton.swift */; };
 		367CDFA020D263DE006CA74A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367CDF9F20D263DE006CA74A /* AppDelegate.swift */; };
 		367CDFA520D263DE006CA74A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 367CDFA320D263DE006CA74A /* Main.storyboard */; };
 		367CDFA720D263DF006CA74A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 367CDFA620D263DF006CA74A /* Assets.xcassets */; };
@@ -19,6 +25,12 @@
 /* Begin PBXFileReference section */
 		2701D50620D7BB9200158406 /* CATransitionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CATransitionVC.swift; sourceTree = "<group>"; };
 		277C39BB20D57FE4003B1655 /* ChildVC_transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVC_transition.swift; sourceTree = "<group>"; };
+		361E038821536C1B00D06DE0 /* PushViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushViewController.swift; sourceTree = "<group>"; };
+		361E038A21536C2C00D06DE0 /* PopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopViewController.swift; sourceTree = "<group>"; };
+		361E038E2153717F00D06DE0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		361E0390215371CB00D06DE0 /* PresentingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentingViewController.swift; sourceTree = "<group>"; };
+		361E0392215371D700D06DE0 /* PresentedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentedViewController.swift; sourceTree = "<group>"; };
+		361E03942153729C00D06DE0 /* RadiusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusButton.swift; sourceTree = "<group>"; };
 		367CDF9C20D263DE006CA74A /* DoSomeTransition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoSomeTransition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		367CDF9F20D263DE006CA74A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		367CDFA420D263DE006CA74A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -64,8 +76,14 @@
 				367CDFA620D263DF006CA74A /* Assets.xcassets */,
 				367CDFA820D263DF006CA74A /* LaunchScreen.storyboard */,
 				367CDFAB20D263DF006CA74A /* Info.plist */,
+				361E038821536C1B00D06DE0 /* PushViewController.swift */,
+				361E038A21536C2C00D06DE0 /* PopViewController.swift */,
+				361E038E2153717F00D06DE0 /* TabBarController.swift */,
+				361E0390215371CB00D06DE0 /* PresentingViewController.swift */,
+				361E0392215371D700D06DE0 /* PresentedViewController.swift */,
 				277C39BB20D57FE4003B1655 /* ChildVC_transition.swift */,
 				2701D50620D7BB9200158406 /* CATransitionVC.swift */,
+				361E03942153729C00D06DE0 /* RadiusButton.swift */,
 			);
 			path = DoSomeTransition;
 			sourceTree = "<group>";
@@ -102,6 +120,7 @@
 				TargetAttributes = {
 					367CDF9B20D263DD006CA74A = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -143,8 +162,14 @@
 			files = (
 				2701D50720D7BB9200158406 /* CATransitionVC.swift in Sources */,
 				367CDFA020D263DE006CA74A /* AppDelegate.swift in Sources */,
+				361E038B21536C2C00D06DE0 /* PopViewController.swift in Sources */,
+				361E03952153729C00D06DE0 /* RadiusButton.swift in Sources */,
 				36FD60BA20D276AF00978A93 /* TableViewController.swift in Sources */,
+				361E038F2153717F00D06DE0 /* TabBarController.swift in Sources */,
+				361E0393215371D700D06DE0 /* PresentedViewController.swift in Sources */,
+				361E038921536C1B00D06DE0 /* PushViewController.swift in Sources */,
 				277C39BC20D57FE4003B1655 /* ChildVC_transition.swift in Sources */,
+				361E0391215371CB00D06DE0 /* PresentingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +322,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Hank-Zhong.DoSomeTransition";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -315,7 +340,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Hank-Zhong.DoSomeTransition";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -22,6 +22,7 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let section = Section(rawValue: indexPath.section) ?? .Default
         switch section {
         case .Navigation:
@@ -33,9 +34,6 @@ class TableViewController: UITableViewController {
         case .Default:
             switch indexPath.row {
             case 0:
-                if let destinationVC = self.storyboard?.instantiateViewController(withIdentifier: String(describing: ChildVC_transition.self)) {
-                    navigationController?.pushViewController(destinationVC, animated: true)
-                }
                 break
             case 1:
                 let transitionVC = CATransitionVC()
