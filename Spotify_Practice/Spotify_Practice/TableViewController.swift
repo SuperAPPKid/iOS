@@ -38,6 +38,7 @@ class TableViewController: UITableViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 375)
         view.addSubview(imageView)
+        
         tableView.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.identifier)
         tableView.register(TableViewSection.nib, forHeaderFooterViewReuseIdentifier: TableViewSection.identifier)
         tableView.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
@@ -45,6 +46,7 @@ class TableViewController: UITableViewController {
         tableView.sectionHeaderHeight = 45
         tableView.rowHeight = 60
         tableView.showsVerticalScrollIndicator = false
+        
         let header = UINib(nibName: "TableHeader", bundle: nil).instantiate(withOwner: nil, options: nil).first as! TableHeader
         let headerContainer = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 350))
         headerContainer.addSubview(header)
@@ -90,6 +92,7 @@ class TableViewController: UITableViewController {
             return
         }
         let y = tableView.contentOffset.y
+        print(y)
         if y > 350 {
             if sectionView.gradientView.alpha != 1 {
                 sectionView.gradientView.alpha = 1

@@ -12,7 +12,7 @@ protocol NibViewDelegate {
 }
 
 class NibView: UIView {
-    lazy var presenter:NibViewDelegate! = NibViewPresenter(view: self)
+    lazy var presenter:NibViewDelegate = NibViewPresenter(view: self)
     @IBOutlet weak var squareView: UIView!
     
     @IBAction func click(_ sender: UIButton) {

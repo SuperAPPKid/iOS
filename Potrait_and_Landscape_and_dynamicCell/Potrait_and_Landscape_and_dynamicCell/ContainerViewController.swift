@@ -39,7 +39,7 @@ extension ContainerViewController:UITableViewDelegate,UITableViewDataSource {
         cell.label.text = data[indexPath.row]
 //        cell.textLabel?.text = data[indexPath.row]
 //        cell.textLabel?.numberOfLines = 0
-        cell.layoutMargins = UIEdgeInsets(top: 0, left: 200, bottom: 0, right: 100)
+        cell.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 100)
         return cell
     }
 }
