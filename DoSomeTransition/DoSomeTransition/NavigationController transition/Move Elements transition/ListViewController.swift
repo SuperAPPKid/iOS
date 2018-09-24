@@ -29,7 +29,6 @@ fileprivate class ImageCell: UICollectionViewCell {
 
 class ListViewController: UICollectionViewController {
     var animals: [Animal] = []
-    private var selectedCell: UICollectionViewCell?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +82,6 @@ class ListViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        selectedCell = cell
         let VC = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         VC.image = UIImage(named: animals[indexPath.row].name)
         navigationController?.pushViewController(VC, animated: true)
@@ -94,8 +92,7 @@ extension ListViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         switch operation {
         case .push:
-            guard let cell = selectedCell else { return nil }
-            return PushToDetailAnimation(selectedCell: cell)
+            return PushToDetailAnimation()
         case .pop:
             return nil
         case .none:
@@ -105,12 +102,6 @@ extension ListViewController: UINavigationControllerDelegate {
 }
 
 private class PushToDetailAnimation: NSObject, UIViewControllerAnimatedTransitioning {
-    private let selectedCell: UICollectionViewCell
-    
-    init(selectedCell: UICollectionViewCell) {
-        self.selectedCell = selectedCell
-    }
-    
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.8
     }
@@ -120,30 +111,9 @@ private class PushToDetailAnimation: NSObject, UIViewControllerAnimatedTransitio
         guard let fromVC = transitionContext.viewController(forKey: .from) as? ListViewController,
             let fromView = fromVC.view,
             let toVC = transitionContext.viewController(forKey: .to) as? DetailViewController,
-            let toView = toVC.view else {
-                return
-        }
-        
-        let translateX = containerView.center.x - selectedCell.center.x
-        let translateY = containerView.frame.width / 2 + 64 - selectedCell.center.y
-        let scale = (containerView.frame.width - 50) / selectedCell.frame.width
-        
-        toView.alpha = 0
-        fromView.alpha = 0.4
+            let toView = toVC.view else { return }
         containerView.addSubview(toView)
-        containerView.addSubview(selectedCell)
-        UIView.animateKeyframes(withDuration: transitionDuration(using: transitionContext), delay: 0, options: .layoutSubviews, animations: {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.7, animations: {
-                self.selectedCell.transform = CGAffineTransform(translationX: translateX, y: translateY).scaledBy(x: scale, y: scale)
-            })
-            UIView.addKeyframe(withRelativeStartTime: 0.7, relativeDuration: 0.1, animations: {
-                toView.alpha = 1
-            })
-        }) { (finish) in
-            self.selectedCell.removeFromSuperview()
-            fromView.alpha = 1
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-        }
+        transitionContext.completeTransition(true)
     }
 }
 

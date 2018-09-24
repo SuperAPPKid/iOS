@@ -45,16 +45,5 @@ class TabBarInteractAnimation: NSObject, UIViewControllerAnimatedTransitioning, 
             fromView.transform = .identity
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
-        
-    }
-    
-    //    func interruptibleAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
-    //        return UIViewPropertyAnimator(duration: 3, dampingRatio: 0.5) {
-    //            transitionContext.view(forKey: .from)?.transform = CGAffineTransform(rotationAngle: .pi)
-    //        }
-    //    }
-    
-    func animationEnded(_ transitionCompleted: Bool) {
-        
     }
 }

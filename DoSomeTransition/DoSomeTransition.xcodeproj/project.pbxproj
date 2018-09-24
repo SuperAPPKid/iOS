@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2701D50720D7BB9200158406 /* CATransitionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2701D50620D7BB9200158406 /* CATransitionVC.swift */; };
+		276FAB192156DF470013140F /* InterruptibleTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276FAB182156DF470013140F /* InterruptibleTabbarController.swift */; };
 		277C39BC20D57FE4003B1655 /* ChildVC_transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277C39BB20D57FE4003B1655 /* ChildVC_transition.swift */; };
 		361E038921536C1B00D06DE0 /* PushViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E038821536C1B00D06DE0 /* PushViewController.swift */; };
 		361E038B21536C2C00D06DE0 /* PopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361E038A21536C2C00D06DE0 /* PopViewController.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		2701D50620D7BB9200158406 /* CATransitionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CATransitionVC.swift; sourceTree = "<group>"; };
+		276FAB182156DF470013140F /* InterruptibleTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterruptibleTabbarController.swift; sourceTree = "<group>"; };
 		277C39BB20D57FE4003B1655 /* ChildVC_transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVC_transition.swift; sourceTree = "<group>"; };
 		361E038821536C1B00D06DE0 /* PushViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushViewController.swift; sourceTree = "<group>"; };
 		361E038A21536C2C00D06DE0 /* PopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		276FAB1A2156DF730013140F /* Interaction transition after iOS10 */ = {
+			isa = PBXGroup;
+			children = (
+				276FAB182156DF470013140F /* InterruptibleTabbarController.swift */,
+			);
+			path = "Interaction transition after iOS10";
+			sourceTree = "<group>";
+		};
 		367CDF9320D263DD006CA74A = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				36854CA72154C45A000E3D91 /* Interaction transition */,
+				276FAB1A2156DF730013140F /* Interaction transition after iOS10 */,
 			);
 			path = "TabbarController transition";
 			sourceTree = "<group>";
@@ -235,6 +246,7 @@
 				36854CA32154BF4A000E3D91 /* TabBarInteractAnimation.swift in Sources */,
 				2701D50720D7BB9200158406 /* CATransitionVC.swift in Sources */,
 				367CDFA020D263DE006CA74A /* AppDelegate.swift in Sources */,
+				276FAB192156DF470013140F /* InterruptibleTabbarController.swift in Sources */,
 				361E038B21536C2C00D06DE0 /* PopViewController.swift in Sources */,
 				36854CA12154BEEF000E3D91 /* TabBarControllerDelegate.swift in Sources */,
 				361E03952153729C00D06DE0 /* RadiusButton.swift in Sources */,

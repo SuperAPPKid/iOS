@@ -25,6 +25,9 @@ class TabBarController: UITabBarController {
         switch gesture.state {
         case .began:
             tabbarDelegate.canInteract = true
+            if tabbarDelegate.interactionController.wantsInteractiveStart {
+                
+            }
             let velocityX = gesture.velocity(in: view).x
             if velocityX < 0 {
                 if selectedIndex < children.count {
@@ -39,10 +42,8 @@ class TabBarController: UITabBarController {
             tabbarDelegate.interactionController.update(progress)
         case .ended, .cancelled:
             if progress > 0.25 {
-//                tabbarDelegate.interactionController.completionSpeed = 0.99
                 tabbarDelegate.interactionController.finish()
             } else {
-//                tabbarDelegate.interactionController.completionSpeed = 0.99
                 tabbarDelegate.interactionController.cancel()
             }
             tabbarDelegate.canInteract = false
