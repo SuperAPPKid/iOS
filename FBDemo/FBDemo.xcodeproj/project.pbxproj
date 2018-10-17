@@ -124,7 +124,6 @@
 				278966A12011BDD500B79E36 /* Frameworks */,
 				278966A22011BDD500B79E36 /* Resources */,
 				4F122CF91D95A46E207A6E7F /* [CP] Embed Pods Frameworks */,
-				A2DCBDDF7758AB2DCA40170F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -206,21 +205,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FBDemo/Pods-FBDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A2DCBDDF7758AB2DCA40170F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FBDemo/Pods-FBDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CF0145AF188A753B0C7B9368 /* [CP] Check Pods Manifest.lock */ = {
