@@ -37,7 +37,7 @@ class TabBarInteractAnimation: NSObject, UIViewControllerAnimatedTransitioning, 
         default: break
         }
         
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: [.curveEaseInOut], animations: {
+        UIView.animate(withDuration: 0.8, delay: 0, options: [.curveEaseInOut], animations: {
             fromView.transform = fromViewFinalTrans
             toView.transform = .identity
         }) { (finish) in
@@ -46,4 +46,5 @@ class TabBarInteractAnimation: NSObject, UIViewControllerAnimatedTransitioning, 
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
     }
+    
 }

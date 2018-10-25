@@ -41,7 +41,7 @@ class TabBarController: UITabBarController {
         case .changed:
             tabbarDelegate.interactionController.update(progress)
         case .ended, .cancelled:
-            if progress > 0.25 {
+            if progress > 0.1 {
                 tabbarDelegate.interactionController.finish()
             } else {
                 tabbarDelegate.interactionController.cancel()

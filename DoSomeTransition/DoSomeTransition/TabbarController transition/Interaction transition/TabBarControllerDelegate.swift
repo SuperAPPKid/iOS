@@ -14,6 +14,20 @@ enum Direction {
     case left
     case right
     case none
+    func reverse() -> Direction {
+        switch self {
+        case .up:
+            return Direction.down
+        case .down:
+            return Direction.up
+        case .left:
+            return Direction.right
+        case .right:
+            return Direction.left
+        case .none:
+            return Direction.none
+        }
+    }
 }
 
 protocol Directionable {
@@ -22,7 +36,7 @@ protocol Directionable {
 
 class TabBarControllerDelegate: NSObject, UITabBarControllerDelegate {
     var animateController: (UIViewControllerAnimatedTransitioning & Directionable)? = TabBarInteractAnimation()
-    let interactionController = UIPercentDrivenInteractiveTransition()
+    let interactionController = Test()
     var canInteract = false
     
     func tabBarController(_ tabBarController: UITabBarController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
@@ -36,5 +50,11 @@ class TabBarControllerDelegate: NSObject, UITabBarControllerDelegate {
         }
         animateController?.direction = fromIndex < toIndex ? .left : .right
         return animateController
+    }
+}
+
+class Test: UIPercentDrivenInteractiveTransition {
+    override func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
+        super.startInteractiveTransition(transitionContext)
     }
 }
