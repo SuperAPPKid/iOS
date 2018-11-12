@@ -47,4 +47,11 @@ class TabBarInteractAnimation: NSObject, UIViewControllerAnimatedTransitioning, 
         }
     }
     
+    func animationEnded(_ transitionCompleted: Bool) {
+        print(#function)
+    }
+    
+//    func interruptibleAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
+//        return UIViewPropertyAnimator(duration: 1, timingParameters: UICubicTimingParameters(animationCurve: .easeIn))
+//    }
 }
