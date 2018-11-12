@@ -50,12 +50,12 @@ Layer
  
  if self.delegate implement draw(_ rect) {
     self.display() -> if self.delegate implement display(_ layer: CALayer) {
-                         self.delegate.display(_ layer: CALayer) 56.3
+                         self.delegate.display(_ layer: CALayer) 56mb
                       } else {
                          create ctx!!! memory need
-                         self.draw(in ctx) -> self.delegate.draw(layer in ctx) -> self.delegate.draw(_ rect) 57.1
+                         self.draw(in ctx) -> self.delegate.draw(layer in ctx) -> self.delegate.draw(_ rect) 152mb
                       }
  } else {
-    **do some private function 56.1
+    **do some private function 56mb
  }
 */

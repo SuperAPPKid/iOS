@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        sview = TestView(frame: CGRect(x: 10, y: 10, width: 500, height: 500))
+        sview = TestView(frame: CGRect(x: 10, y: 10, width: 5000, height: 5000))
         sview.backgroundColor = .black
         slayer.strokeColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
         slayer.fillColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)

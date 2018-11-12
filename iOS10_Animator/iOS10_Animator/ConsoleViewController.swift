@@ -41,6 +41,7 @@ class ConsoleViewController: UIViewController {
     func addAction(action: ConsoleAction<UIControl>) {
         actions.append(action)
     }
+    
 }
 
 fileprivate class ConsoleActionView<T:UIControl>: UIView {
