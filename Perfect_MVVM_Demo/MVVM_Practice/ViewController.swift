@@ -9,36 +9,47 @@
 import UIKit
 
 class ViewController: UIViewController, ObserveElementDelegate {
-    var helloLabel: UILabel!
-    var worldLabel: UILabel!
-
+    var labelViewModels:[LabelViewModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        helloLabel = UILabel(frame: .init(x: 50, y: 80, width: 100, height: 100))
-        worldLabel = UILabel(frame: .init(x: 50, y: 200, width: 100, height: 100))
-        [helloLabel, worldLabel].forEach{ $0?.textAlignment = .center }
+        func createLabel(frame: CGRect) -> UILabel {
+            let label = UILabel(frame: frame)
+            label.font = UIFont.boldSystemFont(ofSize: 18)
+            return label
+        }
+
+        let label1 = createLabel(frame: .init(x: 50, y: 100, width: 100, height: 100))
+        let label2 = createLabel(frame: .init(x: 170, y: 100, width: 100, height: 100))
+        let label3 = createLabel(frame: .init(x: 50, y: 220, width: 100, height: 100))
+        let label4 = createLabel(frame: .init(x: 170, y: 220, width: 100, height: 100))
+        [label1, label2, label3, label4].forEach{ $0?.textAlignment = .center }
         
-        view.addSubview(helloLabel)
-        view.addSubview(worldLabel)
+        view.addSubview(label1)
+        view.addSubview(label2)
+        view.addSubview(label3)
+        view.addSubview(label4)
         
-        let helloViewModel = LabelViewModel(seconds: 3, color: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))
-        helloViewModel.colorElement.delegate = self
-        helloLabel.bind(to: helloViewModel)
-        helloViewModel.textElement.value = "HELLO"
-        helloViewModel.colorElement.value = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        let viewModel1 = LabelViewModel(milliseconds: 0)
+        label1.bind(to: viewModel1)
         
+        let viewModel2 = LabelViewModel(milliseconds: 300)
+        viewModel2.textElement.delegate = self
+        label2.bind(to: viewModel2)
         
-        let worldViewModel = LabelViewModel(seconds: 5, color: #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1))
-        worldViewModel.textElement.delegate = self
-        worldLabel.bind(to: worldViewModel)
-        worldViewModel.textElement.value = "WORLD"
-        worldViewModel.colorElement.value = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        let viewModel3 = LabelViewModel(milliseconds: 600)
+        label3.bind(to: viewModel3)
+        
+        let viewModel4 = LabelViewModel(milliseconds: 900)
+        label4.bind(to: viewModel4)
+        
+        labelViewModels = [viewModel1, viewModel2, viewModel3, viewModel4]
     }
     
     func shouldUpdateView(_ ObserveElement: Any) -> Bool {
         if let element = ObserveElement as? ObserveElement<String> {
-            print("WILL:\(element.value)")
+            print("WILL:\(element.value ?? "nil")")
             if element.value == "GOGOGO" {
                 return false
             }
@@ -48,74 +59,31 @@ class ViewController: UIViewController, ObserveElementDelegate {
     
     func didUpdateView(_ ObserveElement: Any) {
         if let element = ObserveElement as? ObserveElement<String> {
-            print("DID:\(element.value)")
+            print("DID:\(element.value ?? "nil")")
         }
     }
 
+    @IBAction func buttonClick(_ sender: UIButton) {
+        for (index, viewModel) in labelViewModels.enumerated() {
+            viewModel.timer?.invalidate()
+            viewModel.timer = nil
+            viewModel.colorElement.value = [#colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), #colorLiteral(red: 0.4620226622, green: 0.8382837176, blue: 1, alpha: 1), #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)][index]
+        }
+        labelViewModels.shuffle()
+    }
 }
 
 extension UILabel: Bindable {
     func bind(to viewModel: LabelViewModel) {
-        viewModel.textElement.update({ (value) in
+        viewModel.textElement.setUpdate({ (value) in
             self.text = value
         })
-        viewModel.colorElement.update { (value) in
-            self.backgroundColor = value
+        viewModel.colorElement.setUpdate { (value) in
+            UIView.animate(withDuration: 0.5, animations: {
+                self.layer.backgroundColor = value?.cgColor
+            })
         }
     }
 }
 
-class LabelViewModel {
-    var textElement = ObserveElement("")
-    var colorElement = ObserveElement(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
-    init(seconds: Int, color: UIColor) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(seconds)) {
-            self.textElement.value = "GOGOGO"
-            self.colorElement.value = color
-        }
-    }
-}
-
-@objc protocol ObserveElementDelegate: AnyObject {
-    @objc optional func shouldUpdateView(_ ObserveElement: Any) -> Bool
-    @objc optional func didUpdateView(_ ObserveElement: Any)
-}
-
-class ObserveElement<T> {
-    var value: T {
-        didSet {
-            if let delegate = delegate {
-                if (delegate.shouldUpdateView?(self) ?? true) {
-                    callBack?(value)
-                } else {
-                    value = oldValue
-                }
-                delegate.didUpdateView?(self)
-            } else {
-                callBack?(value)
-            }
-        }
-    }
-    
-    private var callBack: ((T) -> ())?
-    
-    weak var delegate: ObserveElementDelegate?
-    
-    weak var view: UIView?
-    
-    init(_ element: T) {
-        self.value = element
-    }
-    
-    func update(_ callBack: @escaping (_ value:T)->()) {
-        callBack(value)
-        
-        self.callBack = callBack
-    }
-}
-
-protocol Bindable {
-    associatedtype T
-    func bind(to viewModel: T)
-}
 

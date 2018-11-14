@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		366D4D5A219BFDED006A3193 /* MVVMCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366D4D59219BFDED006A3193 /* MVVMCore.swift */; };
+		366D4D5C219BFE07006A3193 /* LabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366D4D5B219BFE07006A3193 /* LabelViewModel.swift */; };
 		3670F4E8219A9F9000887768 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3670F4E7219A9F9000887768 /* AppDelegate.swift */; };
 		3670F4EA219A9F9000887768 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3670F4E9219A9F9000887768 /* ViewController.swift */; };
 		3670F4ED219A9F9000887768 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3670F4EB219A9F9000887768 /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		366D4D59219BFDED006A3193 /* MVVMCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMCore.swift; sourceTree = "<group>"; };
+		366D4D5B219BFE07006A3193 /* LabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewModel.swift; sourceTree = "<group>"; };
 		3670F4E4219A9F9000887768 /* MVVM_Practice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVVM_Practice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3670F4E7219A9F9000887768 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3670F4E9219A9F9000887768 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 				3670F4EE219A9F9100887768 /* Assets.xcassets */,
 				3670F4F0219A9F9100887768 /* LaunchScreen.storyboard */,
 				3670F4F3219A9F9100887768 /* Info.plist */,
+				366D4D59219BFDED006A3193 /* MVVMCore.swift */,
+				366D4D5B219BFE07006A3193 /* LabelViewModel.swift */,
 			);
 			path = MVVM_Practice;
 			sourceTree = "<group>";
@@ -136,7 +142,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3670F4EA219A9F9000887768 /* ViewController.swift in Sources */,
+				366D4D5A219BFDED006A3193 /* MVVMCore.swift in Sources */,
 				3670F4E8219A9F9000887768 /* AppDelegate.swift in Sources */,
+				366D4D5C219BFE07006A3193 /* LabelViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
