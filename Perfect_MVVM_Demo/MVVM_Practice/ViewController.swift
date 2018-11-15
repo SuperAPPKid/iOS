@@ -32,10 +32,10 @@ class ViewController: UIViewController, ObserveElementDelegate {
         view.addSubview(label4)
         
         let viewModel1 = LabelViewModel(milliseconds: 0)
+        viewModel1.textElement.delegate = self
         label1.bind(to: viewModel1)
         
         let viewModel2 = LabelViewModel(milliseconds: 300)
-        viewModel2.textElement.delegate = self
         label2.bind(to: viewModel2)
         
         let viewModel3 = LabelViewModel(milliseconds: 600)
@@ -71,9 +71,24 @@ class ViewController: UIViewController, ObserveElementDelegate {
         }
         labelViewModels.shuffle()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destinationVC = segue.destination as? TableViewController else {
+            return
+        }
+        destinationVC.animalModels = [AnimalModel(name: "Hello World~!", imageName: "Giant Panda"),
+                                      AnimalModel(name: "Hello World~~!", imageName: "Giant Panda"),
+                                      AnimalModel(name: "Hello World~~~!", imageName: "Giant Panda"),
+                                      AnimalModel(name: "Hello World~~~~!", imageName: "Giant Panda"),
+                                      AnimalModel(name: "Hello World~~~~~!", imageName: "Giant Panda")]
+    }
 }
 
 extension UILabel: Bindable {
+    var viewModel: LabelViewModel? {
+        return nil
+    }
+    
     func bind(to viewModel: LabelViewModel) {
         viewModel.textElement.setUpdate({ (value) in
             self.text = value
@@ -81,6 +96,7 @@ extension UILabel: Bindable {
         viewModel.colorElement.setUpdate { (value) in
             UIView.animate(withDuration: 0.5, animations: {
                 self.layer.backgroundColor = value?.cgColor
+                self.textColor = value
             })
         }
     }

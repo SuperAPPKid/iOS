@@ -14,6 +14,11 @@
 		3670F4ED219A9F9000887768 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3670F4EB219A9F9000887768 /* Main.storyboard */; };
 		3670F4EF219A9F9100887768 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3670F4EE219A9F9100887768 /* Assets.xcassets */; };
 		3670F4F2219A9F9100887768 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3670F4F0219A9F9100887768 /* LaunchScreen.storyboard */; };
+		36C3C8D6219D075F00AFAFCD /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C3C8D5219D075F00AFAFCD /* TableViewController.swift */; };
+		36C3C8D8219D089E00AFAFCD /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C3C8D7219D089E00AFAFCD /* TableViewCell.swift */; };
+		36C3C8DA219D685C00AFAFCD /* Respository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C3C8D9219D685C00AFAFCD /* Respository.swift */; };
+		36C3C8DC219D69BB00AFAFCD /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C3C8DB219D69BB00AFAFCD /* ImageService.swift */; };
+		36C3C8DE219D6F9600AFAFCD /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C3C8DD219D6F9600AFAFCD /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,11 @@
 		3670F4EE219A9F9100887768 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3670F4F1219A9F9100887768 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3670F4F3219A9F9100887768 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36C3C8D5219D075F00AFAFCD /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		36C3C8D7219D089E00AFAFCD /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		36C3C8D9219D685C00AFAFCD /* Respository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Respository.swift; sourceTree = "<group>"; };
+		36C3C8DB219D69BB00AFAFCD /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		36C3C8DD219D6F9600AFAFCD /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,14 +70,27 @@
 			children = (
 				3670F4E7219A9F9000887768 /* AppDelegate.swift */,
 				3670F4E9219A9F9000887768 /* ViewController.swift */,
+				36C3C8D5219D075F00AFAFCD /* TableViewController.swift */,
 				3670F4EB219A9F9000887768 /* Main.storyboard */,
 				3670F4EE219A9F9100887768 /* Assets.xcassets */,
 				3670F4F0219A9F9100887768 /* LaunchScreen.storyboard */,
 				3670F4F3219A9F9100887768 /* Info.plist */,
 				366D4D59219BFDED006A3193 /* MVVMCore.swift */,
 				366D4D5B219BFE07006A3193 /* LabelViewModel.swift */,
+				36C3C8D7219D089E00AFAFCD /* TableViewCell.swift */,
+				36C3C8DD219D6F9600AFAFCD /* Model.swift */,
+				36C3C8E3219D70D700AFAFCD /* ImageService */,
 			);
 			path = MVVM_Practice;
+			sourceTree = "<group>";
+		};
+		36C3C8E3219D70D700AFAFCD /* ImageService */ = {
+			isa = PBXGroup;
+			children = (
+				36C3C8D9219D685C00AFAFCD /* Respository.swift */,
+				36C3C8DB219D69BB00AFAFCD /* ImageService.swift */,
+			);
+			path = ImageService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,9 +164,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36C3C8DE219D6F9600AFAFCD /* Model.swift in Sources */,
+				36C3C8DA219D685C00AFAFCD /* Respository.swift in Sources */,
+				36C3C8DC219D69BB00AFAFCD /* ImageService.swift in Sources */,
 				3670F4EA219A9F9000887768 /* ViewController.swift in Sources */,
 				366D4D5A219BFDED006A3193 /* MVVMCore.swift in Sources */,
 				3670F4E8219A9F9000887768 /* AppDelegate.swift in Sources */,
+				36C3C8D8219D089E00AFAFCD /* TableViewCell.swift in Sources */,
+				36C3C8D6219D075F00AFAFCD /* TableViewController.swift in Sources */,
 				366D4D5C219BFE07006A3193 /* LabelViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

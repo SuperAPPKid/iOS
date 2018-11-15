@@ -21,16 +21,16 @@ class ObserveElement<T> {
             update(new: value, old: oldValue)
         }
     }
-    var delay: UInt = 0
+    var delay: UInt
     private var callBack: ValueUpdateCallback?
     weak var delegate: ObserveElementDelegate?
     
-    init(_ element: T) {
-        self.value = element
+    convenience init(_ value: T? = nil) {
+        self.init(value, delayMilliSeconds: 0)
     }
     
-    init(_ element: T, delayMilliSeconds: UInt) {
-        self.value = element
+    init(_ value: T? = nil, delayMilliSeconds: UInt) {
+        self.value = value
         self.delay = delayMilliSeconds
     }
     
@@ -70,4 +70,5 @@ class ObserveElement<T> {
 protocol Bindable {
     associatedtype T
     func bind(to viewModel: T)
+    var viewModel: T? { get }
 }
