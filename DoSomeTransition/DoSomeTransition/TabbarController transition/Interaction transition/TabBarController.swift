@@ -25,9 +25,6 @@ class TabBarController: UITabBarController {
         switch gesture.state {
         case .began:
             tabbarDelegate.canInteract = true
-            if tabbarDelegate.interactionController.wantsInteractiveStart {
-                
-            }
             let velocityX = gesture.velocity(in: view).x
             if velocityX < 0 {
                 if selectedIndex < children.count {

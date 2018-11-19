@@ -51,14 +51,14 @@ class ObserveElement<T> {
         update(new: newValue, old: oldValue, animated: animated)
     }
     
-    private func execute(value: T?, animated: Bool, update callBack: ValueUpdateCallback?){
+    private func execute(value: T?, animated: Bool, update callBack: ValueUpdateCallback?) {
         if delay == 0 {
-            DispatchQueue.main.async {
-                callBack?(self.viewModel, value, animated)
+            DispatchQueue.main.async { [weak self] in
+                callBack?(self?.viewModel, value, animated)
             }
         } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(delay))) {
-                callBack?(self.viewModel , value, animated)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(delay))) { [weak self] in
+                callBack?(self?.viewModel , value, animated)
             }
         }
     }
