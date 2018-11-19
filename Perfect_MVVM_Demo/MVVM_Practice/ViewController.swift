@@ -32,7 +32,7 @@ class ViewController: UIViewController, ObserveElementDelegate {
         view.addSubview(label4)
         
         let viewModel1 = LabelViewModel(milliseconds: 0)
-        viewModel1.textElement.delegate = self
+        viewModel1.textElement?.delegate = self
         label1.bind(to: viewModel1)
         
         let viewModel2 = LabelViewModel(milliseconds: 300)
@@ -67,7 +67,7 @@ class ViewController: UIViewController, ObserveElementDelegate {
         for (index, viewModel) in labelViewModels.enumerated() {
             viewModel.timer?.invalidate()
             viewModel.timer = nil
-            viewModel.colorElement.value = [#colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), #colorLiteral(red: 0.4620226622, green: 0.8382837176, blue: 1, alpha: 1), #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)][index]
+            viewModel.colorElement?.set([#colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), #colorLiteral(red: 0.4620226622, green: 0.8382837176, blue: 1, alpha: 1), #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)][index])
         }
         labelViewModels.shuffle()
     }
@@ -80,7 +80,11 @@ class ViewController: UIViewController, ObserveElementDelegate {
                                       AnimalModel(name: "Hello World~~!", imageName: "Giant Panda"),
                                       AnimalModel(name: "Hello World~~~!", imageName: "Giant Panda"),
                                       AnimalModel(name: "Hello World~~~~!", imageName: "Giant Panda"),
-                                      AnimalModel(name: "Hello World~~~~~!", imageName: "Giant Panda")]
+                                      AnimalModel(name: "Error Image", imageName: "ERROR"),
+                                      AnimalModel(name: "LION LION LION", imageName: "Lion"),
+                                      AnimalModel(name: "TIGER TIGER TIGER", imageName: "Tiger"),
+                                      AnimalModel(name: "ZZZZZZZZZZ", imageName: "Zebra"),
+                                      AnimalModel(name: "LONG NECK", imageName: "Giraffe")].shuffled()
     }
 }
 
@@ -90,14 +94,20 @@ extension UILabel: Bindable {
     }
     
     func bind(to viewModel: LabelViewModel) {
-        viewModel.textElement.setUpdate({ (value) in
+        viewModel.textElement?.setUpdate{ (viewModel, value, animated) in
             self.text = value
-        })
-        viewModel.colorElement.setUpdate { (value) in
-            UIView.animate(withDuration: 0.5, animations: {
+        }
+        
+        viewModel.colorElement?.setUpdate{ (viewModel, value, animated) in
+            if animated {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.layer.backgroundColor = value?.cgColor
+                    self.textColor = value
+                })
+            } else {
                 self.layer.backgroundColor = value?.cgColor
-                self.textColor = value
-            })
+                self.textColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+            }
         }
     }
 }

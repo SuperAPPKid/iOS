@@ -14,56 +14,71 @@ import Foundation
 }
 
 class ObserveElement<T> {
-    typealias ValueUpdateCallback = ((T?) -> ())
+    typealias ValueUpdateCallback = ((ViewModel?, T?, Bool) -> ())
     
-    var value: T? {
-        didSet {
-            update(new: value, old: oldValue)
-        }
-    }
+    unowned var viewModel: ViewModel
+    
     var delay: UInt
+    private(set) var value: T?
+    private var oldValue: T?
     private var callBack: ValueUpdateCallback?
     weak var delegate: ObserveElementDelegate?
     
-    convenience init(_ value: T? = nil) {
-        self.init(value, delayMilliSeconds: 0)
+    convenience init(belong viewModel: ViewModel, value: T? = nil) {
+        self.init(belong: viewModel, value: value , delayMilliSeconds: 0)
     }
     
-    init(_ value: T? = nil, delayMilliSeconds: UInt) {
+    init(belong viewModel: ViewModel, value: T? = nil, delayMilliSeconds: UInt) {
+        self.viewModel = viewModel
         self.value = value
         self.delay = delayMilliSeconds
     }
     
-    func setUpdate(_ callBack: @escaping ValueUpdateCallback) {
+    func setUpdate(updateNow: Bool = true, _ callBack: @escaping ValueUpdateCallback) {
         self.callBack = callBack
-        update(new: value, old: value)
+        if updateNow {
+            update(new: value, old: value, animated: false)
+        }
     }
     
     func unBind(){
-        self.callBack  = nil
+        self.callBack = nil
     }
     
-    private func execute(value: T? ,Update callBack: ValueUpdateCallback?){
+    func set(_ newValue: T?, animated: Bool = false) {
+        oldValue = value
+        value = newValue
+        update(new: newValue, old: oldValue, animated: animated)
+    }
+    
+    private func execute(value: T?, animated: Bool, update callBack: ValueUpdateCallback?){
         if delay == 0 {
-            callBack?(value)
+            DispatchQueue.main.async {
+                callBack?(self.viewModel, value, animated)
+            }
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(delay))) {
-                callBack?(value)
+                callBack?(self.viewModel , value, animated)
             }
         }
     }
     
-    private func update(new: T?, old: T?) {
+    private func update(new: T?, old: T?, animated: Bool) {
         if let delegate = delegate {
             if (delegate.shouldUpdateView?(self) ?? true) {
-                execute(value: value, Update: callBack)
+                execute(value: new, animated: animated, update: callBack)
             } else {
-                value = old
+                value = oldValue
+                execute(value: old, animated: animated, update: callBack)
             }
             delegate.didUpdateView?(self)
         } else {
-            execute(value: value, Update: callBack)
+            execute(value: new, animated: animated, update: callBack)
         }
+    }
+    
+    deinit {
+        print("Element Dead")
     }
 }
 
@@ -71,4 +86,14 @@ protocol Bindable {
     associatedtype T
     func bind(to viewModel: T)
     var viewModel: T? { get }
+}
+
+protocol ViewModel: AnyObject {
+    func generateObserveElement<T>(value: T?, delayMilliSeconds: UInt) -> ObserveElement<T>
+}
+
+extension ViewModel {
+    func generateObserveElement<T>(value: T? = nil, delayMilliSeconds: UInt = 0) -> ObserveElement<T> {
+        return ObserveElement(belong: self, value: value, delayMilliSeconds: delayMilliSeconds)
+    }
 }

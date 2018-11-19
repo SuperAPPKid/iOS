@@ -63,14 +63,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="6kG-Mv-fuB">
-                                            <rect key="frame" x="25" y="10" width="98" height="98"/>
+                                            <rect key="frame" x="25" y="10" width="100" height="100"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="6kG-Mv-fuB" secondAttribute="height" id="PhB-GK-J3Q"/>
+                                                <constraint firstAttribute="width" constant="100" id="m9M-zc-1M8"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ya3-OI-iBi">
-                                            <rect key="frame" x="133" y="10" width="227" height="35"/>
+                                            <rect key="frame" x="135" y="10" width="225" height="35"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="35" id="pdQ-8m-gvx"/>
                                             </constraints>
@@ -78,18 +79,24 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="751" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Iqx-ee-F5L">
-                                            <rect key="frame" x="15" y="118" width="345" height="2"/>
+                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="751" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Iqx-ee-F5L">
+                                            <rect key="frame" x="15" y="120" width="345" height="0.0"/>
                                         </progressView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jo-J3-nqE">
-                                            <rect key="frame" x="138" y="65" width="120" height="38"/>
+                                            <rect key="frame" x="140" y="65" width="120" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="120" id="Whi-vq-5TO"/>
                                             </constraints>
                                             <state key="normal" title="Reset"/>
+                                            <connections>
+                                                <action selector="resetClick:" destination="JMn-Il-Png" eventType="touchUpInside" id="QLe-fB-OXF"/>
+                                            </connections>
                                         </button>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tGI-Nr-HeZ">
-                                            <rect key="frame" x="295" y="70" width="51" height="28"/>
+                                            <rect key="frame" x="295" y="70" width="51" height="30"/>
+                                            <connections>
+                                                <action selector="toogleDownload:" destination="JMn-Il-Png" eventType="valueChanged" id="C13-8o-BSs"/>
+                                            </connections>
                                         </switch>
                                     </subviews>
                                     <constraints>
@@ -111,10 +118,11 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="downloadSwitch" destination="tGI-Nr-HeZ" id="Wwu-1o-ImH"/>
                                     <outlet property="nameLabel" destination="Ya3-OI-iBi" id="XZb-k5-MYs"/>
                                     <outlet property="progressBar" destination="Iqx-ee-F5L" id="8Tj-dL-i8b"/>
+                                    <outlet property="resetButton" destination="0jo-J3-nqE" id="0S1-dW-A58"/>
                                     <outlet property="thumbView" destination="6kG-Mv-fuB" id="SPy-jj-0Zq"/>
-                                    <outlet property="toogleSwitch" destination="tGI-Nr-HeZ" id="6U4-j4-tN9"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

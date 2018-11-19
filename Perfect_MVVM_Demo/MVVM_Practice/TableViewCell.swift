@@ -8,8 +8,14 @@
 
 import UIKit
 
+protocol TableViewCellDelegate: AnyObject {
+    func fetchImageFail(_ tableViewCell: TableViewCell, error: Error)
+}
+
 class TableViewCell: UITableViewCell, Bindable {
     weak var viewModel: CellViewModel?  = nil
+    
+    @IBOutlet weak var resetButton: UIButton!
     
     @IBOutlet weak var thumbView: UIImageView!
     
@@ -17,44 +23,75 @@ class TableViewCell: UITableViewCell, Bindable {
     
     @IBOutlet weak var progressBar: UIProgressView!
     
-    @IBOutlet weak var toogleSwitch: UISwitch!
+    @IBOutlet weak var downloadSwitch: UISwitch!
+    
+    weak var delegate: TableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
+    
+    @IBAction func resetClick(_ sender: UIButton) {
+        viewModel?.imageElement?.set(nil)
+        viewModel?.needFetchElement?.set(false)
+        viewModel?.progressElement?.set(0.0)
     }
-
+    
+    @IBAction func toogleDownload(_ sender: UISwitch) {
+        viewModel?.needFetchElement?.set(sender.isOn)
+    }
+    
     func bind(to viewModel: CellViewModel) {
-        viewModel.isCheckedElement.setUpdate { (value) in
-            self.toogleSwitch.isOn = value ?? false
+        self.viewModel = viewModel
+        self.progressBar.progress = viewModel.progressElement?.value ?? 0.0
+        
+        viewModel.needFetchElement?.setUpdate{ [weak self] (viewModel, needFetch, animated) in
+            guard let self = self,
+                let viewModel = viewModel as? CellViewModel,
+                let selfViewModel = self.viewModel,
+                viewModel === selfViewModel else { return }
+            
+            self.downloadSwitch.setOn(needFetch ?? false, animated: animated)
+            
+            
+            selfViewModel.fetchImage(size: self.thumbView.frame.size){ [weak self] (image, error) in
+                if let error = error, let self = self {
+                    self.delegate?.fetchImageFail(self, error: error)
+                }
+            }
         }
-        viewModel.titleElement.setUpdate { (value) in
+        
+        viewModel.titleElement?.setUpdate{ [weak self] (viewModel, value, animated) in
+            guard let self = self,
+                let viewModel = viewModel as? CellViewModel,
+                let selfViewModel = self.viewModel,
+                viewModel === selfViewModel else { return }
+            
             self.nameLabel.text = value
         }
-        viewModel.progressElement.setUpdate { (value) in
-            self.progressBar.progress = value ?? 0.0
+        
+        viewModel.progressElement?.setUpdate{ [weak self] (viewModel, value, animated) in
+            guard let self = self,
+                let viewModel = viewModel as? CellViewModel,
+                let selfViewModel = self.viewModel,
+                viewModel === selfViewModel else { return }
+            
+            self.resetButton.isEnabled = (value ?? 0.0) == 1.0
+            self.progressBar.setProgress(value ?? 0.0, animated: (value ?? 0.0) != 0.0)
+        }
+        
+        viewModel.imageElement?.setUpdate{ [weak self] (viewModel, value, animated) in
+            guard let self = self,
+                let viewModel = viewModel as? CellViewModel,
+                let selfViewModel = self.viewModel,
+                viewModel === selfViewModel else { return }
+            
+            self.thumbView.image = value
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+    deinit {
+        print("Cell Dead")
     }
-}
-
-class CellViewModel {
-    var titleElement: ObserveElement<String>
-    var isCheckedElement: ObserveElement<Bool>
-    var progressElement: ObserveElement<Float>
-    var imageElement: ObserveElement<UIImage>
-    init(title: String, isChecked: Bool, progress: Float, imageName: String) {
-        self.titleElement = ObserveElement(title)
-        self.isCheckedElement = ObserveElement(isChecked)
-        self.progressElement = ObserveElement(progress)
-        self.imageElement = ObserveElement<UIImage>()
-    }
+    
 }

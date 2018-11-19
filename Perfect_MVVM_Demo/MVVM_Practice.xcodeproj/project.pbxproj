@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3652BF72219E6368001F0F58 /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3652BF71219E6368001F0F58 /* CellViewModel.swift */; };
 		366D4D5A219BFDED006A3193 /* MVVMCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366D4D59219BFDED006A3193 /* MVVMCore.swift */; };
 		366D4D5C219BFE07006A3193 /* LabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366D4D5B219BFE07006A3193 /* LabelViewModel.swift */; };
 		3670F4E8219A9F9000887768 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3670F4E7219A9F9000887768 /* AppDelegate.swift */; };
@@ -17,11 +18,12 @@
 		36C3C8D6219D075F00AFAFCD /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C3C8D5219D075F00AFAFCD /* TableViewController.swift */; };
 		36C3C8D8219D089E00AFAFCD /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C3C8D7219D089E00AFAFCD /* TableViewCell.swift */; };
 		36C3C8DA219D685C00AFAFCD /* Respository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C3C8D9219D685C00AFAFCD /* Respository.swift */; };
-		36C3C8DC219D69BB00AFAFCD /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C3C8DB219D69BB00AFAFCD /* ImageService.swift */; };
+		36C3C8DC219D69BB00AFAFCD /* SimulateImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C3C8DB219D69BB00AFAFCD /* SimulateImageService.swift */; };
 		36C3C8DE219D6F9600AFAFCD /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C3C8DD219D6F9600AFAFCD /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3652BF71219E6368001F0F58 /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		366D4D59219BFDED006A3193 /* MVVMCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMCore.swift; sourceTree = "<group>"; };
 		366D4D5B219BFE07006A3193 /* LabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewModel.swift; sourceTree = "<group>"; };
 		3670F4E4219A9F9000887768 /* MVVM_Practice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVVM_Practice.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,7 +36,7 @@
 		36C3C8D5219D075F00AFAFCD /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		36C3C8D7219D089E00AFAFCD /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		36C3C8D9219D685C00AFAFCD /* Respository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Respository.swift; sourceTree = "<group>"; };
-		36C3C8DB219D69BB00AFAFCD /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		36C3C8DB219D69BB00AFAFCD /* SimulateImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulateImageService.swift; sourceTree = "<group>"; };
 		36C3C8DD219D6F9600AFAFCD /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,10 +77,11 @@
 				3670F4EE219A9F9100887768 /* Assets.xcassets */,
 				3670F4F0219A9F9100887768 /* LaunchScreen.storyboard */,
 				3670F4F3219A9F9100887768 /* Info.plist */,
-				366D4D59219BFDED006A3193 /* MVVMCore.swift */,
 				366D4D5B219BFE07006A3193 /* LabelViewModel.swift */,
 				36C3C8D7219D089E00AFAFCD /* TableViewCell.swift */,
+				3652BF71219E6368001F0F58 /* CellViewModel.swift */,
 				36C3C8DD219D6F9600AFAFCD /* Model.swift */,
+				366D4D59219BFDED006A3193 /* MVVMCore.swift */,
 				36C3C8E3219D70D700AFAFCD /* ImageService */,
 			);
 			path = MVVM_Practice;
@@ -88,7 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				36C3C8D9219D685C00AFAFCD /* Respository.swift */,
-				36C3C8DB219D69BB00AFAFCD /* ImageService.swift */,
+				36C3C8DB219D69BB00AFAFCD /* SimulateImageService.swift */,
 			);
 			path = ImageService;
 			sourceTree = "<group>";
@@ -164,9 +167,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3652BF72219E6368001F0F58 /* CellViewModel.swift in Sources */,
 				36C3C8DE219D6F9600AFAFCD /* Model.swift in Sources */,
 				36C3C8DA219D685C00AFAFCD /* Respository.swift in Sources */,
-				36C3C8DC219D69BB00AFAFCD /* ImageService.swift in Sources */,
+				36C3C8DC219D69BB00AFAFCD /* SimulateImageService.swift in Sources */,
 				3670F4EA219A9F9000887768 /* ViewController.swift in Sources */,
 				366D4D5A219BFDED006A3193 /* MVVMCore.swift in Sources */,
 				3670F4E8219A9F9000887768 /* AppDelegate.swift in Sources */,
