@@ -19,16 +19,12 @@ class ObserveElement<T> {
     unowned var viewModel: ViewModel
     
     var delay: UInt
+    weak var delegate: ObserveElementDelegate?
     private(set) var value: T?
     private var oldValue: T?
     private var callBack: ValueUpdateCallback?
-    weak var delegate: ObserveElementDelegate?
     
-    convenience init(belong viewModel: ViewModel, value: T? = nil) {
-        self.init(belong: viewModel, value: value , delayMilliSeconds: 0)
-    }
-    
-    init(belong viewModel: ViewModel, value: T? = nil, delayMilliSeconds: UInt) {
+    fileprivate init(belong viewModel: ViewModel, value: T? = nil, delayMilliSeconds: UInt) {
         self.viewModel = viewModel
         self.value = value
         self.delay = delayMilliSeconds
@@ -41,7 +37,7 @@ class ObserveElement<T> {
         }
     }
     
-    func unBind(){
+    func unBind() {
         self.callBack = nil
     }
     

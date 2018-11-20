@@ -12,29 +12,47 @@ class ConsoleViewController: UIViewController {
     private var scrollView: UIScrollView = UIScrollView()
     private var actions: [ConsoleAction<UIControl>] = []
     private var actionViews: [ConsoleActionView<UIControl>] = []
-    private let fixedWidth: Int = 300
+    private var cellHeight: CGFloat = 65
+    private var padding: CGFloat = 20
+    private let blurView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    private let topMask: UIView = GradientView(autoSize: [.flexibleTopMargin], reverse: false)
+    private let bottomMask: UIView = GradientView(autoSize: [.flexibleBottomMargin], reverse: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.contentInset = .zero
         scrollView.contentOffset = .zero
         
-        view.addSubview(scrollView)
+        scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurView)
+        blurView.contentView.addSubview(scrollView)
+        view.addSubview(topMask)
+        view.addSubview(bottomMask)
+        
         for action in actions {
-            let actionView = ConsoleActionView(title: action.title, control: action.control)
+            let actionView = ConsoleActionView(title: action.title, control: action.control, color: action.preferColor)
             scrollView.addSubview(actionView)
             actionViews.append(actionView)
         }
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+    
     override func viewDidLayoutSubviews() {
-        scrollView.frame = view.bounds
-        let width = Int(view.bounds.width)
-        scrollView.contentSize = CGSize(width: width, height: 10 + actions.count * 90)
+        blurView.frame = view.bounds
+        let width = view.bounds.width
+        let height = view.bounds.height
+        topMask.frame = CGRect(x: 0, y: 0, width: width, height: height / 2)
+        bottomMask.frame = CGRect(x: 0, y: height - height / 2, width: width, height: height / 2)
+        scrollView.contentSize = CGSize(width: width, height: CGFloat(actions.count) * (cellHeight + padding) + padding)
         for (index, actionView) in actionViews.enumerated() {
-            actionView.configureLayout(frame: CGRect(x: 10, y: 90 * index + 10, width: width - 20, height: 80))
+            actionView.configureLayout(frame: CGRect(x: padding, y: (cellHeight + padding) * CGFloat(index) + padding, width: width - padding * 2, height: cellHeight))
         }
     }
     
@@ -45,33 +63,74 @@ class ConsoleViewController: UIViewController {
 }
 
 fileprivate class ConsoleActionView<T:UIControl>: UIView {
-    let titleLabel: UILabel
+    let titleView: UIVisualEffectView
     let controlElement: T
     
-    init(title: String, control: T) {
-        titleLabel = {
-            let label = UILabel()
+    init(title: String, control: T, color: UIColor) {
+        titleView = {
+            let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+            blurView.clipsToBounds = true
+            let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: .dark)))
+            vibrancyView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+            blurView.contentView.addSubview(vibrancyView)
+            let label = UILabel(frame: blurView.bounds)
+            label.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             label.text = title
+            label.textColor = .white
             label.font = UIFont.boldSystemFont(ofSize: 18)
             label.textAlignment = .center
-            label.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
-            return label
+            vibrancyView.contentView.addSubview(label)
+            return blurView
         }()
         controlElement = control
         
         super.init(frame: .zero)
         
-        addSubview(titleLabel)
+        addSubview(titleView)
         addSubview(controlElement)
-        backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+        clipsToBounds = true
+        backgroundColor = UIColor(cgColor: color.cgColor.copy(alpha: 0.5) ?? color.cgColor)
+        layer.borderWidth = 2
+        layer.borderColor = color.cgColor.copy(alpha: 1)
     }
     
     func configureLayout(frame: CGRect) {
         self.frame = frame
-        titleLabel.frame.size = CGSize(width: frame.size.width * 0.3, height: frame.size.height * 0.8)
-        titleLabel.center = CGPoint(x: frame.size.width * 0.2, y: frame.size.height * 0.5)
-        controlElement.frame.size = CGSize(width: frame.size.width * 0.5, height: frame.size.height * 0.8)
-        controlElement.center = CGPoint(x: frame.size.width * 0.65, y: frame.size.height * 0.5)
+        titleView.layer.cornerRadius = frame.size.height * 0.35
+        layer.cornerRadius = frame.size.height * 0.25
+        titleView.frame.size = CGSize(width: frame.size.width * 0.3, height: frame.size.height * 0.7)
+        titleView.center = CGPoint(x: frame.size.width * 0.2, y: frame.size.height * 0.5)
+        controlElement.frame.size = CGSize(width: frame.size.width * 0.5, height: frame.size.height * 0.5)
+        controlElement.center = CGPoint(x: frame.size.width * 0.7, y: frame.size.height * 0.5)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+fileprivate class GradientView: UIView {
+    override class var layerClass: AnyClass {
+        return CAGradientLayer.self
+    }
+    
+    var gradientLayer: CAGradientLayer? {
+        return self.layer as? CAGradientLayer
+    }
+    
+    init(autoSize: AutoresizingMask, reverse: Bool) {
+        super.init(frame: .zero)
+        self.isUserInteractionEnabled = false
+        self.autoresizingMask = autoSize
+        gradientLayer?.colors = [UIColor(white: 0, alpha: 0.3).cgColor, UIColor(white: 0, alpha: 0).cgColor]
+        gradientLayer?.locations = [0.2, 0.5]
+        if !reverse {
+            gradientLayer?.startPoint = CGPoint(x: 0, y: 0)
+            gradientLayer?.endPoint = CGPoint(x: 0, y: 1)
+        } else {
+            gradientLayer?.startPoint = CGPoint(x: 0, y: 1)
+            gradientLayer?.endPoint = CGPoint(x: 0, y: 0)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

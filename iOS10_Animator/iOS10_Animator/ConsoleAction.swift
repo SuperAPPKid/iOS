@@ -14,12 +14,14 @@ protocol ConsoleActionElement: AnyObject {
     var control: Element { get }
 }
 
-class ConsoleAction<T:UIControl>: NSObject, ConsoleActionElement {
+class ConsoleAction<T: UIControl>: NSObject, ConsoleActionElement {
     let title: String
     let control: T
+    let preferColor: UIColor
     
-    init(title:String, control: T) {
+    init(title:String, control: T, preferColor: UIColor) {
         self.title = title
         self.control = control
+        self.preferColor = preferColor
     }
 }
