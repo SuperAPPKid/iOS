@@ -50,7 +50,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Lion" translatesAutoresizingMaskIntoConstraints="NO" id="huF-GR-Ivl">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starry-night" translatesAutoresizingMaskIntoConstraints="NO" id="huF-GR-Ivl">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CN" translatesAutoresizingMaskIntoConstraints="NO" id="jzD-ck-9W2">
@@ -101,6 +101,6 @@
     </scenes>
     <resources>
         <image name="CN" width="750" height="421.5"/>
-        <image name="Lion" width="319.5" height="240"/>
+        <image name="starry-night" width="1200" height="1200"/>
     </resources>
 </document>

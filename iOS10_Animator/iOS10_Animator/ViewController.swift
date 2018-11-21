@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let consoleVC = ConsoleViewController(parent: self, blurType: .dark)
+        let consoleVC = ConsoleViewController(parent: self, blurType: .light)
         slider.addTarget(self, action: #selector(test(sender:)), for: .valueChanged)
         let sw = UISwitch()
         sw.thumbTintColor = .red

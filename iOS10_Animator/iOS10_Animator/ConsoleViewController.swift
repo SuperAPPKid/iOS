@@ -21,18 +21,6 @@ class ConsoleViewController: UIViewController {
     private let barView: UIView = ExpandTouchView()
     private var isExpanded: Bool = false
     var desireHeight: CGFloat = 400
-    private var isBelowBuffer: Bool {
-        return parantVC.view.frame.height - view.frame.origin.y <= 45
-    }
-    private var isAboveDesire: Bool {
-        return parantVC.view.frame.height - view.frame.origin.y >= 45 + desireHeight
-    }
-    private var isAroundBuffer: Bool {
-        return parantVC.view.frame.height - view.frame.origin.y <= 135
-    }
-    private var isAroundDesire: Bool {
-        return parantVC.view.frame.height - view.frame.origin.y >= desireHeight - 90
-    }
     
     init(parent: UIViewController, blurType: UIBlurEffect.Style) {
         self.parantVC = parent
@@ -83,23 +71,20 @@ class ConsoleViewController: UIViewController {
         gesture.setTranslation(CGPoint(x: 0, y: 0), in: view)
         switch gesture.state {
         case .changed:
-            if isBelowBuffer && translate > 0 {
-                break
-            }
-            if isAboveDesire && translate < 0  {
-                break
-            }
-            view.center.y += translate
-            break
-        case .ended, .cancelled, .failed:
-            if isExpanded {
-                if isAroundBuffer {
-                    isExpanded = false
-                }
+            let isBelowBuffer = parantVC.view.frame.height - view.frame.origin.y <= 45
+            let isAboveDesire = parantVC.view.frame.height - view.frame.origin.y >= 45 + desireHeight
+            if (isBelowBuffer && translate > 0) || (isAboveDesire && translate < 0) {
+                view.center.y += translate * 0.1
             } else {
-                if isAroundDesire {
-                    isExpanded = true
-                }
+                view.center.y += translate
+            }
+        case .ended, .cancelled, .failed:
+            let isAroundBuffer = parantVC.view.frame.height - view.frame.origin.y <= 90
+            let isAroundDesire = parantVC.view.frame.height - view.frame.origin.y >= desireHeight - 90
+            if isExpanded {
+                isExpanded = isAroundDesire
+            } else {
+                isExpanded = !isAroundBuffer
             }
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.view.frame.origin.y = self.isExpanded ? self.parantVC.view.frame.height - self.desireHeight : self.parantVC.view.frame.height - 45
@@ -113,15 +98,15 @@ class ConsoleViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         blurView.frame = view.bounds
         maskView.frame = view.bounds
-        barView.center = CGPoint(x: view.center.x, y: 15)
-        barView.frame.size = CGSize(width: 75, height: 6)
+        barView.center = CGPoint(x: view.center.x, y: 18)
+        barView.frame.size = CGSize(width: 120, height: 6)
         let width = view.bounds.width
-        scrollView.contentSize = CGSize(width: width, height: CGFloat(actions.count) * (cellHeight + padding) + padding + 15)
+        scrollView.contentSize = CGSize(width: width, height: CGFloat(actions.count) * (cellHeight + padding) + padding + 25)
         scrollView.contentInset = .zero
         scrollView.contentOffset = .zero
         
         for (index, actionView) in actionViews.enumerated() {
-            actionView.configureLayout(frame: CGRect(x: padding, y: (cellHeight + padding) * CGFloat(index) + padding + 15, width: width - padding * 2, height: cellHeight))
+            actionView.configureLayout(frame: CGRect(x: padding, y: (cellHeight + padding) * CGFloat(index) + padding + 25, width: width - padding * 2, height: cellHeight))
         }
     }
     
@@ -193,8 +178,8 @@ fileprivate class GradientView: UIView {
         self.isUserInteractionEnabled = false
         self.clipsToBounds = true
         
-        gradientLayer?.colors = [UIColor(white: 0, alpha: 0.05).cgColor, UIColor(white: 0, alpha: 1).cgColor]
-        gradientLayer?.locations = [0.025, 0.1]
+        gradientLayer?.colors = [UIColor(white: 0, alpha: 0.1).cgColor, UIColor(white: 0, alpha: 1).cgColor]
+        gradientLayer?.locations = [0.05, 0.15]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -204,7 +189,7 @@ fileprivate class GradientView: UIView {
 
 fileprivate class ExpandTouchView: UIView {
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        if bounds.insetBy(dx: 0, dy: -10).contains(point) {
+        if bounds.insetBy(dx: 0, dy: -22.5).contains(point) {
             return true
         } else {
             return false
