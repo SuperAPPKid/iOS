@@ -14,24 +14,62 @@ class ConsoleViewController: UIViewController {
     private var actionViews: [ConsoleActionView<UIControl>] = []
     private var cellHeight: CGFloat = 65
     private var padding: CGFloat = 20
-    private let blurView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    private let topMask: UIView = GradientView(autoSize: [.flexibleTopMargin], reverse: false)
-    private let bottomMask: UIView = GradientView(autoSize: [.flexibleBottomMargin], reverse: true)
+    private var blurType: UIBlurEffect.Style
+    private lazy var blurView: UIVisualEffectView = { return UIVisualEffectView(effect: UIBlurEffect(style: blurType) ) }()
+    private let maskView: UIView = GradientView(autoSize: [.flexibleHeight, .flexibleWidth])
+    private unowned let parantVC: UIViewController
+    private let barView: UIView = ExpandTouchView()
+    private var isExpanded: Bool = false
+    var desireHeight: CGFloat = 400
+    private var isBelowBuffer: Bool {
+        return parantVC.view.frame.height - view.frame.origin.y <= 45
+    }
+    private var isAboveDesire: Bool {
+        return parantVC.view.frame.height - view.frame.origin.y >= 45 + desireHeight
+    }
+    private var isAroundBuffer: Bool {
+        return parantVC.view.frame.height - view.frame.origin.y <= 135
+    }
+    private var isAroundDesire: Bool {
+        return parantVC.view.frame.height - view.frame.origin.y >= desireHeight - 90
+    }
+    
+    init(parent: UIViewController, blurType: UIBlurEffect.Style) {
+        self.parantVC = parent
+        self.blurType = blurType
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        return nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.clipsToBounds = true
+        parantVC.addChild(self)
+        view.layer.cornerRadius = 35
+        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        view.frame = CGRect(x: 0, y: parantVC.view.frame.height - 45, width: parantVC.view.frame.width, height: parantVC.view.frame.height)
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.contentInset = .zero
-        scrollView.contentOffset = .zero
         
-        scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        scrollView.autoresizingMask = [.flexibleWidth]
+        scrollView.frame.size.height = desireHeight
         view.addSubview(blurView)
         blurView.contentView.addSubview(scrollView)
-        view.addSubview(topMask)
-        view.addSubview(bottomMask)
+        blurView.contentView.mask = maskView
+        
+        barView.backgroundColor = UIColor.white
+        barView.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleBottomMargin]
+        barView.clipsToBounds = true
+        barView.layer.cornerRadius = 3
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panBarView(_:)))
+        barView.addGestureRecognizer(panGesture)
+        view.addSubview(barView)
         
         for action in actions {
             let actionView = ConsoleActionView(title: action.title, control: action.control, color: action.preferColor)
@@ -40,19 +78,50 @@ class ConsoleViewController: UIViewController {
         }
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    @objc func panBarView(_ gesture:UIPanGestureRecognizer) {
+        let translate = gesture.translation(in: view).y
+        gesture.setTranslation(CGPoint(x: 0, y: 0), in: view)
+        switch gesture.state {
+        case .changed:
+            if isBelowBuffer && translate > 0 {
+                break
+            }
+            if isAboveDesire && translate < 0  {
+                break
+            }
+            view.center.y += translate
+            break
+        case .ended, .cancelled, .failed:
+            if isExpanded {
+                if isAroundBuffer {
+                    isExpanded = false
+                }
+            } else {
+                if isAroundDesire {
+                    isExpanded = true
+                }
+            }
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.view.frame.origin.y = self.isExpanded ? self.parantVC.view.frame.height - self.desireHeight : self.parantVC.view.frame.height - 45
+            }, completion: nil)
+            break
+        default:
+            break
+        }
     }
     
     override func viewDidLayoutSubviews() {
         blurView.frame = view.bounds
+        maskView.frame = view.bounds
+        barView.center = CGPoint(x: view.center.x, y: 15)
+        barView.frame.size = CGSize(width: 75, height: 6)
         let width = view.bounds.width
-        let height = view.bounds.height
-        topMask.frame = CGRect(x: 0, y: 0, width: width, height: height / 2)
-        bottomMask.frame = CGRect(x: 0, y: height - height / 2, width: width, height: height / 2)
-        scrollView.contentSize = CGSize(width: width, height: CGFloat(actions.count) * (cellHeight + padding) + padding)
+        scrollView.contentSize = CGSize(width: width, height: CGFloat(actions.count) * (cellHeight + padding) + padding + 15)
+        scrollView.contentInset = .zero
+        scrollView.contentOffset = .zero
+        
         for (index, actionView) in actionViews.enumerated() {
-            actionView.configureLayout(frame: CGRect(x: padding, y: (cellHeight + padding) * CGFloat(index) + padding, width: width - padding * 2, height: cellHeight))
+            actionView.configureLayout(frame: CGRect(x: padding, y: (cellHeight + padding) * CGFloat(index) + padding + 15, width: width - padding * 2, height: cellHeight))
         }
     }
     
@@ -64,7 +133,7 @@ class ConsoleViewController: UIViewController {
 
 fileprivate class ConsoleActionView<T:UIControl>: UIView {
     let titleView: UIVisualEffectView
-    let controlElement: T
+    unowned let controlElement: T
     
     init(title: String, control: T, color: UIColor) {
         titleView = {
@@ -118,22 +187,27 @@ fileprivate class GradientView: UIView {
         return self.layer as? CAGradientLayer
     }
     
-    init(autoSize: AutoresizingMask, reverse: Bool) {
+    init(autoSize: AutoresizingMask) {
         super.init(frame: .zero)
-        self.isUserInteractionEnabled = false
         self.autoresizingMask = autoSize
-        gradientLayer?.colors = [UIColor(white: 0, alpha: 0.3).cgColor, UIColor(white: 0, alpha: 0).cgColor]
-        gradientLayer?.locations = [0.2, 0.5]
-        if !reverse {
-            gradientLayer?.startPoint = CGPoint(x: 0, y: 0)
-            gradientLayer?.endPoint = CGPoint(x: 0, y: 1)
-        } else {
-            gradientLayer?.startPoint = CGPoint(x: 0, y: 1)
-            gradientLayer?.endPoint = CGPoint(x: 0, y: 0)
-        }
+        self.isUserInteractionEnabled = false
+        self.clipsToBounds = true
+        
+        gradientLayer?.colors = [UIColor(white: 0, alpha: 0.05).cgColor, UIColor(white: 0, alpha: 1).cgColor]
+        gradientLayer?.locations = [0.025, 0.1]
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+fileprivate class ExpandTouchView: UIView {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        if bounds.insetBy(dx: 0, dy: -10).contains(point) {
+            return true
+        } else {
+            return false
+        }
     }
 }
