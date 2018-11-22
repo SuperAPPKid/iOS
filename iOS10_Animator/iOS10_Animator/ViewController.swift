@@ -10,25 +10,32 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let slider: UISlider = {
-        var slider = UISlider()
-        slider.thumbTintColor = .red
-        slider.tintColor = .black
-        return slider
+    @IBOutlet weak var blurImageView: UIImageView!
+    lazy var blurView: UIVisualEffectView = {
+        let view = UIVisualEffectView(frame: self.blurImageView.bounds)
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.blurImageView.addSubview(view)
+        return view
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let consoleVC = ConsoleViewController(parent: self, blurType: .light)
+        
+        let slider = UISlider()
+        slider.thumbTintColor = .red
+        slider.tintColor = .black
         slider.addTarget(self, action: #selector(test(sender:)), for: .valueChanged)
+        
         let sw = UISwitch()
         sw.thumbTintColor = .red
         sw.onTintColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 0.6043985445)
         sw.addTarget(self, action: #selector(test(sender:)), for: .valueChanged)
+        
         let seg = UISegmentedControl(items: ["Hello", "World"])
         seg.setTitleTextAttributes([.font: UIFont.boldSystemFont(ofSize: 18) ], for: .normal)
         seg.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        
         consoleVC.addAction(action: ConsoleAction(title: "BAD", control: seg, preferColor: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)))
         consoleVC.addAction(action: ConsoleAction(title: "Slider", control: slider, preferColor: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)))
         consoleVC.addAction(action: ConsoleAction(title: "Switch", control: sw, preferColor: #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)))
@@ -45,6 +52,15 @@ class ViewController: UIViewController {
     }
     
     @objc func test(sender: Any) {
+        if blurView.effect == nil {
+            UIView.animate(withDuration: 1) {
+                self.blurView.effect = UIBlurEffect(style: .light)
+            }
+        } else {
+            UIView.animate(withDuration: 1) {
+                self.blurView.effect = nil
+            }
+        }
         print(sender)
     }
     

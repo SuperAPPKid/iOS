@@ -72,6 +72,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="U8v-Ny-01R"/>
                     </view>
+                    <connections>
+                        <outlet property="blurImageView" destination="jzD-ck-9W2" id="SVU-Fd-NgC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zRN-IL-nLH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

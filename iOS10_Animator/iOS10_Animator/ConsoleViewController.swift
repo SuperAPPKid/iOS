@@ -9,21 +9,27 @@
 import UIKit
 
 class ConsoleViewController: UIViewController {
-    private var scrollView: UIScrollView = UIScrollView()
-    private var actions: [ConsoleAction<UIControl>] = []
-    private var actionViews: [ConsoleActionView<UIControl>] = []
-    private var cellHeight: CGFloat = 65
-    private var padding: CGFloat = 20
-    private var blurType: UIBlurEffect.Style
+    private unowned let parentVC: UIViewController
+    
+    var blurType: UIBlurEffect.Style
     private lazy var blurView: UIVisualEffectView = { return UIVisualEffectView(effect: UIBlurEffect(style: blurType) ) }()
     private let maskView: UIView = GradientView(autoSize: [.flexibleHeight, .flexibleWidth])
-    private unowned let parantVC: UIViewController
+    
+    private var scrollView: UIScrollView = UIScrollView()
+    
+    private var actions: [ConsoleAction<UIControl>] = []
+    private var actionViews: [ConsoleActionView<UIControl>] = []
+    
     private let barView: UIView = ExpandTouchView()
     private var isExpanded: Bool = false
+    
     var desireHeight: CGFloat = 400
+    private var cellHeight: CGFloat = 65
+    private var padding: CGFloat = 20
+    private var buffer: CGFloat = 45
     
     init(parent: UIViewController, blurType: UIBlurEffect.Style) {
-        self.parantVC = parent
+        self.parentVC = parent
         self.blurType = blurType
         super.init(nibName: nil, bundle: nil)
     }
@@ -34,30 +40,31 @@ class ConsoleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.clipsToBounds = true
-        parantVC.addChild(self)
-        view.layer.cornerRadius = 35
-        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        view.frame = CGRect(x: 0, y: parantVC.view.frame.height - 45, width: parantVC.view.frame.width, height: parantVC.view.frame.height)
-        view.translatesAutoresizingMaskIntoConstraints = false
+        parentVC.addChild(self)
         
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 35
+        
+        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         
         scrollView.autoresizingMask = [.flexibleWidth]
         scrollView.frame.size.height = desireHeight
+        
         view.addSubview(blurView)
         blurView.contentView.addSubview(scrollView)
         blurView.contentView.mask = maskView
         
+        view.addSubview(barView)
         barView.backgroundColor = UIColor.white
         barView.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleBottomMargin]
         barView.clipsToBounds = true
         barView.layer.cornerRadius = 3
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panBarView(_:)))
         barView.addGestureRecognizer(panGesture)
-        view.addSubview(barView)
         
         for action in actions {
             let actionView = ConsoleActionView(title: action.title, control: action.control, color: action.preferColor)
@@ -71,23 +78,23 @@ class ConsoleViewController: UIViewController {
         gesture.setTranslation(CGPoint(x: 0, y: 0), in: view)
         switch gesture.state {
         case .changed:
-            let isBelowBuffer = parantVC.view.frame.height - view.frame.origin.y <= 45
-            let isAboveDesire = parantVC.view.frame.height - view.frame.origin.y >= 45 + desireHeight
+            let isBelowBuffer = parentVC.view.frame.height - view.frame.origin.y <= 45
+            let isAboveDesire = parentVC.view.frame.height - view.frame.origin.y >= 45 + desireHeight
             if (isBelowBuffer && translate > 0) || (isAboveDesire && translate < 0) {
                 view.center.y += translate * 0.1
             } else {
                 view.center.y += translate
             }
         case .ended, .cancelled, .failed:
-            let isAroundBuffer = parantVC.view.frame.height - view.frame.origin.y <= 90
-            let isAroundDesire = parantVC.view.frame.height - view.frame.origin.y >= desireHeight - 90
+            let isAroundBuffer = parentVC.view.frame.height - view.frame.origin.y <= 90
+            let isAroundDesire = parentVC.view.frame.height - view.frame.origin.y >= desireHeight - 90
             if isExpanded {
                 isExpanded = isAroundDesire
             } else {
                 isExpanded = !isAroundBuffer
             }
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.view.frame.origin.y = self.isExpanded ? self.parantVC.view.frame.height - self.desireHeight : self.parantVC.view.frame.height - 45
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 5, options: .curveEaseOut, animations: {
+                self.view.frame.origin.y = self.isExpanded ? self.parentVC.view.frame.height - self.desireHeight : self.parentVC.view.frame.height - 45
             }, completion: nil)
             break
         default:
@@ -96,6 +103,8 @@ class ConsoleViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        
+        view.frame = CGRect(x: 0, y: parentVC.view.frame.height - 45, width: parentVC.view.frame.width, height: parentVC.view.frame.height)
         blurView.frame = view.bounds
         maskView.frame = view.bounds
         barView.center = CGPoint(x: view.center.x, y: 18)
@@ -114,6 +123,9 @@ class ConsoleViewController: UIViewController {
         actions.append(action)
     }
     
+    deinit {
+        print("Console DEAD")
+    }
 }
 
 fileprivate class ConsoleActionView<T:UIControl>: UIView {
@@ -179,7 +191,7 @@ fileprivate class GradientView: UIView {
         self.clipsToBounds = true
         
         gradientLayer?.colors = [UIColor(white: 0, alpha: 0.1).cgColor, UIColor(white: 0, alpha: 1).cgColor]
-        gradientLayer?.locations = [0.05, 0.15]
+        gradientLayer?.locations = [0.025, 0.1]
     }
     
     required init?(coder aDecoder: NSCoder) {
