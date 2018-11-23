@@ -8,12 +8,17 @@
 
 import Foundation
 
+//MARK: 🍎🍎Observable🍎🍎
+protocol Observable {
+}
+
+//MARK: 🍎🍎ObserveElement🍎🍎
 @objc protocol ObserveElementDelegate: AnyObject {
     @objc optional func shouldUpdateView(_ ObserveElement: Any) -> Bool
     @objc optional func didUpdateView(_ ObserveElement: Any)
 }
 
-class ObserveElement<T> {
+final class ObserveElement<T>: Observable {
     typealias ValueUpdateCallback = ((ViewModel?, T?, Bool) -> ())
     
     unowned var viewModel: ViewModel
@@ -78,12 +83,27 @@ class ObserveElement<T> {
     }
 }
 
+//MARK: 🍎🍎TriggerElement🍎🍎
+final class Trigger {
+    typealias Flag = () -> (Bool)
+    
+    var flags: [Flag] = []
+    var fire: ((Bool) -> ())
+    
+    init(_ fire: @escaping ((Bool) -> Void)) {
+        self.fire = fire
+    }
+}
+
+//MARK: 🍎🍎Bindable🍎🍎
 protocol Bindable {
     associatedtype T
     func bind(to viewModel: T)
     var viewModel: T? { get }
 }
 
+
+//MARK: 🍎🍎ViewModel🍎🍎
 protocol ViewModel: AnyObject {
     func generateObserveElement<T>(value: T?, delayMilliSeconds: UInt) -> ObserveElement<T>
 }

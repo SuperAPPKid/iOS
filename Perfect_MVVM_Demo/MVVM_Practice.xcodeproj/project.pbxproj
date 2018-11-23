@@ -81,7 +81,7 @@
 				36C3C8D7219D089E00AFAFCD /* TableViewCell.swift */,
 				3652BF71219E6368001F0F58 /* CellViewModel.swift */,
 				36C3C8DD219D6F9600AFAFCD /* Model.swift */,
-				366D4D59219BFDED006A3193 /* MVVMCore.swift */,
+				36EC166F21A7A671000CD2C1 /* MVVMCore */,
 				36C3C8E3219D70D700AFAFCD /* ImageService */,
 			);
 			path = MVVM_Practice;
@@ -94,6 +94,14 @@
 				36C3C8DB219D69BB00AFAFCD /* SimulateImageService.swift */,
 			);
 			path = ImageService;
+			sourceTree = "<group>";
+		};
+		36EC166F21A7A671000CD2C1 /* MVVMCore */ = {
+			isa = PBXGroup;
+			children = (
+				366D4D59219BFDED006A3193 /* MVVMCore.swift */,
+			);
+			path = MVVMCore;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
