@@ -11,6 +11,9 @@ import RxCocoa
 import RxSwift
 
 class ViewController: UIViewController {
+    let bag = DisposeBag()
+    let name = "Hello World"
+    var disposer: MyDispose?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +27,23 @@ class ViewController: UIViewController {
         subSegment.center.x = view.center.x
         subSegment.frame.origin.y = 150
         view.addSubview(subSegment)
+        
+        subSegment.rx
+        .selectedSegmentIndex
+        .subscribe{ print($0) }
+        .disposed(by: bag)
+        
+        do {
+            let observable = MyObservable { [weak weakVC = self] (observer) -> (MyDispose) in
+                guard let vc = weakVC else { return MyDispose(disposer: nil) }
+                let target = MyTarget(vc: vc, callBack: { (vc) in
+                    print(vc.name)
+                })
+                return MyDispose(disposer: target.dispose)
+            }
+            let observer = MyObserver()
+            disposer = observable.handler?(observer)
+        }
     }
     
     @objc func toggleSeg(_ sender: UISegmentedControl) {
@@ -51,6 +71,7 @@ class ViewController: UIViewController {
             showFilterResult()
             break
         case 3:
+            disposer = nil
             break
         default:
             break
@@ -61,7 +82,6 @@ class ViewController: UIViewController {
     }
     
     func showTransformResult() {
-        let bag = DisposeBag()
         
         print("🏆🏆🏆 Map")
         Observable.of(1,2,3).map{ $0 * 10 }.subscribe{ print($0) }.disposed(by: bag)
@@ -111,7 +131,6 @@ class ViewController: UIViewController {
     }
     
     func showAssociateResult() {
-        let bag = DisposeBag()
         print("🏆🏆🏆 StartWith")
         Observable.of("2","3").startWith("1").subscribe{ print($0) }.disposed(by: bag)
         
@@ -322,7 +341,7 @@ class ViewController: UIViewController {
     }
 }
 
-
+//以下相關技術
 struct Magic<Base> {
     let base: Base
 }
@@ -341,3 +360,52 @@ extension Testable {
     }
 }
 extension NSObject: Testable{}
+
+class MyObserver {}
+class MyDispose {
+    typealias Disposer = () -> Void
+    var disposer: Disposer?
+    init(disposer: Disposer?) {
+        self.disposer = disposer
+    }
+    
+    deinit {
+        print("MyDispose Dead")
+    }
+}
+class MyObservable {
+    typealias Handler = (MyObserver) -> (MyDispose)
+    var handler: Handler?
+    init(_ handler: Handler?) {
+        self.handler = handler
+    }
+    
+    deinit {
+        print("MyObservable Dead")
+    }
+}
+class MyTarget {
+    typealias CallBack = (ViewController) -> Void
+    weak var vc: ViewController?
+    var callBack: CallBack?
+    
+//    lazy var dispose: (() -> (Void)) = {
+//        self.callBack = nil
+//        self.vc = nil
+//    }
+    
+        func dispose() {
+            callBack = nil
+            vc = nil
+        }
+    
+    init(vc: ViewController, callBack: @escaping CallBack) {
+        self.vc = vc
+        self.callBack = callBack
+    }
+    
+    
+    deinit {
+        print("MyTarget Dead")
+    }
+}
