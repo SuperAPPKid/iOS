@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     let bag = DisposeBag()
     let name = "Hello World"
     var disposer: MyDispose?
+    var observable: MyObservable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,7 @@ class ViewController: UIViewController {
         .disposed(by: bag)
         
         do {
-            let observable = MyObservable { [weak weakVC = self] (observer) -> (MyDispose) in
+            observable = MyObservable { [weak weakVC = self] (observer) -> (MyDispose) in
                 guard let vc = weakVC else { return MyDispose(disposer: nil) }
                 let target = MyTarget(vc: vc, callBack: { (vc) in
                     print(vc.name)
@@ -42,7 +43,7 @@ class ViewController: UIViewController {
                 return MyDispose(disposer: target.dispose)
             }
             let observer = MyObserver()
-            disposer = observable.handler?(observer)
+            disposer = observable?.handler?(observer)
         }
     }
     
@@ -389,7 +390,8 @@ class MyTarget {
     weak var vc: ViewController?
     var callBack: CallBack?
     
-//    lazy var dispose: (() -> (Void)) = {
+//    lazy var dispose: (() -> (Void)) = { [weak self] in
+//        guard let self = self else { return }
 //        self.callBack = nil
 //        self.vc = nil
 //    }
