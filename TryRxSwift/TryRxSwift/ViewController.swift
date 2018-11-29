@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     let bag = DisposeBag()
     let name = "Hello World"
     var disposer: MyDispose?
-    var observable: MyObservable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +30,11 @@ class ViewController: UIViewController {
         
         subSegment.rx
         .selectedSegmentIndex
-        .subscribe{ print($0) }
+        .subscribe{ print() }
         .disposed(by: bag)
         
         do {
-            observable = MyObservable { [weak weakVC = self] (observer) -> (MyDispose) in
+            let myObservable = MyObservable { [weak weakVC = self] (observer) -> (MyDispose) in
                 guard let vc = weakVC else { return MyDispose(disposer: nil) }
                 let target = MyTarget(vc: vc, callBack: { (vc) in
                     print(vc.name)
@@ -43,7 +42,7 @@ class ViewController: UIViewController {
                 return MyDispose(disposer: target.dispose)
             }
             let observer = MyObserver()
-            disposer = observable?.handler?(observer)
+            disposer = myObservable.handler?(observer)
         }
     }
     
@@ -73,13 +72,91 @@ class ViewController: UIViewController {
             break
         case 3:
             disposer = nil
+            showOthers()
             break
         default:
             break
         }
     }
     
+    func showOthers() {
+        print("🏆🏆🏆 ToArray")
+        Observable.of("🐖","🐏","🦒","🐓","🐈").toArray().subscribe{ print($0) }.disposed(by: bag)
+        
+        print("🏆🏆🏆 Reduce")
+        Observable.of(10, 100, 1000).reduce(8, accumulator: +).subscribe{ print($0) }.disposed(by: bag)
+        
+        print("🏆🏆🏆 Concat")
+        print("🏆🏆🏆 Publish")
+        print("🏆🏆🏆 Replay")
+        print("🏆🏆🏆 Multicast")
+        print("🏆🏆🏆 CatchErrorJustReturn")
+        print("🏆🏆🏆 CatchError")
+        print("🏆🏆🏆 Retry")
+        print("🏆🏆🏆 CatchErrorJustReturn")
+        print("🏆🏆🏆 Debug")
+        
+        print("🏆🏆🏆 Resource")
+    }
+    
     func showFilterResult() {
+        print("🏆🏆🏆 Filter")
+        Observable.of("🐖","🐏","🦒","🐓","🐈","🐖","🐖").filter{ $0 == "🐖" }.subscribe{ print($0) }.disposed(by: bag)
+        
+        print("🏆🏆🏆 DistinctUntilChanged")
+        Observable.of("🐖","🐏","🐖","🦒","🐓","🐓","🐈").distinctUntilChanged().subscribe{ print($0) }.disposed(by: bag)
+        
+        print("🏆🏆🏆 ElementAt")
+        Observable.of("🐖","🐏","🐖","🦒","🐓","🐓","🐈").elementAt(3).subscribe{ print($0) }.disposed(by: bag)
+        
+        print("🏆🏆🏆 Single")
+        do {
+            let singleOB1 = Observable.of("🐖","🐏","🦒","🐓","🐈").single()
+            let singleOB2 = Observable.of("🐖","🐖","🐏","🦒","🐓","🐈").single{ $0 == "🐖"}
+            singleOB1.subscribe{ print($0) }.disposed(by: bag)
+            singleOB2.subscribe{ print($0) }.disposed(by: bag)
+        }
+        
+        print("🏆🏆🏆 Take")
+        Observable.of(1,2,3,4,5,6,7,8,9).take(3).subscribe{ print($0) }.disposed(by: bag)
+        
+        print("🏆🏆🏆 TakeLast")
+        Observable.of(1,2,3,4,5,6,7,8,9).takeLast(3).subscribe{ print($0) }.disposed(by: bag)
+        
+        print("🏆🏆🏆 TakeWhile")
+        Observable.of(1,2,3,4,5,6,7,8,9).takeWhile{ $0 <= 5 }.subscribe{ print($0) }.disposed(by: bag)
+        
+        print("🏆🏆🏆 TakeUntil")
+        do {
+            let PRelay = PublishRelay<String>()
+            PRelay.subscribe{ print($0) }.disposed(by: bag)
+            let TRelay = PublishRelay<Int>()
+            TRelay.takeUntil(PRelay).subscribe{ print($0) }.disposed(by: bag)
+            TRelay.accept(1)
+            TRelay.accept(2)
+            TRelay.accept(3)
+            PRelay.accept("Stop")
+            TRelay.accept(4)
+            TRelay.accept(5)
+        }
+        
+        print("🏆🏆🏆 Skip")
+        Observable.from(Array("ABCDEFG")).skip(3).subscribe{ print($0) }.disposed(by: bag)
+        print("🏆🏆🏆 SkipWhile")
+        Observable.from([1,2,3,4,5,6]).skipWhile{ $0 < 4 }.subscribe{ print($0) }.disposed(by: bag)
+        print("🏆🏆🏆 SkipUntil")
+        do {
+            let PRelay = PublishRelay<String>()
+            PRelay.subscribe{ print($0) }.disposed(by: bag)
+            let TRelay = PublishRelay<Int>()
+            TRelay.skipUntil(PRelay).subscribe{ print($0) }.disposed(by: bag)
+            TRelay.accept(1)
+            TRelay.accept(2)
+            TRelay.accept(3)
+            PRelay.accept("Stop")
+            TRelay.accept(4)
+            TRelay.accept(5)
+        }
     }
     
     func showTransformResult() {
