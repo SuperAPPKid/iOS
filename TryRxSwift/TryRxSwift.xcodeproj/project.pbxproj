@@ -12,10 +12,12 @@
 		367EFD5621A689D9002C6647 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 367EFD5421A689D9002C6647 /* Main.storyboard */; };
 		367EFD5821A689DA002C6647 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 367EFD5721A689DA002C6647 /* Assets.xcassets */; };
 		367EFD5B21A689DA002C6647 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 367EFD5921A689DA002C6647 /* LaunchScreen.storyboard */; };
-		E05ED91D14211B7DCA58FB3C /* Pods_TryRxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BBE6D99C75DB1A671393F06 /* Pods_TryRxSwift.framework */; };
+		9523673EF5AC26806822E49B /* Pods_TryRxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8B409F9247F60A0405BE38 /* Pods_TryRxSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0632F78B1B9AA2C34E1FFDFB /* Pods-TryRxSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TryRxSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TryRxSwift/Pods-TryRxSwift.debug.xcconfig"; sourceTree = "<group>"; };
+		2E8B409F9247F60A0405BE38 /* Pods_TryRxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TryRxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		367EFD4D21A689D9002C6647 /* TryRxSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TryRxSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		367EFD5021A689D9002C6647 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		367EFD5221A689D9002C6647 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -23,9 +25,7 @@
 		367EFD5721A689DA002C6647 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		367EFD5A21A689DA002C6647 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		367EFD5C21A689DA002C6647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4F1C28454B912D4EA66F73EE /* Pods-TryRxSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TryRxSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TryRxSwift/Pods-TryRxSwift.debug.xcconfig"; sourceTree = "<group>"; };
-		8BBE6D99C75DB1A671393F06 /* Pods_TryRxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TryRxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C51694696CA65B0E938EEE6D /* Pods-TryRxSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TryRxSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-TryRxSwift/Pods-TryRxSwift.release.xcconfig"; sourceTree = "<group>"; };
+		A8250309CD99708162237F8B /* Pods-TryRxSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TryRxSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-TryRxSwift/Pods-TryRxSwift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,7 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E05ED91D14211B7DCA58FB3C /* Pods_TryRxSwift.framework in Frameworks */,
+				9523673EF5AC26806822E49B /* Pods_TryRxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,8 +43,8 @@
 		154883EA437D4026DF05207E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4F1C28454B912D4EA66F73EE /* Pods-TryRxSwift.debug.xcconfig */,
-				C51694696CA65B0E938EEE6D /* Pods-TryRxSwift.release.xcconfig */,
+				0632F78B1B9AA2C34E1FFDFB /* Pods-TryRxSwift.debug.xcconfig */,
+				A8250309CD99708162237F8B /* Pods-TryRxSwift.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -52,7 +52,7 @@
 		1B2F21F3798CD5454E666A47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8BBE6D99C75DB1A671393F06 /* Pods_TryRxSwift.framework */,
+				2E8B409F9247F60A0405BE38 /* Pods_TryRxSwift.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -349,16 +349,14 @@
 		};
 		367EFD6021A689DA002C6647 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F1C28454B912D4EA66F73EE /* Pods-TryRxSwift.debug.xcconfig */;
+			baseConfigurationReference = 0632F78B1B9AA2C34E1FFDFB /* Pods-TryRxSwift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = TryRxSwift/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Hank-Zhong.TryRxSwift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -368,15 +366,13 @@
 		};
 		367EFD6121A689DA002C6647 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C51694696CA65B0E938EEE6D /* Pods-TryRxSwift.release.xcconfig */;
+			baseConfigurationReference = A8250309CD99708162237F8B /* Pods-TryRxSwift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = TryRxSwift/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Hank-Zhong.TryRxSwift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

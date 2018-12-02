@@ -23,7 +23,7 @@ class ConsoleViewController: UIViewController {
     private let barView: UIView = ExpandTouchView()
     private var isExpanded: Bool = false
     
-    var desireHeight: CGFloat = 400
+    var desireHeight: CGFloat = 250
     private var cellHeight: CGFloat = 65
     private var padding: CGFloat = 20
     private var buffer: CGFloat = 45
@@ -73,7 +73,7 @@ class ConsoleViewController: UIViewController {
         }
     }
     
-    @objc func panBarView(_ gesture:UIPanGestureRecognizer) {
+    @objc private func panBarView(_ gesture:UIPanGestureRecognizer) {
         let translate = gesture.translation(in: view).y
         gesture.setTranslation(CGPoint(x: 0, y: 0), in: view)
         switch gesture.state {
