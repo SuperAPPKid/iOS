@@ -21,12 +21,19 @@ class ViewController: UIViewController {
         segment.addTarget(self, action: #selector(toggleSeg(_:)), for: .valueChanged)
         navigationItem.titleView = segment
         
-        let subSegment = UISegmentedControl(items: ["組合", "變換", "約束", "其他"])
+        let subSegment = UISegmentedControl(items: ["組合", "變換", "約束", "連接", "其他"])
         subSegment.addTarget(self, action: #selector(toggleSubSeg(_:)), for: .valueChanged)
         subSegment.frame.size.width = 300
         subSegment.center.x = view.center.x
         subSegment.frame.origin.y = 150
         view.addSubview(subSegment)
+        
+        let subSubSegment = UISegmentedControl(items: ["ObserveOn", "SubscribeOn", "ShareReplay"])
+        subSubSegment.addTarget(self, action: #selector(toggleSubSubSeg(_:)), for: .valueChanged)
+        subSubSegment.frame.size.width = 300
+        subSubSegment.center.x = view.center.x
+        subSubSegment.frame.origin.y = 300
+        view.addSubview(subSubSegment)
         
         subSegment.rx
         .selectedSegmentIndex
@@ -72,10 +79,137 @@ class ViewController: UIViewController {
             break
         case 3:
             disposer = nil
+            showConnect()
+            break
+        case 4:
+            disposer = nil
             showOthers()
             break
         default:
             break
+        }
+    }
+    
+    @objc func toggleSubSubSeg(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            print("🏆🏆🏆 ObserveOn")
+            Observable.of("🤪","😱","🤑","🤐").observeOn(MainScheduler.instance).subscribe{ print("Thread\(Thread.current): \($0)") }.disposed(by: bag)
+            Observable.of(1,2,3,4).observeOn(ConcurrentMainScheduler.instance).subscribe{ print("Thread\(Thread.current): \($0)") }.disposed(by: bag)
+            Observable.of("😤","🤯","🤮","😪").observeOn(SerialDispatchQueueScheduler(qos: .default)).subscribe{ print("Thread\(Thread.current): \($0)") }.disposed(by: bag)
+            Observable.of(5,6,7,8).observeOn(ConcurrentDispatchQueueScheduler(qos: .default)).subscribe{ print("Thread\(Thread.current): \($0)") }.disposed(by: bag)
+            break
+        case 1:
+            print("🏆🏆🏆 SubscribeOn")
+            Observable.of(1,2,3,4,5)
+                .observeOn(MainScheduler.instance)
+                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .default))
+                .subscribe{ print("Thread\(Thread.current): \($0)") }.disposed(by: bag)
+            Observable.of(6,7,8,9)
+                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .default))
+                .subscribe{ print("Thread\(Thread.current): \($0)") }.disposed(by: bag)
+            Observable.of(6,7,8,9)
+                .subscribe{ print("Thread\(Thread.current): \($0)") }.disposed(by: bag)
+            break
+        case 2:
+            print("🏆🏆🏆 ShareReplay (NoShare)")
+            let pSubjectN = PublishSubject<String>()
+            let pObservaleShareN = pSubjectN.map({ (str) -> String in
+                print("Do Map")
+                return str
+            })
+            pObservaleShareN.subscribe{ print("Subscribe 1: \($0)") }.disposed(by: bag)
+            pObservaleShareN.subscribe{ print("Subscribe 2: \($0)") }.disposed(by: bag)
+            pObservaleShareN.subscribe{ print("Subscribe 3: \($0)") }.disposed(by: bag)
+            pSubjectN.onNext("💋")
+            pSubjectN.onNext("💄")
+            
+            print("🏆🏆🏆 Share")
+            let pSubject = PublishSubject<String>()
+            let pObservaleShare = pSubject.map({ (str) -> String in
+                print("Do Map")
+                return str
+            }).share()
+            pObservaleShare.subscribe{ print("Subscribe 1: \($0)") }.disposed(by: bag)
+            pObservaleShare.subscribe{ print("Subscribe 2: \($0)") }.disposed(by: bag)
+            pObservaleShare.subscribe{ print("Subscribe 3: \($0)") }.disposed(by: bag)
+            pSubject.onNext("👘")
+            pSubject.onNext("👙")
+            
+            print("🏆🏆🏆 ShareReplay (Forever)")
+            let pSubjectF = PublishSubject<String>()
+            let pObservaleShareF = pSubjectF.map({ (str) -> String in
+                print("Do Map")
+                return str
+            }).share(replay: 1, scope: .forever)
+            pObservaleShareF.subscribe{ print("Subscribe 1: \($0)") }.disposed(by: bag)
+            pObservaleShareF.subscribe{ print("Subscribe 2: \($0)") }.disposed(by: bag)
+            pObservaleShareF.subscribe{ print("Subscribe 3: \($0)") }.disposed(by: bag)
+            pSubjectF.onNext("👹")
+            pSubjectF.onNext("👾")
+            
+            print("🏆🏆🏆 ShareReplay (Connected)")
+            let pSubjectC = PublishSubject<String>()
+            let pObservaleShareC = pSubjectC.map({ (str) -> String in
+                print("Do Map")
+                return str
+            }).share(replay: 1, scope: .whileConnected)
+            pObservaleShareC.subscribe{ print("Subscribe 1: \($0)") }.disposed(by: bag)
+            pObservaleShareC.subscribe{ print("Subscribe 2: \($0)") }.disposed(by: bag)
+            pObservaleShareC.subscribe{ print("Subscribe 3: \($0)") }.disposed(by: bag)
+            pSubjectC.onNext("✌🏻")
+            pSubjectC.onNext("🤞🏻")
+            break
+        default:
+            break
+        }
+    }
+    
+    func showConnect() {
+        print("🏆🏆🏆 Publish")
+        do {
+            let connection = Observable.from(Array("❤️🧡💛")).publish()
+            connection.subscribe{ print("Subscribe 1: \($0)") }.disposed(by: bag)
+            connection.subscribe{ print("Subscribe 2: \($0)") }.disposed(by: bag)
+            connection.subscribe{ print("Subscribe 3: \($0)") }.disposed(by: bag)
+            print("Did Subscribe")
+            print("Will Connect")
+            connection.connect().disposed(by: bag)
+            print("After Connect")
+        }
+        
+        print("🏆🏆🏆 Replay")
+        do {
+            let publishRelay = PublishRelay<Int>()
+            let connection = publishRelay.replay(2)
+            connection.subscribe{ print("Subscribe 1: \($0)") }.disposed(by: bag)
+            publishRelay.accept(1)
+            publishRelay.accept(2)
+            connection.connect().disposed(by: bag)
+            publishRelay.accept(3)
+            publishRelay.accept(4)
+            publishRelay.accept(5)
+            publishRelay.accept(6)
+            connection.subscribe{ print("Subscribe 2: \($0)") }.disposed(by: bag)
+            publishRelay.accept(7)
+            publishRelay.accept(8)
+        }
+        
+        print("🏆🏆🏆 Multicast")
+        do {
+            let behaviorSubject = BehaviorSubject(value: "💔")
+            let publishRelay = PublishRelay<String>()
+            let connection = publishRelay.multicast(behaviorSubject)
+            connection.subscribe{ print("Subscribe 1: \($0)") }.disposed(by: bag)
+            publishRelay.accept("❤️")
+            publishRelay.accept("🧡")
+            connection.connect().disposed(by: bag)
+            publishRelay.accept("💛")
+            publishRelay.accept("💚")
+            publishRelay.accept("💙")
+            connection.subscribe{ print("Subscribe 2: \($0)") }.disposed(by: bag)
+            publishRelay.accept("💜")
+            publishRelay.accept("🖤")
         }
     }
     
@@ -87,16 +221,73 @@ class ViewController: UIViewController {
         Observable.of(10, 100, 1000).reduce(8, accumulator: +).subscribe{ print($0) }.disposed(by: bag)
         
         print("🏆🏆🏆 Concat")
-        print("🏆🏆🏆 Publish")
-        print("🏆🏆🏆 Replay")
-        print("🏆🏆🏆 Multicast")
+        do {
+            let sourceSub = PublishSubject<String>()
+            let concatSub = PublishSubject<String>()
+            Observable.of(sourceSub, concatSub).concat().subscribe{ print($0) }.disposed(by: bag)
+            concatSub.onNext("🔮")
+            sourceSub.onNext("🚗")
+            sourceSub.onNext("🚕")
+            sourceSub.onCompleted()
+            sourceSub.onNext("🚙")
+            concatSub.onNext("💰")
+            concatSub.onNext("💎")
+        }
+        
         print("🏆🏆🏆 CatchErrorJustReturn")
+        do {
+            let publishSub = PublishSubject<String>()
+            publishSub.catchErrorJustReturn("❌").subscribe{ print($0) }.disposed(by: bag)
+            publishSub.onNext("⭕️")
+            publishSub.onNext("⭕️")
+            publishSub.onNext("⭕️")
+            publishSub.onError(RxError.unknown)
+        }
+        
         print("🏆🏆🏆 CatchError")
+        do {
+            let publishSub = PublishSubject<String>()
+            let recoverSub = PublishSubject<String>()
+            publishSub.catchError({ (error) -> Observable<String> in
+                print("❌ : \(error.localizedDescription)")
+                return recoverSub
+            }).subscribe{ print($0) }.disposed(by: bag)
+            recoverSub.onNext("🔆")
+            publishSub.onNext("⭕️")
+            recoverSub.onNext("🔆")
+            publishSub.onNext("⭕️")
+            recoverSub.onNext("🔆")
+            publishSub.onNext("⭕️")
+            publishSub.onError(RxError.unknown)
+            recoverSub.onNext("🔰")
+        }
+        
         print("🏆🏆🏆 Retry")
-        print("🏆🏆🏆 CatchErrorJustReturn")
+        do {
+            var count = 0
+            let errorPossible = Observable<String>.create { (observer) -> Disposable in
+                if count < 2 {
+                    observer.onError(RxError.unknown)
+                    print("💔")
+                    count += 1
+                }
+                observer.onNext("❤️")
+                observer.onNext("🧡")
+                observer.onNext("💛")
+                observer.onNext("💚")
+                observer.onNext("💙")
+                observer.onNext("💜")
+                observer.onCompleted()
+                return Disposables.create()
+            }
+            errorPossible.retry(5).subscribe{ print($0) }.disposed(by: bag)
+        }
+        
         print("🏆🏆🏆 Debug")
+        Observable.of(1,2,3,4,5).debug().subscribe{ print($0) }.disposed(by: bag)
         
         print("🏆🏆🏆 Resource")
+        print("Resources Used: \(Resources.total)")
     }
     
     func showFilterResult() {
