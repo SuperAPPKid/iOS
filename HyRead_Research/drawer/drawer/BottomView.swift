@@ -9,7 +9,7 @@
 import UIKit
 
 class BottomView: UIImageView {
-    lazy var paintView: PaintingView = PaintingView().setBackgroundColor(#colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 0.2978114298)).shrink([.flexibleWidth, .flexibleHeight]).fill(self).add(to: self)
+    lazy var paintView: PaintingView = PaintingView().setBackgroundColor(#colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 0.1533069349)).shrink([.flexibleWidth, .flexibleHeight]).fill(self).add(to: self)
     
     convenience init() {
         self.init(frame: .zero)
@@ -23,8 +23,13 @@ class BottomView: UIImageView {
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        for subview in subviews.reversed() {
+            if let touchedSubview = subview.hitTest(point, with: event) {
+                return touchedSubview
+            }
+        }
         if self.point(inside: point, with: event) {
-            return paintView
+            return self
         } else {
             return nil
         }

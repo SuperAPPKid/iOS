@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var paintToolbox: UIToolbar!
-    @IBOutlet weak var toolBoxHeight: NSLayoutConstraint!
+    @IBOutlet weak var toolBoxBottom: NSLayoutConstraint!
     
     var beforePaintTools: [UIBarButtonItem] = []
     var startPaintTools: [UIBarButtonItem] = []
@@ -26,14 +26,18 @@ class ViewController: UIViewController {
         scrollView.delegate = self
         scrollView.panGestureRecognizer.minimumNumberOfTouches = 2
         scrollView.delaysContentTouches = false
-
+        
         let addBoardBtn = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(beforePaintToolsClick(_:))).with(tag: 0)
         let changeImageBtn = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(beforePaintToolsClick(_:))).with(tag: 1)
         beforePaintTools.append(contentsOf: [addBoardBtn, changeImageBtn])
         
         let closeBoardBtn = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(startPaintToolsClick(_:))).with(tag: 0)
         let trashBtn = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(startPaintToolsClick(_:))).with(tag: 1)
-        startPaintTools.append(contentsOf: [closeBoardBtn, trashBtn])
+        let changeWidthBtn = UIBarButtonItem(title: "線寬", style: .plain, target: self, action: #selector(startPaintToolsClick(_:))).with(tag: 2)
+        let changeColorBtn = UIBarButtonItem(title: "顏色", style: .plain, target: self, action: #selector(startPaintToolsClick(_:))).with(tag: 3)
+        let changeAlphaBtn = UIBarButtonItem(title: "不透明度", style: .plain, target: self, action: #selector(startPaintToolsClick(_:))).with(tag: 4)
+        let shapeBtn = UIBarButtonItem(title: "形狀", style: .plain, target: self, action: #selector(startPaintToolsClick(_:))).with(tag: 5)
+        startPaintTools.append(contentsOf: [closeBoardBtn, trashBtn, changeWidthBtn, changeColorBtn, changeAlphaBtn, shapeBtn])
         
         paintToolbox.setItems(beforePaintTools, animated: true)
         
@@ -45,7 +49,8 @@ class ViewController: UIViewController {
     
     @objc func oneTap(sender: UITapGestureRecognizer) {
         UIView.animate(withDuration: 0.5) {
-            self.toolBoxHeight.constant = self.toolBoxHeight.constant == 0 ? 50 : 0  ///use storyboard
+            self.toolBoxBottom.constant = self.toolBoxBottom.constant == 0 ? -50 : 0  ///use storyboard
+            
             ///use code
 //            self.paintToolbox.constraints.forEach { (constraint) in
 //                if constraint.firstAnchor === self.paintToolbox.heightAnchor {
@@ -54,6 +59,7 @@ class ViewController: UIViewController {
 //                    self.view.layoutIfNeeded()
 //                }
 //            }
+            
             self.view.layoutIfNeeded()
         }
     }
@@ -87,6 +93,46 @@ class ViewController: UIViewController {
         case 1:
             bottomView.paintView.clear()
             break
+        case 2:
+            let alertController = UIAlertController(title: "線寬", message: nil, preferredStyle: .actionSheet)
+            alertController.addAction(.init(title: "3(預設)", style: .default, handler: { _ in self.bottomView.paintView.preferWidth = 3}))
+            alertController.addAction(.init(title: "5", style: .default, handler: { _ in self.bottomView.paintView.preferWidth = 5}))
+            alertController.addAction(.init(title: "10", style: .default, handler: { _ in self.bottomView.paintView.preferWidth = 10}))
+            alertController.addAction(.init(title: "20", style: .default, handler: { _ in self.bottomView.paintView.preferWidth = 20}))
+            alertController.addAction(.init(title: "40", style: .default, handler: { _ in self.bottomView.paintView.preferWidth = 40}))
+            alertController.popoverPresentationController?.barButtonItem = sender
+            present(alertController, animated: true, completion: nil)
+            break
+        case 3:
+            let alertController = UIAlertController(title: "顏色", message: nil, preferredStyle: .actionSheet)
+            alertController.addAction(.init(title: "紅", style: .default, handler: { _ in self.bottomView.paintView.preferColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)}))
+            alertController.addAction(.init(title: "橙", style: .default, handler: { _ in self.bottomView.paintView.preferColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)}))
+            alertController.addAction(.init(title: "黃", style: .default, handler: { _ in self.bottomView.paintView.preferColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)}))
+            alertController.addAction(.init(title: "綠", style: .default, handler: { _ in self.bottomView.paintView.preferColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)}))
+            alertController.addAction(.init(title: "藍", style: .default, handler: { _ in self.bottomView.paintView.preferColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)}))
+            alertController.addAction(.init(title: "紫", style: .default, handler: { _ in self.bottomView.paintView.preferColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)}))
+            alertController.addAction(.init(title: "黑", style: .default, handler: { _ in self.bottomView.paintView.preferColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)}))
+            alertController.popoverPresentationController?.barButtonItem = sender
+            present(alertController, animated: true, completion: nil)
+            break
+        case 4:
+            let alertController = UIAlertController(title: "不透明度", message: nil, preferredStyle: .actionSheet)
+            alertController.addAction(.init(title: "0.8(預設)", style: .default, handler: { _ in self.bottomView.paintView.preferAlpha = 0.8}))
+            alertController.addAction(.init(title: "0.5", style: .default, handler: { _ in self.bottomView.paintView.preferAlpha = 0.5}))
+            alertController.addAction(.init(title: "0.2", style: .default, handler: { _ in self.bottomView.paintView.preferAlpha = 0.2}))
+            alertController.popoverPresentationController?.barButtonItem = sender
+            present(alertController, animated: true, completion: nil)
+            break
+        case 5:
+            let alertController = UIAlertController(title: "形狀", message: nil, preferredStyle: .actionSheet)
+            alertController.addAction(.init(title: "曲線(預設)", style: .default, handler: { _ in self.bottomView.paintView.preferShape = .曲線}))
+            alertController.addAction(.init(title: "直線", style: .default, handler: { _ in self.bottomView.paintView.preferShape = .直線}))
+            alertController.addAction(.init(title: "曲線(虛線)", style: .default, handler: { _ in self.bottomView.paintView.preferShape = .虛線曲}))
+            alertController.addAction(.init(title: "直線(虛線)", style: .default, handler: { _ in self.bottomView.paintView.preferShape = .虛線直}))
+            alertController.addAction(.init(title: "橡皮擦", style: .default, handler: { _ in self.bottomView.paintView.preferShape = .橡皮擦}))
+            alertController.popoverPresentationController?.barButtonItem = sender
+            present(alertController, animated: true, completion: nil)
+            break
         default:
             break
         }
@@ -98,6 +144,7 @@ extension ViewController: UIImagePickerControllerDelegate & UINavigationControll
         guard let image = info[.originalImage] as? UIImage else {
             fatalError()
         }
+        bottomView.paintView.clear()
         self.bottomView.image = image
         dismiss(animated: true)
     }
