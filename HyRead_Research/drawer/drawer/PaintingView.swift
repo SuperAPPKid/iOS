@@ -9,7 +9,6 @@
 import UIKit
 
 fileprivate typealias callback = ((CAShapeLayer)->Void)
-fileprivate let Accuracy = 1
 
 enum Shape {
     case 直線, 曲線, 虛線直, 虛線曲, 橡皮擦
@@ -71,28 +70,27 @@ class PaintingView: UIView {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first?.location(in: self), touches.count == 1,
             let drawingObj = currentDraw else {
-            return
+                return
         }
         
-        if drawingObj.shapeLayer.superlayer == nil && drawingObj.currentDistance > 10{
+        if drawingObj.shapeLayer.superlayer == nil && drawingObj.currentDistance > 5{
             layer.addSublayer(drawingObj.shapeLayer)
         }
-
+        
         drawingObj.move(point: touch)
         
         guard garbageCollectIsOn else {
             return
         }
-        
-        let bufferRect = CGRect(origin: touch, size: .zero).insetBy(dx: CGFloat(-Accuracy * 5), dy: CGFloat(-Accuracy * 5))
         drawers.forEach { (drawer) in
-            if drawer.currentPath.contains(touch) {
-                for pointWraper in drawer.pointBox {
-                    let isContains = bufferRect.contains(pointWraper.point)
-                    print("\(bufferRect) contain \(pointWraper.point) : \(isContains)")
-                    if isContains {
-                        garbageSet.insert(drawer)
-                    }
+            let bufferlength = drawer.shapeLayer.lineWidth
+            for pointWraper in drawer.pointBox {
+                let targetRect = CGRect(origin: pointWraper.point, size: .zero).insetBy(dx: -bufferlength, dy: -bufferlength)
+                let targetContains = targetRect.contains(touch)
+                if !drawer.deleteMark && targetContains {
+                    garbageSet.insert(drawer)
+                    drawer.deleteMark = true
+                    break
                 }
             }
         }
@@ -112,8 +110,8 @@ class PaintingView: UIView {
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.currentDraw = nil
-        
+        currentDraw?.shapeLayer.removeFromSuperlayer()
+        currentDraw = nil
         if garbageCollectIsOn {
             disposeGarbage()
         }
@@ -156,6 +154,8 @@ fileprivate class AbstractDrawer: NSObject, Drawable {
     
     var origin: CGPoint
     
+    var deleteMark: Bool = false
+    
     init(point: CGPoint) {
         currentPath = UIBezierPath()
         origin = point
@@ -163,9 +163,12 @@ fileprivate class AbstractDrawer: NSObject, Drawable {
     }
     
     func move(point: CGPoint) {
+        let lineWidth = self.shapeLayer.lineWidth
         DispatchQueue.global().async {
-            if (Int(point.x) % Accuracy == 0) && (Int(point.y) % Accuracy == 0) {
-                self.pointBox.insert(LowAccuracyPoint(point: point))
+            let calculatePoint = CGPoint(x: Int(point.x) % Int(lineWidth), y: Int(point.y) % Int(lineWidth))
+            if (calculatePoint.x == 0 || calculatePoint.y == 0) {
+                let pointWrapper = LowAccuracyPoint(point: CGPoint(x: point.x / lineWidth * lineWidth, y: point.y / lineWidth * lineWidth))
+                self.pointBox.insert(pointWrapper)
             }
         }
     }
@@ -178,7 +181,7 @@ fileprivate class CurveDrawer: AbstractDrawer {
         shapeLayer.path = currentPath.cgPath
         currentPath.move(to: point)
         shapeLayer.strokeColor = color.cgColor
-        shapeLayer.fillColor = UIColor.cyan.cgColor
+        shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineWidth = width
         shapeLayer.lineCap = .round
         shapeLayer.lineJoin = .round
