@@ -8,19 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		362CB85B21B4C34C00F87DB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362CB85A21B4C34C00F87DB4 /* AppDelegate.swift */; };
-		362CB85D21B4C34C00F87DB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362CB85C21B4C34C00F87DB4 /* ViewController.swift */; };
+		362CB85D21B4C34C00F87DB4 /* PaintingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362CB85C21B4C34C00F87DB4 /* PaintingViewController.swift */; };
 		362CB86021B4C34C00F87DB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 362CB85E21B4C34C00F87DB4 /* Main.storyboard */; };
 		362CB86221B4C34D00F87DB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 362CB86121B4C34D00F87DB4 /* Assets.xcassets */; };
 		362CB86521B4C34D00F87DB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 362CB86321B4C34D00F87DB4 /* LaunchScreen.storyboard */; };
 		362CB86D21B4C46B00F87DB4 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362CB86C21B4C46B00F87DB4 /* TableViewController.swift */; };
 		362CB86F21B4D92800F87DB4 /* PaintingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362CB86E21B4D92800F87DB4 /* PaintingView.swift */; };
 		362CB87121B4D97B00F87DB4 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362CB87021B4D97B00F87DB4 /* BottomView.swift */; };
+		36E3F3EF21BA51A200FC1996 /* ClippingBezier.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3634E73B21B8B5D100AE1A96 /* ClippingBezier.framework */; };
+		36E3F3F021BA51A200FC1996 /* PerformanceBezier.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3634E73C21B8B5D200AE1A96 /* PerformanceBezier.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3634E73E21B8B5D200AE1A96 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		362CB85721B4C34C00F87DB4 /* drawer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = drawer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		362CB85A21B4C34C00F87DB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		362CB85C21B4C34C00F87DB4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		362CB85C21B4C34C00F87DB4 /* PaintingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaintingViewController.swift; sourceTree = "<group>"; };
 		362CB85F21B4C34C00F87DB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		362CB86121B4C34D00F87DB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		362CB86421B4C34D00F87DB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -28,6 +43,9 @@
 		362CB86C21B4C46B00F87DB4 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		362CB86E21B4D92800F87DB4 /* PaintingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaintingView.swift; sourceTree = "<group>"; };
 		362CB87021B4D97B00F87DB4 /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
+		3634E73B21B8B5D100AE1A96 /* ClippingBezier.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ClippingBezier.framework; path = drawer/Framework/ClippingBezier.framework; sourceTree = "<group>"; };
+		3634E73C21B8B5D200AE1A96 /* PerformanceBezier.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PerformanceBezier.framework; path = drawer/Framework/PerformanceBezier.framework; sourceTree = "<group>"; };
+		3634E74521B8BE4400AE1A96 /* drawer-bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "drawer-bridging.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36E3F3EF21BA51A200FC1996 /* ClippingBezier.framework in Frameworks */,
+				36E3F3F021BA51A200FC1996 /* PerformanceBezier.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +66,7 @@
 			children = (
 				362CB85921B4C34C00F87DB4 /* drawer */,
 				362CB85821B4C34C00F87DB4 /* Products */,
+				36ADCE0721B7E35900671553 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,15 +83,25 @@
 			children = (
 				362CB85A21B4C34C00F87DB4 /* AppDelegate.swift */,
 				362CB86C21B4C46B00F87DB4 /* TableViewController.swift */,
-				362CB85C21B4C34C00F87DB4 /* ViewController.swift */,
 				362CB85E21B4C34C00F87DB4 /* Main.storyboard */,
 				362CB86121B4C34D00F87DB4 /* Assets.xcassets */,
 				362CB86321B4C34D00F87DB4 /* LaunchScreen.storyboard */,
 				362CB86621B4C34D00F87DB4 /* Info.plist */,
-				362CB86E21B4D92800F87DB4 /* PaintingView.swift */,
+				362CB85C21B4C34C00F87DB4 /* PaintingViewController.swift */,
 				362CB87021B4D97B00F87DB4 /* BottomView.swift */,
+				362CB86E21B4D92800F87DB4 /* PaintingView.swift */,
+				3634E74521B8BE4400AE1A96 /* drawer-bridging.h */,
 			);
 			path = drawer;
+			sourceTree = "<group>";
+		};
+		36ADCE0721B7E35900671553 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3634E73B21B8B5D100AE1A96 /* ClippingBezier.framework */,
+				3634E73C21B8B5D200AE1A96 /* PerformanceBezier.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +114,7 @@
 				362CB85321B4C34C00F87DB4 /* Sources */,
 				362CB85421B4C34C00F87DB4 /* Frameworks */,
 				362CB85521B4C34C00F87DB4 /* Resources */,
+				3634E73E21B8B5D200AE1A96 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,7 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				362CB85D21B4C34C00F87DB4 /* ViewController.swift in Sources */,
+				362CB85D21B4C34C00F87DB4 /* PaintingViewController.swift in Sources */,
 				362CB86D21B4C46B00F87DB4 /* TableViewController.swift in Sources */,
 				362CB86F21B4D92800F87DB4 /* PaintingView.swift in Sources */,
 				362CB85B21B4C34C00F87DB4 /* AppDelegate.swift in Sources */,
@@ -178,6 +210,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -232,6 +265,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = "armv7 armv7s arm64 arm64e";
 			};
 			name = Debug;
 		};
@@ -239,6 +273,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -295,15 +330,27 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FJ796T7KK8;
+				DEVELOPMENT_TEAM = 2Q9UN2MUUV;
+				ENABLE_ONLY_ACTIVE_RESOURCES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/drawer/Framework",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = drawer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Hank-Zhong.drawer";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC++",
+					"-lstdc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Hank-Zhong.drawer87";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "drawer/drawer-bridging.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -314,15 +361,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FJ796T7KK8;
+				DEVELOPMENT_TEAM = 2Q9UN2MUUV;
+				ENABLE_ONLY_ACTIVE_RESOURCES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/drawer/Framework",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = drawer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Hank-Zhong.drawer";
+				OTHER_LDFLAGS = (
+					"-ObjC++",
+					"-lstdc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Hank-Zhong.drawer87";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "drawer/drawer-bridging.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

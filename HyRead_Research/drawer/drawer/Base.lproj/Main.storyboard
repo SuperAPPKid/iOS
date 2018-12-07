@@ -44,10 +44,10 @@
             </objects>
             <point key="canvasLocation" x="308" y="132"/>
         </scene>
-        <!--View Controller-->
+        <!--Painting View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="drawer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PaintingViewController" customModule="drawer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -62,14 +62,33 @@
                                 </constraints>
                                 <items/>
                             </toolbar>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2mY-zc-etJ">
+                                <rect key="frame" x="10" y="74" width="168.5" height="31"/>
+                                <subviews>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pqY-R2-pdh">
+                                        <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="toggleDebug:" destination="BYZ-38-t0r" eventType="valueChanged" id="QN4-h5-Spq"/>
+                                        </connections>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debug Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBQ-nN-ORe">
+                                        <rect key="frame" x="59" y="5" width="109.5" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="NMw-az-7Id" secondAttribute="bottom" id="8GI-Uu-xdI"/>
                             <constraint firstItem="Vib-m2-VCf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9r9-Y4-THH"/>
+                            <constraint firstItem="2mY-zc-etJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="Mxm-T2-4Kc"/>
                             <constraint firstItem="Vib-m2-VCf" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Nf8-PI-l9o"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vib-m2-VCf" secondAttribute="trailing" id="Smm-4q-G7R"/>
                             <constraint firstItem="Vib-m2-VCf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aCs-jn-zcW"/>
+                            <constraint firstItem="2mY-zc-etJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="tbI-oS-CYi"/>
                             <constraint firstItem="NMw-az-7Id" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wIZ-Dz-1P1"/>
                             <constraint firstItem="NMw-az-7Id" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="yb1-Xc-Qz9"/>
                         </constraints>

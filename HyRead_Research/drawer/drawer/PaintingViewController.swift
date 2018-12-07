@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class PaintingViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var paintToolbox: UIToolbar!
@@ -17,14 +17,24 @@ class ViewController: UIViewController {
     var beforePaintTools: [UIBarButtonItem] = []
     var startPaintTools: [UIBarButtonItem] = []
     
-    lazy var bottomView: BottomView = BottomView().shrink([.flexibleWidth, .flexibleHeight]).fill(scrollView).add(to: scrollView)
+    var bottomView: BottomView!
+    lazy var paintView: PaintingView = {
+        let view = PaintingView().setBackgroundColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 0.09554259418)).fill(bottomView).add(to: bottomView).hide()
+        view.delegate = self
+        return view
+    }()
+    
+    var backStepBtn: UIBarButtonItem!
+    var nextStepBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.minimumZoomScale = 1
         scrollView.maximumZoomScale = 4
         scrollView.delegate = self
         scrollView.panGestureRecognizer.minimumNumberOfTouches = 2
+//        scrollView.bouncesZoom = false
         scrollView.delaysContentTouches = false
         
         let addBoardBtn = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(beforePaintToolsClick(_:))).with(tag: 0)
@@ -35,16 +45,25 @@ class ViewController: UIViewController {
         let trashBtn = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(startPaintToolsClick(_:))).with(tag: 1)
         let changeWidthBtn = UIBarButtonItem(title: "線寬", style: .plain, target: self, action: #selector(startPaintToolsClick(_:))).with(tag: 2)
         let changeColorBtn = UIBarButtonItem(title: "顏色", style: .plain, target: self, action: #selector(startPaintToolsClick(_:))).with(tag: 3)
-        let changeAlphaBtn = UIBarButtonItem(title: "不透明度", style: .plain, target: self, action: #selector(startPaintToolsClick(_:))).with(tag: 4)
+        let changeAlphaBtn = UIBarButtonItem(title: "alpha", style: .plain, target: self, action: #selector(startPaintToolsClick(_:))).with(tag: 4)
         let shapeBtn = UIBarButtonItem(title: "形狀", style: .plain, target: self, action: #selector(startPaintToolsClick(_:))).with(tag: 5)
-        startPaintTools.append(contentsOf: [closeBoardBtn, trashBtn, changeWidthBtn, changeColorBtn, changeAlphaBtn, shapeBtn])
+        backStepBtn = UIBarButtonItem(barButtonSystemItem: .rewind, target: self, action: #selector(back(sender:)))
+        nextStepBtn = UIBarButtonItem(barButtonSystemItem: .fastForward, target: self, action: #selector(next(sender:)))
+        backStepBtn.isEnabled = false
+        nextStepBtn.isEnabled = false
+        startPaintTools.append(contentsOf: [closeBoardBtn, trashBtn, changeWidthBtn, changeColorBtn, changeAlphaBtn, shapeBtn, backStepBtn, nextStepBtn])
         
         paintToolbox.setItems(beforePaintTools, animated: true)
         
+        bottomView = BottomView().fill(scrollView).add(to: scrollView)
         let oneTap = UITapGestureRecognizer(target: self, action: #selector(oneTap(sender:)))
         oneTap.numberOfTouchesRequired = 1
-        
-        view.addGestureRecognizer(oneTap)
+        oneTap.cancelsTouchesInView = false
+        bottomView.addGestureRecognizer(oneTap)
+    }
+    
+    @IBAction func toggleDebug(_ sender: UISwitch) {
+        paintView.debug.toggle()
     }
     
     @objc func oneTap(sender: UITapGestureRecognizer) {
@@ -59,15 +78,14 @@ class ViewController: UIViewController {
 //                    self.view.layoutIfNeeded()
 //                }
 //            }
-            
-            self.view.layoutIfNeeded()
+            self.view.updateConstraintsIfNeeded()
         }
     }
 
     @objc func beforePaintToolsClick(_ sender: UIBarButtonItem) {
         switch sender.tag {
         case 0:
-            bottomView.togglePaintBoard { visible in
+            togglePaintBoard { visible in
                 self.paintToolbox.setItems(startPaintTools, animated: true)
             }
             break
@@ -85,51 +103,51 @@ class ViewController: UIViewController {
     @objc func startPaintToolsClick(_ sender: UIBarButtonItem) {
         switch sender.tag {
         case 0:
-            bottomView.togglePaintBoard { visible in
+            togglePaintBoard { visible in
                 scrollView.setZoomScale(1, animated: true)
                 paintToolbox.setItems(beforePaintTools, animated: true)
             }
             break
         case 1:
-            bottomView.paintView.clear()
+            paintView.clear()
             break
         case 2:
             let alertController = UIAlertController(title: "線寬", message: nil, preferredStyle: .actionSheet)
-            alertController.addAction(.init(title: "3(預設)", style: .default, handler: { _ in self.bottomView.paintView.preferWidth = 3}))
-            alertController.addAction(.init(title: "5", style: .default, handler: { _ in self.bottomView.paintView.preferWidth = 5}))
-            alertController.addAction(.init(title: "10", style: .default, handler: { _ in self.bottomView.paintView.preferWidth = 10}))
-            alertController.addAction(.init(title: "20", style: .default, handler: { _ in self.bottomView.paintView.preferWidth = 20}))
-            alertController.addAction(.init(title: "40", style: .default, handler: { _ in self.bottomView.paintView.preferWidth = 40}))
+            alertController.addAction(.init(title: "3(預設)", style: .default, handler: { _ in self.paintView.preferWidth = 3}))
+            alertController.addAction(.init(title: "5", style: .default, handler: { _ in self.paintView.preferWidth = 5}))
+            alertController.addAction(.init(title: "10", style: .default, handler: { _ in self.paintView.preferWidth = 10}))
+            alertController.addAction(.init(title: "20", style: .default, handler: { _ in self.paintView.preferWidth = 20}))
+            alertController.addAction(.init(title: "40", style: .default, handler: { _ in self.paintView.preferWidth = 40}))
             alertController.popoverPresentationController?.barButtonItem = sender
             present(alertController, animated: true, completion: nil)
             break
         case 3:
             let alertController = UIAlertController(title: "顏色", message: nil, preferredStyle: .actionSheet)
-            alertController.addAction(.init(title: "紅", style: .default, handler: { _ in self.bottomView.paintView.preferColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)}))
-            alertController.addAction(.init(title: "橙", style: .default, handler: { _ in self.bottomView.paintView.preferColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)}))
-            alertController.addAction(.init(title: "黃", style: .default, handler: { _ in self.bottomView.paintView.preferColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)}))
-            alertController.addAction(.init(title: "綠", style: .default, handler: { _ in self.bottomView.paintView.preferColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)}))
-            alertController.addAction(.init(title: "藍", style: .default, handler: { _ in self.bottomView.paintView.preferColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)}))
-            alertController.addAction(.init(title: "紫", style: .default, handler: { _ in self.bottomView.paintView.preferColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)}))
-            alertController.addAction(.init(title: "黑", style: .default, handler: { _ in self.bottomView.paintView.preferColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)}))
+            alertController.addAction(.init(title: "紅", style: .default, handler: { _ in self.paintView.preferColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)}))
+            alertController.addAction(.init(title: "橙", style: .default, handler: { _ in self.paintView.preferColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)}))
+            alertController.addAction(.init(title: "黃", style: .default, handler: { _ in self.paintView.preferColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)}))
+            alertController.addAction(.init(title: "綠", style: .default, handler: { _ in self.paintView.preferColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)}))
+            alertController.addAction(.init(title: "藍", style: .default, handler: { _ in self.paintView.preferColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)}))
+            alertController.addAction(.init(title: "紫", style: .default, handler: { _ in self.paintView.preferColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)}))
+            alertController.addAction(.init(title: "黑", style: .default, handler: { _ in self.paintView.preferColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)}))
             alertController.popoverPresentationController?.barButtonItem = sender
             present(alertController, animated: true, completion: nil)
             break
         case 4:
             let alertController = UIAlertController(title: "不透明度", message: nil, preferredStyle: .actionSheet)
-            alertController.addAction(.init(title: "0.8(預設)", style: .default, handler: { _ in self.bottomView.paintView.preferAlpha = 0.8}))
-            alertController.addAction(.init(title: "0.5", style: .default, handler: { _ in self.bottomView.paintView.preferAlpha = 0.5}))
-            alertController.addAction(.init(title: "0.2", style: .default, handler: { _ in self.bottomView.paintView.preferAlpha = 0.2}))
+            alertController.addAction(.init(title: "0.8(預設)", style: .default, handler: { _ in self.paintView.preferAlpha = 0.8}))
+            alertController.addAction(.init(title: "0.5", style: .default, handler: { _ in self.paintView.preferAlpha = 0.5}))
+            alertController.addAction(.init(title: "0.2", style: .default, handler: { _ in self.paintView.preferAlpha = 0.2}))
             alertController.popoverPresentationController?.barButtonItem = sender
             present(alertController, animated: true, completion: nil)
             break
         case 5:
-            let alertController = UIAlertController(title: "形狀", message: nil, preferredStyle: .actionSheet)
-            alertController.addAction(.init(title: "曲線(預設)", style: .default, handler: { _ in self.bottomView.paintView.preferShape = .曲線}))
-            alertController.addAction(.init(title: "直線", style: .default, handler: { _ in self.bottomView.paintView.preferShape = .直線}))
-            alertController.addAction(.init(title: "曲線(虛線)", style: .default, handler: { _ in self.bottomView.paintView.preferShape = .虛線曲}))
-            alertController.addAction(.init(title: "直線(虛線)", style: .default, handler: { _ in self.bottomView.paintView.preferShape = .虛線直}))
-            alertController.addAction(.init(title: "橡皮擦", style: .default, handler: { _ in self.bottomView.paintView.preferShape = .橡皮擦}))
+            let alertController = UIAlertController(title: "形狀 曲直nonzero 曲虛evenOdd", message: nil, preferredStyle: .actionSheet)
+            alertController.addAction(.init(title: "曲線(預設)", style: .default, handler: { _ in self.paintView.preferShape = .曲線}))
+            alertController.addAction(.init(title: "直線", style: .default, handler: { _ in self.paintView.preferShape = .直線}))
+            alertController.addAction(.init(title: "曲線(虛線)", style: .default, handler: { _ in self.paintView.preferShape = .虛線曲}))
+            alertController.addAction(.init(title: "直線(虛線)", style: .default, handler: { _ in self.paintView.preferShape = .虛線直}))
+            alertController.addAction(.init(title: "橡皮擦", style: .default, handler: { _ in self.paintView.preferShape = .橡皮擦}))
             alertController.popoverPresentationController?.barButtonItem = sender
             present(alertController, animated: true, completion: nil)
             break
@@ -137,26 +155,54 @@ class ViewController: UIViewController {
             break
         }
     }
+    
+    func togglePaintBoard(_ complete: (Bool)->(Void)) {
+        paintView.isHidden.toggle()
+        complete(paintView.isHidden)
+    }
+    
+    @objc func back(sender: UIBarButtonItem) {
+        paintView.back()
+    }
+    
+    @objc func next(sender: UIBarButtonItem) {
+        paintView.next()
+    }
 }
 
-extension ViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+extension PaintingViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.originalImage] as? UIImage else {
             fatalError()
         }
-        bottomView.paintView.clear()
+        paintView.clear()
         self.bottomView.image = image
         dismiss(animated: true)
     }
 }
 
-extension ViewController: UIScrollViewDelegate {
+extension PaintingViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return bottomView
     }
     
-    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        scrollView.setZoomScale(scale, animated: true)
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        let top = (scrollView.frame.height - bottomView.frame.height) / 2
+        let left = (scrollView.frame.width - bottomView.frame.width) / 2
+        scrollView.contentInset = UIEdgeInsets(top: max(0, top), left: max(0, left), bottom: 0, right: 0)
+    }
+}
+
+extension PaintingViewController: PaintingViewDelegate {
+    func drawerArrayIsEmpty(_ paintingView: PaintingView, drawerType: UndoOrRedo, isEmpty: Bool) {
+        switch drawerType {
+        case .undo:
+            backStepBtn.isEnabled = !isEmpty
+            break
+        case .redo:
+            nextStepBtn.isEnabled = !isEmpty
+            break
+        }
     }
 }
 
@@ -167,13 +213,11 @@ extension UIBarButtonItem {
     }
 }
 
-
-
 protocol UIViewExtendable {
     func add(to view: UIView) -> Self
     func fill(_ view: UIView) -> Self
-    func shrink(_ shrink: UIView.AutoresizingMask) -> Self
     func setBackgroundColor(_ color: UIColor) -> Self
+    func hide() -> Self
 }
 
 extension UIViewExtendable where Self : UIView {
@@ -183,17 +227,18 @@ extension UIViewExtendable where Self : UIView {
     }
     
     func fill(_ view: UIView) -> Self {
+        self.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.frame = view.bounds
-        return self
-    }
-    
-    func shrink(_ shrink: AutoresizingMask) -> Self {
-        self.autoresizingMask = shrink
         return self
     }
     
     func setBackgroundColor(_ color: UIColor) -> Self {
         self.backgroundColor = color
+        return self
+    }
+    
+    func hide() -> Self {
+        self.isHidden = true
         return self
     }
 }
