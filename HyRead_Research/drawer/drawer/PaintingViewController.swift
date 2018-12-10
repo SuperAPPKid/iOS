@@ -162,11 +162,11 @@ class PaintingViewController: UIViewController {
     }
     
     @objc func back(sender: UIBarButtonItem) {
-        paintView.back()
+        paintView.undo()
     }
     
     @objc func next(sender: UIBarButtonItem) {
-        paintView.next()
+        paintView.redo()
     }
 }
 
@@ -194,15 +194,12 @@ extension PaintingViewController: UIScrollViewDelegate {
 }
 
 extension PaintingViewController: PaintingViewDelegate {
-    func drawerArrayIsEmpty(_ paintingView: PaintingView, drawerType: UndoOrRedo, isEmpty: Bool) {
-        switch drawerType {
-        case .undo:
-            backStepBtn.isEnabled = !isEmpty
-            break
-        case .redo:
-            nextStepBtn.isEnabled = !isEmpty
-            break
-        }
+    func undoAble(_ paintingView: PaintingView, enable: Bool) {
+        backStepBtn.isEnabled = enable
+    }
+    
+    func redoAble(_ paintingView: PaintingView, enable: Bool) {
+        nextStepBtn.isEnabled = enable
     }
 }
 

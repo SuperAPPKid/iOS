@@ -14,28 +14,15 @@ enum Shape {
     case 直線, 曲線, 虛線直, 虛線曲, 橡皮擦
 }
 
-enum UndoOrRedo {
-    case undo, redo
-}
-
 protocol PaintingViewDelegate: AnyObject {
-    func drawerArrayIsEmpty(_ paintingView: PaintingView, drawerType: UndoOrRedo, isEmpty: Bool)
+    func undoAble(_ paintingView: PaintingView, enable: Bool )
+    func redoAble(_ paintingView: PaintingView, enable: Bool )
 }
 
 class PaintingView: UIView {
     var debug: Bool = true
     
-    private var drawers: [AbstractDrawer] = [] {
-        didSet {
-            delegate?.drawerArrayIsEmpty(self, drawerType: .undo, isEmpty: drawers.count == 0)
-        }
-    }
-    
-    private var tempdrawers: [AbstractDrawer] = [] {
-        didSet {
-            delegate?.drawerArrayIsEmpty(self, drawerType: .redo, isEmpty: tempdrawers.count == 0)
-        }
-    }
+    private var drawers: [AbstractDrawer] = []
     
     private var currentDraw: AbstractDrawer?
     private var garbageSet: Set<AbstractDrawer> = []
@@ -64,9 +51,24 @@ class PaintingView: UIView {
     }
     var preferShape: Shape = .曲線
     
-    func clear() {
-        drawers = []
-        layer.sublayers = []
+    private var myUndoManager: UndoManager = UndoManager()
+    private var undoCheckObservation: NSObjectProtocol?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        undoCheckObservation = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSUndoManagerCheckpoint, object: myUndoManager, queue: nil, using: {
+            [unowned self] (notification) in
+            guard let manager = notification.object as? UndoManager else {
+                return
+            }
+            self.delegate?.undoAble(self, enable: manager.canUndo)
+            self.delegate?.redoAble(self, enable: manager.canRedo)
+        })
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        return nil
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -148,8 +150,9 @@ class PaintingView: UIView {
             disposeGarbage()
         } else {
             if drawObject.shapeLayer.superlayer != nil {
-                drawers.append(drawObject)
-                tempdrawers.removeAll()
+                var newDrawers = drawers
+                newDrawers.append(drawObject)
+                doDrawers(newDrawers)
             }
         }
         self.currentDraw = nil
@@ -171,28 +174,67 @@ class PaintingView: UIView {
             point.removeFromSuperlayer()
         }
         garbagePoints.removeAll()
-        drawers.removeAll { $0.shapeLayer.superlayer == nil }
+        
+        var newDrawers = drawers
+        newDrawers.removeAll { $0.shapeLayer.superlayer == nil }
+        doDrawers(newDrawers)
+        
         garbageSet.removeAll()
     }
     
-    func back() {
-        guard let latestUndoable = drawers.popLast() else {
-            return
-        }
-        tempdrawers.append(latestUndoable)
-        latestUndoable.shapeLayer.removeFromSuperlayer()
+    func clear() {
+        myUndoManager.removeAllActions()
+        doDrawers([])
     }
     
-    func next() {
-        guard let latestRedoable = tempdrawers.popLast() else {
-            return
+    func undo() {
+        myUndoManager.undo()
+    }
+    
+    func redo() {
+        myUndoManager.redo()
+    }
+    
+    func doDrawers(_ newDrawers: [AbstractDrawer]) {
+        let currentDrawers = self.drawers
+        
+        myUndoManager.registerUndo(withTarget: self, handler: { (target) in
+            target.doDrawers(currentDrawers)
+        })
+        
+        myUndoManager.setActionName("Do Drawers")
+        
+        self.drawers = newDrawers
+        let diff = newDrawers.count - currentDrawers.count
+        if diff > 0 {
+            //新增操作
+            for i in newDrawers.count - diff ..< newDrawers.count {
+                let sLayer = newDrawers[i].shapeLayer
+                if sLayer.superlayer == nil {
+                    layer.addSublayer(sLayer)
+                }
+            }
+        } else if diff < 0 {
+            //刪除操作
+            for i in currentDrawers.count + diff ..< currentDrawers.count {
+                let sLayer = currentDrawers[i].shapeLayer
+                if sLayer.superlayer != nil {
+                    sLayer.removeFromSuperlayer()
+                }
+            }
+        } else {
+            myUndoManager.removeAllActions()
         }
-        drawers.append(latestRedoable)
-        layer.addSublayer(latestRedoable.shapeLayer)
+        
+        self.delegate?.undoAble(self, enable: myUndoManager.canUndo)
+        self.delegate?.redoAble(self, enable: myUndoManager.canRedo)
+//        print(currentDrawers.count)
+//        print(newDrawers.count)
+//        print("DD - \(newDrawers)")
     }
 }
 
-fileprivate protocol Drawable {
+protocol Drawable {
     var shapeLayer: CAShapeLayer { get }
     var currentPath: UIBezierPath { get }
     var origin: CGPoint { get }
@@ -211,7 +253,7 @@ extension Drawable {
     }
 }
 
-fileprivate class AbstractDrawer: NSObject, Drawable {
+class AbstractDrawer: NSObject, Drawable {
     let shapeLayer: CAShapeLayer = CAShapeLayer()
     
     let currentPath: UIBezierPath
