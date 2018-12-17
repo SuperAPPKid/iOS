@@ -40,6 +40,8 @@ class ViewController: UIViewController {
         .subscribe{ print() }
         .disposed(by: bag)
         
+        UIButton().rx.tap.subscribe().disposed(by: bag)
+        
         do {
             let myObservable = MyObservable { [weak weakVC = self] (observer) -> (MyDispose) in
                 guard let vc = weakVC else { return MyDispose(disposer: nil) }
