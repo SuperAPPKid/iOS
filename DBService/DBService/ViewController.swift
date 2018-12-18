@@ -12,13 +12,15 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         do {
-            try FMDBService.shared.dropTable(name: "Planet")
-            try FMDBService.shared.dropTable(name: "Animal")
+            try FMDBService.shared.insertTable("Animal", ["Name":"tiger"])
+            try FMDBService.shared.insertTable("Animal", ["Name":"dog"])
+            try FMDBService.shared.insertTable("Animal", ["Name":"cat"])
+            try FMDBService.shared.insertTable("Animal", ["Name":"lion"])
         } catch {
             print(error)
         }
+        
     }
 
 

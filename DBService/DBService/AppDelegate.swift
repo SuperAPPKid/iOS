@@ -16,17 +16,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         do {
-            try FMDBService.shared.createTable(name: "Animal",
-                                               columns: Column(name: "ID", type: .Integer, option: .AutoIncrement),
-                                                        Column(name: "Name", type: .Text, option: [.Unique, .NotNull]),
-                                                        Column(name: "Sex", type: .Text, option: [.Unique, .NotNull]))
-            try FMDBService.shared.createTable(name: "Planet",
-                                               columns: Column(name: "ID", type: .Integer, option: .AutoIncrement),
-                                                        Column(name: "Name", type: .Text, option: [.Unique, .NotNull]),
-                                                        Column(name: "Sex", type: .Text, option: [.Unique, .NotNull]))
+            try FMDBService.shared.createTable("Animal",
+                                               ColumnBuilder("ID", type: .Integer, option: .AutoIncrement),
+                                               ColumnBuilder("Name", type: .Text, default: "UnKnown", option: [.NotNull]),
+                                               ColumnBuilder("Sex", type: .Text, option: [])
+            )
         } catch {
             print(error)
         }
+        
+        do {
+            try FMDBService.shared.createTable("Plant",
+                                               ColumnBuilder("ID", type: .Integer, option: .AutoIncrement),
+                                               ColumnBuilder("Name", type: .Text, option: [.NotNull]),
+                                               ColumnBuilder("Sex", type: .Text, option: []),
+                                               ColumnBuilder("FID", type: .Integer, option: []).reference(to: "Animal", column: "ID")
+            )
+        } catch {
+            print(error)
+        }
+        
         return true
     }
 
