@@ -13,6 +13,7 @@
 		364CCFF421C7433D0091F37A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 364CCFF321C7433D0091F37A /* Assets.xcassets */; };
 		364CCFF721C7433D0091F37A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 364CCFF521C7433D0091F37A /* LaunchScreen.storyboard */; };
 		364CCFFF21C744110091F37A /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364CCFFE21C744110091F37A /* Table.swift */; };
+		364CD00121C9DB4B0091F37A /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364CD00021C9DB4B0091F37A /* Operator.swift */; };
 		AC0FBAA8BE86714827EF1F19 /* Pods_DBService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 480A579458140C6000D5D840 /* Pods_DBService.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		364CCFF621C7433D0091F37A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		364CCFF821C7433D0091F37A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		364CCFFE21C744110091F37A /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
+		364CD00021C9DB4B0091F37A /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		3D6EF2CE6B2FB7E578084D09 /* Pods-DBService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBService.release.xcconfig"; path = "Pods/Target Support Files/Pods-DBService/Pods-DBService.release.xcconfig"; sourceTree = "<group>"; };
 		480A579458140C6000D5D840 /* Pods_DBService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DBService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE6A9B1A0E599F3EF38EE5D7 /* Pods-DBService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBService.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DBService/Pods-DBService.debug.xcconfig"; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				364CCFF521C7433D0091F37A /* LaunchScreen.storyboard */,
 				364CCFF821C7433D0091F37A /* Info.plist */,
 				364CCFFE21C744110091F37A /* Table.swift */,
+				364CD00021C9DB4B0091F37A /* Operator.swift */,
 			);
 			path = DBService;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				364CCFFF21C744110091F37A /* Table.swift in Sources */,
+				364CD00121C9DB4B0091F37A /* Operator.swift in Sources */,
 				364CCFEF21C7433C0091F37A /* ViewController.swift in Sources */,
 				364CCFED21C7433C0091F37A /* AppDelegate.swift in Sources */,
 			);
