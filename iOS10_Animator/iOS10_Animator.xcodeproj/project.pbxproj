@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36BA8CEF21CB344D00B371E0 /* ConsoleAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA8CED21CB344D00B371E0 /* ConsoleAction.swift */; };
+		36BA8CF021CB344D00B371E0 /* ConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA8CEE21CB344D00B371E0 /* ConsoleViewController.swift */; };
 		36F516312182AF880035E869 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F516302182AF880035E869 /* AppDelegate.swift */; };
 		36F516332182AF880035E869 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F516322182AF880035E869 /* ViewController.swift */; };
 		36F516362182AF880035E869 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36F516342182AF880035E869 /* Main.storyboard */; };
 		36F516382182AF890035E869 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36F516372182AF890035E869 /* Assets.xcassets */; };
 		36F5163B2182AF890035E869 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36F516392182AF890035E869 /* LaunchScreen.storyboard */; };
-		36F516452182B4340035E869 /* ConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F516442182B4340035E869 /* ConsoleViewController.swift */; };
-		36F516472182B4930035E869 /* ConsoleAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F516462182B4930035E869 /* ConsoleAction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36BA8CED21CB344D00B371E0 /* ConsoleAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleAction.swift; sourceTree = "<group>"; };
+		36BA8CEE21CB344D00B371E0 /* ConsoleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleViewController.swift; sourceTree = "<group>"; };
 		36F5162D2182AF880035E869 /* iOS10_Animator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS10_Animator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36F516302182AF880035E869 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36F516322182AF880035E869 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,8 +26,6 @@
 		36F516372182AF890035E869 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36F5163A2182AF890035E869 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		36F5163C2182AF890035E869 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		36F516442182B4340035E869 /* ConsoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleViewController.swift; sourceTree = "<group>"; };
-		36F516462182B4930035E869 /* ConsoleAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleAction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +39,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36BA8CEC21CB344D00B371E0 /* ConsoleViewController */ = {
+			isa = PBXGroup;
+			children = (
+				36BA8CED21CB344D00B371E0 /* ConsoleAction.swift */,
+				36BA8CEE21CB344D00B371E0 /* ConsoleViewController.swift */,
+			);
+			path = ConsoleViewController;
+			sourceTree = "<group>";
+		};
 		36F516242182AF870035E869 = {
 			isa = PBXGroup;
 			children = (
@@ -64,8 +73,7 @@
 				36F516372182AF890035E869 /* Assets.xcassets */,
 				36F516392182AF890035E869 /* LaunchScreen.storyboard */,
 				36F5163C2182AF890035E869 /* Info.plist */,
-				36F516442182B4340035E869 /* ConsoleViewController.swift */,
-				36F516462182B4930035E869 /* ConsoleAction.swift */,
+				36BA8CEC21CB344D00B371E0 /* ConsoleViewController */,
 			);
 			path = iOS10_Animator;
 			sourceTree = "<group>";
@@ -141,8 +149,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36F516472182B4930035E869 /* ConsoleAction.swift in Sources */,
-				36F516452182B4340035E869 /* ConsoleViewController.swift in Sources */,
+				36BA8CF021CB344D00B371E0 /* ConsoleViewController.swift in Sources */,
+				36BA8CEF21CB344D00B371E0 /* ConsoleAction.swift in Sources */,
 				36F516332182AF880035E869 /* ViewController.swift in Sources */,
 				36F516312182AF880035E869 /* AppDelegate.swift in Sources */,
 			);
