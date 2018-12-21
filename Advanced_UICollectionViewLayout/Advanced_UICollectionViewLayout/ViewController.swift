@@ -103,9 +103,3 @@ class MyLayout2: UICollectionViewFlowLayout {
 
     }
 }
-
-protocol 可儲存{
-    associatedtype Item
-    func 存(_ item: Item)
-    subscript (第: Int) -> Item { get }
-}
