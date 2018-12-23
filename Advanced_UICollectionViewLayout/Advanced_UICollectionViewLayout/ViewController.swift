@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    typealias LazyTuple = (name: String,lazy: LazyLayout)
+    typealias LazyTuple = (name: String, value: LazyLayout)
     var myLayouts: [LazyTuple] = []
     var pickerView: UIPickerView?
     
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         picker.heightAnchor.constraint(equalToConstant: 200).isActive = true
         pickerView = picker
         
-        let layout3 = TestDeinitLayout.customLazy{
+        let layout3 = TestDeinitLayout.lazy {
             let layout = TestDeinitLayout()
             let itemLength = (self.view.bounds.width - 40) / 3
             layout.itemSize = CGSize(width: itemLength, height: itemLength)
@@ -47,7 +47,7 @@ class ViewController: UIViewController {
             return layout
         }
         
-        let layout4 = TestDeinitLayout.customLazy {
+        let layout4 = TestDeinitLayout.lazy {
             let layout = TestDeinitLayout()
             let itemLength = (self.view.bounds.width - 50) / 4
             layout.itemSize = CGSize(width: itemLength, height: itemLength)
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
             return layout
         }
         
-        let layout5 = TestDeinitLayout.customLazy {
+        let layout5 = TestDeinitLayout.lazy {
             let layout = TestDeinitLayout()
             let itemLength = (self.view.bounds.width - 60) / 5
             layout.itemSize = CGSize(width: itemLength, height: itemLength)
@@ -67,13 +67,16 @@ class ViewController: UIViewController {
             return layout
         }
         
-        let layout242 = My242FlowLayout.defaultLazy
+        let layout242 = My242FlowLayout.defaultLazy() as LazyLayout
         
-        myLayouts += [("Flow-3", layout3), ("Flow-4", layout4), ("Flow-5", layout5), ("MyFlow-242", layout242)]
+        myLayouts += [LazyTuple("layout3", layout3),
+                      LazyTuple("layout4", layout4),
+                      LazyTuple("layout5", layout5),
+                      LazyTuple("layout242", layout242)]
         
         collectionView.dataSource = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        collectionView.setCollectionViewLayout(layout3.wake(), animated: true)
+        collectionView.setCollectionViewLayout(layout3.layout, animated: true)
         
     }
     
@@ -93,13 +96,13 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let name = NSAttributedString(string: myLayouts[row].name, attributes: [.font: UIFont(name: "Papyrus", size: 20) ?? UIFont.boldSystemFont(ofSize: 20),
+        let name = NSAttributedString(string: "For Test", attributes: [.font: UIFont(name: "Papyrus", size: 20) ?? UIFont.boldSystemFont(ofSize: 20),
                                                                                 .foregroundColor: UIColor.red])
         return name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let newLayout = myLayouts[row].lazy.wake()
+        let newLayout = myLayouts[row].value.layout
         print(String(describing: type(of: newLayout)))
         collectionView.setCollectionViewLayout(newLayout, animated: true)
     }

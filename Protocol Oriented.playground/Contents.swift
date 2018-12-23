@@ -1,3 +1,5 @@
+import UIKit
+
 protocol 可儲存{
     associatedtype Item
     mutating func 存(_ item: Item)
@@ -34,29 +36,29 @@ struct Stack<T>: 可儲存 {
 
 protocol 可從儲存的內容複製: 可儲存 {
     associatedtype 複製後的容器
-//            : 可從儲存的內容複製
-//        where Self.複製後的容器.Item == Self.Item
+            : 可從儲存的內容複製
+        where Self.複製後的容器.Item == Self.Item
     func 複製(最多n個 n: Int) -> 複製後的容器
 }
 
 extension Stack: 可從儲存的內容複製 {
-//    func 複製(最多n個 n: Int) -> String {
-//        return "不加 Line37 這樣寫可以通過"
-//    }
+    func 複製(最多n個 n: Int) -> String {
+        return "不加 Line39 這樣寫可以通過"
+    }
 //
 //    func 複製(最多n個 n: Int) -> Stack<String> {
 //        var result = Stack<String>()
-//        result.存("不加 Line38 這樣寫可以通過")
+//        result.存("不加 Line40 這樣寫可以通過")
 //        return result
 //    }
     
-    func 複製(最多n個 n: Int) -> Stack {
-        var result = Stack()
-        for i in 0 ..< min(n, items.count) {
-            result.存(items[i])
-        }
-        return result
-    }
+//    func 複製(最多n個 n: Int) -> Stack {
+//        var result = Stack()
+//        for i in 0 ..< min(n, items.count) {
+//            result.存(items[i])
+//        }
+//        return result
+//    }
 }
 
 var stack = Stack<Int>()
@@ -66,3 +68,38 @@ stack.存(3)
 stack.存(4)
 stack.存(5)
 let copyStack = stack.複製(最多n個: 3)
+
+//RxSwift用法
+protocol HasHZ {
+    associatedtype T
+    var hz: HZ<T> {get}
+}
+
+struct HZ<T> {
+    let value: T
+}
+
+extension HasHZ {
+    var hz: HZ<Self> {
+        return HZ(value: self)
+    }
+}
+
+//可以這樣用
+protocol Test {
+    associatedtype T
+    var returnSelf: T { get }
+}
+extension Test {
+    var returnSelf: Self {
+        return self
+    }
+}
+extension UIViewController: Test {}
+UIViewController().returnSelf
+
+//這樣不行
+protocol Test2 {
+    var returnSelf: Self { get }
+}
+extension UIViewController: Test2 {}

@@ -33,3 +33,5 @@ Carthage/Build
 
 *.DS_Store
 .DS_Store
+
+Protocol Oriented\.playground/timeline\.xctimeline

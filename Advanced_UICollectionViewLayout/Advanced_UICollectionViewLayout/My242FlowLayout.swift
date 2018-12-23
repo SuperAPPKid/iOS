@@ -8,11 +8,11 @@
 
 import UIKit
 
-class My242FlowLayout: UICollectionViewLayout, HasLazyLayout {
-    static var defaultLazy: LazyLayout {
-        return LazyLayout {
-            let layout = My242FlowLayout()
-            return layout
+class My242FlowLayout: UICollectionViewLayout, HasDefaultLazyLayout {
+    
+    static func defaultLazy() -> DefaultLazyStructure<My242FlowLayout> {
+        return DefaultLazyStructure {
+            return My242FlowLayout()
         }
     }
     
