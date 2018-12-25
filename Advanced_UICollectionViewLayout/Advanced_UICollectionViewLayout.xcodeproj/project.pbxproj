@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		369B692B21D1FD76000AFDF1 /* OnelineFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369B692A21D1FD76000AFDF1 /* OnelineFlowLayout.swift */; };
 		36BA8CFE21CB35D600B371E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA8CFD21CB35D600B371E0 /* AppDelegate.swift */; };
 		36BA8D0021CB35D600B371E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA8CFF21CB35D600B371E0 /* ViewController.swift */; };
 		36BA8D0321CB35D600B371E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36BA8D0121CB35D600B371E0 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		369B692A21D1FD76000AFDF1 /* OnelineFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnelineFlowLayout.swift; sourceTree = "<group>"; };
 		36BA8CFA21CB35D600B371E0 /* Advanced_UICollectionViewLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Advanced_UICollectionViewLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36BA8CFD21CB35D600B371E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36BA8CFF21CB35D600B371E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				36BA8D0921CB35D700B371E0 /* Info.plist */,
 				36C82FA521CDD373006BD615 /* LazyLayoutCore.swift */,
 				36C82FA721CE3607006BD615 /* RotationFlowLayout.swift */,
+				369B692A21D1FD76000AFDF1 /* OnelineFlowLayout.swift */,
 			);
 			path = Advanced_UICollectionViewLayout;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				369B692B21D1FD76000AFDF1 /* OnelineFlowLayout.swift in Sources */,
 				36C82FA821CE3607006BD615 /* RotationFlowLayout.swift in Sources */,
 				36BA8D0021CB35D600B371E0 /* ViewController.swift in Sources */,
 				36C82FA621CDD373006BD615 /* LazyLayoutCore.swift in Sources */,

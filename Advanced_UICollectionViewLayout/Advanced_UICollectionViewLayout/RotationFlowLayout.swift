@@ -22,25 +22,13 @@ class RotationFlowLayout: UICollectionViewFlowLayout, HasDefaultLazyLayout {
         }
     }
     
-    override func prepare() {
-        print(#function)
-        super.prepare()
-    }
-    
-    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        print("\(#function) \(newBounds) \(collectionView!.frame)")
-        return super.shouldInvalidateLayout(forBoundsChange: newBounds)
-    }
-    
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        print("\(#function) \(rect)")
         guard let attributes = super.layoutAttributesForElements(in: rect) else { return nil }
         attributes.forEach{ $0.transform = CGAffineTransform(rotationAngle: .pi * (CGFloat($0.indexPath.row) / 10)) }
         return attributes
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        print("\(#function) \(indexPath)")
         guard let attribute = super.layoutAttributesForItem(at: indexPath) else { return nil }
         attribute.transform = CGAffineTransform(rotationAngle: .pi * (CGFloat(attribute.indexPath.row) / 10))
         return attribute

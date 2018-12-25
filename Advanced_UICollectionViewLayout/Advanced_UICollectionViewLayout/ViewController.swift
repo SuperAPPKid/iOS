@@ -28,10 +28,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UIFont.familyNames.forEach({ familyName in
-            let fontNames = UIFont.fontNames(forFamilyName: familyName)
-            print(familyName, fontNames)
-        })
         editButtonItem.title = "Change"
         navigationItem.rightBarButtonItem = editButtonItem
         
@@ -49,8 +45,8 @@ class ViewController: UIViewController {
         picker.heightAnchor.constraint(equalToConstant: 200).isActive = true
         pickerView = picker
         
-        let layout3 = TestDeinitLayout.lazy {
-            let layout = TestDeinitLayout()
+        let layout3 = TestLayout.lazy {
+            let layout = TestLayout()
             let itemLength = (self.collectionView.bounds.width - 40) / 3
             layout.itemSize = CGSize(width: itemLength, height: itemLength)
             layout.minimumLineSpacing = 10
@@ -59,19 +55,9 @@ class ViewController: UIViewController {
             return layout
         }
         
-        let layout4 = TestDeinitLayout.lazy {
-            let layout = TestDeinitLayout()
+        let layout4 = TestLayout.lazy {
+            let layout = TestLayout()
             let itemLength = (self.collectionView.bounds.width - 50) / 4
-            layout.itemSize = CGSize(width: itemLength, height: itemLength)
-            layout.minimumLineSpacing = 10
-            layout.minimumInteritemSpacing = 0
-            layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            return layout
-        }
-        
-        let layout5 = TestDeinitLayout.lazy {
-            let layout = TestDeinitLayout()
-            let itemLength = (self.collectionView.bounds.width - 60) / 5
             layout.itemSize = CGSize(width: itemLength, height: itemLength)
             layout.minimumLineSpacing = 10
             layout.minimumInteritemSpacing = 0
@@ -81,10 +67,31 @@ class ViewController: UIViewController {
         
         let layoutRotation = RotationFlowLayout.defaultLazy() as LazyLayout
         
+        let layoutOnelineH = OnelineFlowLayout.lazy {
+            let layout = OnelineFlowLayout()
+            layout.minimumLineSpacing = 10
+            layout.itemSize = CGSize(width: 50, height: 50)
+            layout.sectionInset.left = 50
+            layout.sectionInset.right = 50
+            layout.scrollDirection = .horizontal
+            return layout
+        }
+        
+        let layoutOnelineV = OnelineFlowLayout.lazy {
+            let layout = OnelineFlowLayout()
+            layout.minimumLineSpacing = 40
+            layout.itemSize = CGSize(width: 100, height: 100)
+            layout.sectionInset.top = 50
+            layout.sectionInset.bottom = 50
+            layout.scrollDirection = .vertical
+            return layout
+        }
+        
         myLayouts += [LazyTuple("Layout3", layout3),
                       LazyTuple("Layout4", layout4),
                       LazyTuple("RotationLayout", layoutRotation),
-                      LazyTuple("Layout5", layout5)]
+                      LazyTuple("Oneline Horizon", layoutOnelineH),
+                      LazyTuple("Oneline Vertical", layoutOnelineV)]
         
         collectionView.dataSource = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
@@ -144,17 +151,136 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
-class TestDeinitLayout: UICollectionViewFlowLayout {
+class TestLayout: UICollectionViewFlowLayout {
     override init() {
+        print("---Born")
         super.init()
-        print("?????Born?????")
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override var collectionViewContentSize: CGSize {
+        print("---\(#function)")
+        let size = super.collectionViewContentSize
+        print(size)
+        return size
+    }
+    
+    override func prepare() {
+        print("---\(#function)")
+        super.prepare()
+    }
+    
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        print("---\(#function) \(rect)")
+        guard let attributes = super.layoutAttributesForElements(in: rect) else { return nil }
+        print(attributes)
+        return attributes
+    }
+    
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        print("---\(#function) \(indexPath)")
+        guard let attribute = super.layoutAttributesForItem(at: indexPath) else { return nil }
+        print(attribute)
+        return attribute
+    }
+    
+    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        print("---\(#function) \(itemIndexPath)")
+        guard let attribute = super.layoutAttributesForItem(at: itemIndexPath) else { return nil }
+        print(attribute)
+        return attribute
+    }
+    
+    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        print("---\(#function) \(itemIndexPath)")
+        guard let attribute = super.layoutAttributesForItem(at: itemIndexPath) else { return nil }
+        print(attribute)
+        return attribute
+    }
+    
+    override func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
+        print("---\(#function) \(updateItems)")
+        super.prepare(forCollectionViewUpdates: updateItems)
+    }
+    
+    override func finalizeCollectionViewUpdates() {
+        print("---\(#function)")
+        super.finalizeCollectionViewUpdates()
+    }
+    
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        print("---\(#function) \(newBounds) \(collectionView!.frame)")
+        let should = super.shouldInvalidateLayout(forBoundsChange: newBounds)
+        print(should)
+        return should
+    }
+    
+    override func invalidateLayout() {
+        print("---\(#function)")
+    }
+    
+    override func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
+        print("---\(#function) \(context)")
+        super.invalidateLayout(with: context)
+    }
+    
+    override func shouldInvalidateLayout(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> Bool {
+        print("---\(#function) \(preferredAttributes) \(originalAttributes)")
+        let should = super.shouldInvalidateLayout(forPreferredLayoutAttributes: preferredAttributes, withOriginalAttributes: originalAttributes)
+        print(should)
+        return should
+    }
+    
+    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+        print("---\(#function) \(proposedContentOffset)")
+        let target = super.targetContentOffset(forProposedContentOffset: proposedContentOffset)
+        print(target)
+        return target
+    }
+    
+    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+        print("---\(#function) \(proposedContentOffset) \(velocity)")
+        let target = super.targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: velocity)
+        print(target)
+        return target
+    }
+    
+    override func targetIndexPath(forInteractivelyMovingItem previousIndexPath: IndexPath, withPosition position: CGPoint) -> IndexPath {
+        print("---\(#function) \(previousIndexPath) \(position)")
+        let target = super.targetIndexPath(forInteractivelyMovingItem: previousIndexPath, withPosition: position)
+        print(target)
+        return target
+    }
+    
+    override func prepare(forAnimatedBoundsChange oldBounds: CGRect) {
+        print("---\(#function) \(oldBounds)")
+        super.prepare(forAnimatedBoundsChange: oldBounds)
+    }
+    
+    override func finalizeAnimatedBoundsChange() {
+        print("---\(#function)")
+        super.finalizeAnimatedBoundsChange()
+    }
+    
+    override func prepareForTransition(from oldLayout: UICollectionViewLayout) {
+        print("---\(#function) \(oldLayout)")
+        super.prepareForTransition(from: oldLayout)
+    }
+    
+    override func prepareForTransition(to newLayout: UICollectionViewLayout) {
+        print("---\(#function) \(newLayout)")
+        super.prepareForTransition(to: newLayout)
+    }
+    
+    override func finalizeLayoutTransition() {
+        print("---\(#function)")
+        super.finalizeLayoutTransition()
+    }
+    
     deinit {
-        print("!!!!!Dead!!!!!")
+        print("---Dead")
     }
 }
