@@ -295,7 +295,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZH73R434FZ;
+				DEVELOPMENT_TEAM = 2Q9UN2MUUV;
 				INFOPLIST_FILE = Advanced_UICollectionViewLayout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -313,7 +313,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZH73R434FZ;
+				DEVELOPMENT_TEAM = 2Q9UN2MUUV;
 				INFOPLIST_FILE = Advanced_UICollectionViewLayout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

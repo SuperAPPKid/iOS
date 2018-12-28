@@ -23,7 +23,6 @@ class OnelineFlowLayout: TestLayout {
     }
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        super.shouldInvalidateLayout(forBoundsChange: newBounds)
         return true
     }
     
@@ -77,9 +76,9 @@ class OnelineFlowLayout: TestLayout {
         }
     }
 
-    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
-        return CGPoint.zero
-    }
+//    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+//        return CGPoint.zero
+//    }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         guard let collectionView = collectionView else { return proposedContentOffset }
@@ -102,7 +101,7 @@ class OnelineFlowLayout: TestLayout {
                 fixCenter.y = attribute.center.y - targetCenter.y
             }
         }
-        
+
         switch scrollDirection {
         case .vertical:
             fixCenter.x = 0

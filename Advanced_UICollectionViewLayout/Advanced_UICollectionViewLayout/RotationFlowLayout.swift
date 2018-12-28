@@ -13,7 +13,7 @@ class RotationFlowLayout: UICollectionViewFlowLayout, HasDefaultLazyLayout {
     static func defaultLazy() -> DefaultLazyStructure<RotationFlowLayout> {
         return DefaultLazyStructure {
             let layout = RotationFlowLayout()
-            let itemLength = (layout.collectionView?.bounds.width ?? UIScreen.main.bounds.width - 40) / 3
+            let itemLength = (layout.collectionView?.bounds.width ?? UIScreen.main.bounds.width - 30) / 2
             layout.itemSize = CGSize(width: itemLength, height: itemLength)
             layout.minimumLineSpacing = 10
             layout.minimumInteritemSpacing = 0
@@ -24,13 +24,19 @@ class RotationFlowLayout: UICollectionViewFlowLayout, HasDefaultLazyLayout {
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let attributes = super.layoutAttributesForElements(in: rect) else { return nil }
-        attributes.forEach{ $0.transform = CGAffineTransform(rotationAngle: .pi * (CGFloat($0.indexPath.row) / 10)) }
+        attributes.forEach { (attribute) in
+            let row = attribute.indexPath.row
+            attribute.transform = CGAffineTransform(rotationAngle: .pi * (CGFloat(row) / 10))
+                .concatenating(.init(scaleX: 0.3 * CGFloat(row % 4 + 1), y: 0.3 * CGFloat(row % 4 + 1)))
+        }
         return attributes
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         guard let attribute = super.layoutAttributesForItem(at: indexPath) else { return nil }
         attribute.transform = CGAffineTransform(rotationAngle: .pi * (CGFloat(attribute.indexPath.row) / 10))
+            .concatenating(.init(scaleX: 0.3 * CGFloat(attribute.indexPath.row % 4 + 1), y: 0.3 * CGFloat(attribute.indexPath.row % 4 + 1)))
+        
         return attribute
     }
 }

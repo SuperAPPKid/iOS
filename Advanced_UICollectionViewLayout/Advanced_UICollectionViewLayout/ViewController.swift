@@ -135,9 +135,8 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let newLayout = myLayouts[row].value.layout
 //        print(String(describing: type(of: newLayout)))
-        UIView.animate(withDuration: 2) {
-            self.collectionView.setCollectionViewLayout(newLayout, animated: true)
-        }
+        
+        self.collectionView.setCollectionViewLayout(newLayout, animated: true)
     }
 }
 
@@ -203,11 +202,6 @@ class TestLayout: UICollectionViewFlowLayout {
         return attribute
     }
     
-    override func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
-        print("---\(type(of: self)) \(#function) \(updateItems)")
-        super.prepare(forCollectionViewUpdates: updateItems)
-    }
-    
     override func finalizeCollectionViewUpdates() {
         print("---\(type(of: self)) \(#function)")
         super.finalizeCollectionViewUpdates()
@@ -258,14 +252,14 @@ class TestLayout: UICollectionViewFlowLayout {
         return target
     }
     
+    override func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
+        print("---\(type(of: self)) \(#function) \(updateItems)")
+        super.prepare(forCollectionViewUpdates: updateItems)
+    }
+    
     override func prepare(forAnimatedBoundsChange oldBounds: CGRect) {
         print("---\(type(of: self)) \(#function) \(oldBounds)")
         super.prepare(forAnimatedBoundsChange: oldBounds)
-    }
-    
-    override func finalizeAnimatedBoundsChange() {
-        print("---\(type(of: self)) \(#function)")
-        super.finalizeAnimatedBoundsChange()
     }
     
     override func prepareForTransition(from oldLayout: UICollectionViewLayout) {
@@ -276,6 +270,11 @@ class TestLayout: UICollectionViewFlowLayout {
     override func prepareForTransition(to newLayout: UICollectionViewLayout) {
         print("---\(type(of: self)) \(#function) \(newLayout)")
         super.prepareForTransition(to: newLayout)
+    }
+    
+    override func finalizeAnimatedBoundsChange() {
+        print("---\(type(of: self)) \(#function)")
+        super.finalizeAnimatedBoundsChange()
     }
     
     override func finalizeLayoutTransition() {
