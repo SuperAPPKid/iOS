@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OnelineFlowLayout: TestLayout {
+class OnelineFlowLayout: TestFlowLayout {
     
     var maxZoomScale: CGFloat = 0.5
     var minimumZoomScope: CGFloat?
@@ -71,14 +71,13 @@ class OnelineFlowLayout: TestLayout {
                 let stdDistance = abs(distance / activeDistance)
                 let zoom =  1 + (maxZoomScale - 1) * (1 - stdDistance)
                 attribute.transform = CGAffineTransform(scaleX: zoom, y: zoom)
-                attribute.zIndex =  1
             }
         }
     }
-
-//    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
-//        return CGPoint.zero
-//    }
+    
+    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+        return CGPoint.zero
+    }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         guard let collectionView = collectionView else { return proposedContentOffset }
@@ -101,7 +100,7 @@ class OnelineFlowLayout: TestLayout {
                 fixCenter.y = attribute.center.y - targetCenter.y
             }
         }
-
+        
         switch scrollDirection {
         case .vertical:
             fixCenter.x = 0
@@ -109,6 +108,7 @@ class OnelineFlowLayout: TestLayout {
             fixCenter.y = 0
         }
         
-        return CGPoint(x: proposedContentOffset.x + fixCenter.x, y: proposedContentOffset.y + fixCenter.y)
+        return CGPoint(x: proposedContentOffset.x + fixCenter.x,
+                       y: proposedContentOffset.y + fixCenter.y)
     }
 }

@@ -8,12 +8,12 @@
 
 import UIKit
 
-class RotationFlowLayout: UICollectionViewFlowLayout, HasDefaultLazyLayout {
+class RotationFlowLayout: TestFlowLayout, HasDefaultLazyLayout {
     
     static func defaultLazy() -> DefaultLazyStructure<RotationFlowLayout> {
         return DefaultLazyStructure {
             let layout = RotationFlowLayout()
-            let itemLength = (layout.collectionView?.bounds.width ?? UIScreen.main.bounds.width - 30) / 2
+            let itemLength = (layout.collectionView?.bounds.width ?? UIScreen.main.bounds.width - 40) / 3
             layout.itemSize = CGSize(width: itemLength, height: itemLength)
             layout.minimumLineSpacing = 10
             layout.minimumInteritemSpacing = 0
