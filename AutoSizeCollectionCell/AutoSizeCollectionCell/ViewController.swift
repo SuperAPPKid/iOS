@@ -121,7 +121,7 @@ extension ViewController:UICollectionViewDataSource,UICollectionViewDelegate{
         }
         let oldAttrsArr = squareLayout.attrsArray
         collectionView.collectionViewLayout.invalidateLayout()
-        self.collectionView.layoutIfNeeded()
+        collectionView.layoutIfNeeded()
         let newAttrsArr = squareLayout.attrsArray
         var oldChangedAttrsArr:[UICollectionViewLayoutAttributes] = []
         var newChangedAttrsArr:[UICollectionViewLayoutAttributes] = []

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+///Deprecated
 class OnelineFlowLayout: TestFlowLayout {
     
     var maxZoomScale: CGFloat = 0.5

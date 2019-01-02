@@ -16,14 +16,18 @@ class ViewController: UIViewController {
     var myLayouts: [LazyTuple] = []
     var pickerView: UIPickerView?
     
-    var cellViewModel: [UIColor] = [#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9914394021, blue: 1, alpha: 1), #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1), #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1), #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), #colorLiteral(red: 0.4508578777, green: 0.9882974029, blue: 0.8376303315, alpha: 1), #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1), #colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 1), #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
-                                    #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9914394021, blue: 1, alpha: 1), #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1), #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1), #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), #colorLiteral(red: 0.4508578777, green: 0.9882974029, blue: 0.8376303315, alpha: 1), #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1), #colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 1), #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
-                                    #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9914394021, blue: 1, alpha: 1), #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1), #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1), #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), #colorLiteral(red: 0.4508578777, green: 0.9882974029, blue: 0.8376303315, alpha: 1), #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1), #colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 1), #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
-                                    #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9914394021, blue: 1, alpha: 1), #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1), #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1), #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), #colorLiteral(red: 0.4508578777, green: 0.9882974029, blue: 0.8376303315, alpha: 1), #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1), #colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 1), #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
-                                    #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9914394021, blue: 1, alpha: 1), #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1), #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1), #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), #colorLiteral(red: 0.4508578777, green: 0.9882974029, blue: 0.8376303315, alpha: 1), #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1), #colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 1), #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
-                                    #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9914394021, blue: 1, alpha: 1), #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1), #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1), #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), #colorLiteral(red: 0.4508578777, green: 0.9882974029, blue: 0.8376303315, alpha: 1), #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1), #colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 1), #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
-                                    #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9914394021, blue: 1, alpha: 1), #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1), #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1), #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), #colorLiteral(red: 0.4508578777, green: 0.9882974029, blue: 0.8376303315, alpha: 1), #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1), #colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 1), #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
-                                    #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9914394021, blue: 1, alpha: 1), #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1), #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1), #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), #colorLiteral(red: 0.4508578777, green: 0.9882974029, blue: 0.8376303315, alpha: 1), #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1), #colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 1), #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)]
+    var cellViewModel: [UIColor] = {
+        var colorArr = [UIColor]()
+        for i in 0 ..< 30 {
+            colorArr.append(UIColor.random(alpha: 1))
+        }
+        return colorArr
+    }()
+    
+    var hashTable: [Int:String] = [
+        0:"零", 1:"一", 2:"二", 3:"三", 4:"四",
+        5:"五", 6:"六", 7:"七", 8:"八", 9:"九"
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +50,7 @@ class ViewController: UIViewController {
         pickerView = picker
         
         let layout3 = TestFlowLayout.lazy {
-            let layout = TestFlowLayout()
+            let layout = TestFlowLayout(name: "33333")
             let itemLength = (self.collectionView.bounds.width - 40) / 3
             layout.itemSize = CGSize(width: itemLength, height: itemLength)
             layout.minimumLineSpacing = 10
@@ -56,7 +60,7 @@ class ViewController: UIViewController {
         }
         
         let layout4 = TestFlowLayout.lazy {
-            let layout = TestFlowLayout()
+            let layout = TestFlowLayout(name: "44444")
             let itemLength = (self.collectionView.bounds.width - 50) / 4
             layout.itemSize = CGSize(width: itemLength, height: itemLength)
             layout.minimumLineSpacing = 10
@@ -67,7 +71,7 @@ class ViewController: UIViewController {
         
         let layoutRotation = RotationFlowLayout.defaultLazy() as LazyLayout
         
-        //Bad transition
+        //Bad transition animation
         //        let layoutOnelineH = OnelineFlowLayout.lazy {
         //            let layout = OnelineFlowLayout()
         //            layout.minimumLineSpacing = 10
@@ -96,17 +100,47 @@ class ViewController: UIViewController {
         }
         
         let newOneLayoutH = NewOnelineLayout.lazy {
-            let layout = NewOnelineLayout(size: CGSize(width: 200, height: 375), space: 100)
+            let layout = NewOnelineLayout(size: CGSize(width: 185, height: 350), space: 100)
             layout.preferDirection = .horizon
-            layout.maxZoomScale = 1.5
+            layout.maxZoomScale = 1.65
             return layout
         }
         
-        let mosaicLayout = MosaicLayout.lazy{
+        let mosaicLayout = MosaicLayout.lazy {
             let layout = MosaicLayout()
             layout.length = 180
             layout.space = 8
             layout.preferStyles = [.oneThirdTwoThirds, .twoThirdsOneThird, .fiftyFifty, .twoThirdsOneThird]
+            return layout
+        }
+        
+        let circleLayout = CircleLayout.lazy {
+            let layout = CircleLayout()
+            layout.size = CGSize(width: 40, height: 40)
+            layout.radius = 170
+            return layout
+        }
+        
+        let waterfallLayout3 = WaterFallLayout.lazy {
+            let layout = WaterFallLayout()
+            layout.columnCount = 3
+            layout.delegate = self
+            return layout
+        }
+        
+        let waterfallLayout5 = WaterFallLayout.lazy {
+            let layout = WaterFallLayout()
+            layout.columnCount = 5
+            layout.edgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
+            layout.columnSpace = 3
+            layout.rowSpace = 3
+            layout.delegate = self
+            return layout
+        }
+        
+        let stackLayout = StackLayout.lazy {
+            let layout = StackLayout()
+            layout.overlapSpace = 35
             return layout
         }
         
@@ -115,10 +149,14 @@ class ViewController: UIViewController {
                       LazyTuple("RotationLayout", layoutRotation),
                       LazyTuple("NewLayout Vertical", newOneLayoutV),
                       LazyTuple("NewLayout Horizontal", newOneLayoutH),
-                      LazyTuple("MosaicLayout", mosaicLayout)]
+                      LazyTuple("stackLayout", stackLayout),
+                      LazyTuple("MosaicLayout", mosaicLayout),
+                      LazyTuple("waterfallLayout3", waterfallLayout3),
+                      LazyTuple("waterfallLayout5", waterfallLayout5),
+                      LazyTuple("CircleLayout", circleLayout)]
         
         collectionView.dataSource = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.register(MyCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.setCollectionViewLayout(layout3.layout, animated: true)
     }
     
@@ -169,8 +207,16 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MyCell
         cell.backgroundColor = cellViewModel[indexPath.row]
+        let text = String(indexPath.row).compactMap{Int(String($0))}.compactMap{hashTable[$0]}.joined()
+        cell.text = text
         return cell
+    }
+}
+
+extension ViewController: WaterFallLayoutDelegate {
+    func waterFall(layout: WaterFallLayout, heightFor indexPath: IndexPath) -> CGFloat {
+        return [CGFloat(80), CGFloat(100), CGFloat(125), CGFloat(200), CGFloat(240)].randomElement() ?? CGFloat(87)
     }
 }

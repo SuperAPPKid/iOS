@@ -22,10 +22,10 @@ class NewOnelineLayout: UICollectionViewLayout {
     var minimumZoomScope: CGFloat?
     
     private var cachedAttributes: [UICollectionViewLayoutAttributes] = []
-    private var contentRect: CGRect = .zero
+    private var contentSize: CGSize = .zero
     
     override var collectionViewContentSize: CGSize {
-        return contentRect.size
+        return contentSize
     }
     
     init(size: CGSize, space: CGFloat) {
@@ -43,7 +43,7 @@ class NewOnelineLayout: UICollectionViewLayout {
         guard let collectionView = collectionView else { return }
         
         cachedAttributes.removeAll()
-        contentRect = CGRect.zero
+        contentSize = .zero
         
         for i in 0 ..< collectionView.numberOfItems(inSection: 0) {
             let attribute = UICollectionViewLayoutAttributes(forCellWith: .init(row: i, section: 0))
@@ -53,11 +53,11 @@ class NewOnelineLayout: UICollectionViewLayout {
             case .horizon:
                 rect.origin = CGPoint(x: (preferSize.width + preferSpace) * CGFloat(i) + (collectionView.bounds.width - preferSize.width) / 2,
                                       y: (collectionView.bounds.height - preferSize.height) / 2)
-                contentRect.size = CGSize(width: rect.maxX, height: collectionView.bounds.height)
+                contentSize = CGSize(width: rect.maxX, height: collectionView.bounds.height)
             case .vertical:
                 rect.origin = CGPoint(x: (collectionView.bounds.width - preferSize.width) / 2,
                                       y: (preferSize.height + preferSpace) * CGFloat(i) + (collectionView.bounds.height - preferSize.height) / 2)
-                contentRect.size = CGSize(width: collectionView.bounds.width, height: rect.maxY)
+                contentSize = CGSize(width: collectionView.bounds.width, height: rect.maxY)
             }
             
             attribute.frame = rect
@@ -67,9 +67,9 @@ class NewOnelineLayout: UICollectionViewLayout {
         
         switch preferDirection {
         case .horizon:
-            contentRect.size.width += (collectionView.bounds.width - preferSize.width) / 2
+            contentSize.width += (collectionView.bounds.width - preferSize.width) / 2
         case .vertical:
-            contentRect.size.height += (collectionView.bounds.height - preferSize.height) / 2
+            contentSize.height += (collectionView.bounds.height - preferSize.height) / 2
         }
     }
     

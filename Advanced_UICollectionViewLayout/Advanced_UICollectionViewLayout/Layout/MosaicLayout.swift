@@ -144,32 +144,3 @@ class MosaicLayout: UICollectionViewLayout {
     }
     
 }
-
-extension CGRect {
-    func  dividedIntegral(fraction: CGFloat, space: CGFloat, from fromEdge: CGRectEdge) -> (first: CGRect, second: CGRect) {
-        let dimension: CGFloat
-        
-        switch fromEdge {
-        case .minXEdge, .maxXEdge:
-            dimension = self.size.width
-        case .minYEdge, .maxYEdge:
-            dimension = self.size.height
-        }
-        
-        let distance = (dimension * fraction).rounded(.up)
-        var slices = self.divided(atDistance: distance, from: fromEdge)
-        
-        switch fromEdge {
-        case .minXEdge, .maxXEdge:
-            slices.slice.size.width -= (space * 0.5)
-            slices.remainder.origin.x += (space * 0.5)
-            slices.remainder.size.width -= (space * 0.5)
-        case .minYEdge, .maxYEdge:
-            slices.slice.size.height -= (space * 0.5)
-            slices.remainder.origin.y += (space * 0.5)
-            slices.remainder.size.height -= (space * 0.5)
-        }
-        
-        return (first: slices.slice, second: slices.remainder)
-    }
-}

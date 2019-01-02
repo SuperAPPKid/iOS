@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RotationFlowLayout: TestFlowLayout, HasDefaultLazyLayout {
+class RotationFlowLayout: UICollectionViewFlowLayout, HasDefaultLazyLayout {
     
     static func defaultLazy() -> DefaultLazyStructure<RotationFlowLayout> {
         return DefaultLazyStructure {

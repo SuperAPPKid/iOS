@@ -9,8 +9,11 @@
 import UIKit
 
 class TestFlowLayout: UICollectionViewFlowLayout {
-    override init() {
-        print("---\(type(of: self)) Born")
+    var name: String
+    
+    init(name: String) {
+        print("---\(name) Born")
+        self.name = name
         super.init()
     }
     
@@ -19,126 +22,140 @@ class TestFlowLayout: UICollectionViewFlowLayout {
     }
     
     override var collectionViewContentSize: CGSize {
-        print("---\(type(of: self)) \(#function)")
+        print("---\(name) \(#function)")
         let size = super.collectionViewContentSize
         //        print(size)
         return size
     }
     
     override func prepare() {
-        print("---\(type(of: self)) \(#function)")
+        print("---\(name) \(#function)")
         super.prepare()
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        print("---\(type(of: self)) \(#function) \(rect)")
+        print("---\(name) \(#function) \(rect)")
         guard let attributes = super.layoutAttributesForElements(in: rect) else { return nil }
         //        print(attributes)
         return attributes
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        print("---\(type(of: self)) \(#function) \(indexPath)")
+        print("---\(name) \(#function) \(indexPath)")
         guard let attribute = super.layoutAttributesForItem(at: indexPath) else { return nil }
         //        print(attribute)
         return attribute
     }
     
     override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        print("---\(type(of: self)) \(#function) \(itemIndexPath)")
+        print("---\(name) \(#function) \(itemIndexPath)")
         guard let attribute = super.layoutAttributesForItem(at: itemIndexPath) else { return nil }
         //        print(attribute)
         return attribute
     }
     
     override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        print("---\(type(of: self)) \(#function) \(itemIndexPath)")
+        print("---\(name) \(#function) \(itemIndexPath)")
         guard let attribute = super.layoutAttributesForItem(at: itemIndexPath) else { return nil }
         //        print(attribute)
         return attribute
     }
     
     override func finalizeCollectionViewUpdates() {
-        print("---\(type(of: self)) \(#function)")
+        print("---\(name) \(#function)")
         super.finalizeCollectionViewUpdates()
     }
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        print("---\(type(of: self)) \(#function) \(newBounds) \(collectionView!.frame)")
+        print("---\(name) \(#function) \(newBounds) \(collectionView!.frame)")
         let should = super.shouldInvalidateLayout(forBoundsChange: newBounds)
         //        print(should)
         return should
     }
     
     override func invalidateLayout() {
-        print("---\(type(of: self)) \(#function)")
+        print("---\(name) \(#function)")
         super.invalidateLayout()
     }
     
     override func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
-        print("---\(type(of: self)) \(#function) \(context)")
+        print("---\(name) \(#function) \(context)")
+        
+        ///this line cause crash
         super.invalidateLayout(with: context)
     }
     
+    override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
+        print("---\(name) \(#function) \(newBounds)")
+        let context = super.invalidationContext(forBoundsChange: newBounds)
+        return context
+    }
+    
+    override func invalidationContext(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutInvalidationContext {
+        print("---\(name) \(#function) \(preferredAttributes) \(originalAttributes)")
+        let context = super.invalidationContext(forPreferredLayoutAttributes: preferredAttributes, withOriginalAttributes: originalAttributes)
+        return context
+    }
+    
     override func shouldInvalidateLayout(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> Bool {
-        print("---\(type(of: self)) \(#function) \(preferredAttributes) \(originalAttributes)")
+        print("---\(name) \(#function) \(preferredAttributes) \(originalAttributes)")
         let should = super.shouldInvalidateLayout(forPreferredLayoutAttributes: preferredAttributes, withOriginalAttributes: originalAttributes)
         //        print(should)
         return should
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
-        print("---\(type(of: self)) \(#function) \(proposedContentOffset)")
+        print("---\(name) \(#function) \(proposedContentOffset)")
         let target = super.targetContentOffset(forProposedContentOffset: proposedContentOffset)
         //        print(target)
         return target
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        print("---\(type(of: self)) \(#function) \(proposedContentOffset) \(velocity)")
+        print("---\(name) \(#function) \(proposedContentOffset) \(velocity)")
         let target = super.targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: velocity)
         //        print(target)
         return target
     }
     
     override func targetIndexPath(forInteractivelyMovingItem previousIndexPath: IndexPath, withPosition position: CGPoint) -> IndexPath {
-        print("---\(type(of: self)) \(#function) \(previousIndexPath) \(position)")
+        print("---\(name) \(#function) \(previousIndexPath) \(position)")
         let target = super.targetIndexPath(forInteractivelyMovingItem: previousIndexPath, withPosition: position)
         //        print(target)
         return target
     }
     
     override func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
-        print("---\(type(of: self)) \(#function) \(updateItems)")
+        print("---\(name) \(#function) \(updateItems)")
         super.prepare(forCollectionViewUpdates: updateItems)
     }
     
     override func prepare(forAnimatedBoundsChange oldBounds: CGRect) {
-        print("---\(type(of: self)) \(#function) \(oldBounds)")
+        print("---\(name) \(#function) \(oldBounds)")
         super.prepare(forAnimatedBoundsChange: oldBounds)
     }
     
     override func prepareForTransition(from oldLayout: UICollectionViewLayout) {
-        print("---\(type(of: self)) \(#function) \(oldLayout)")
+        print("---\(name) \(#function) \(oldLayout)")
         super.prepareForTransition(from: oldLayout)
     }
     
     override func prepareForTransition(to newLayout: UICollectionViewLayout) {
-        print("---\(type(of: self)) \(#function) \(newLayout)")
+        print("---\(name) \(#function) \(newLayout)")
         super.prepareForTransition(to: newLayout)
     }
     
     override func finalizeAnimatedBoundsChange() {
-        print("---\(type(of: self)) \(#function)")
+        print("---\(name) \(#function)")
         super.finalizeAnimatedBoundsChange()
     }
     
     override func finalizeLayoutTransition() {
-        print("---\(type(of: self)) \(#function)")
+        print("---\(name) \(#function)")
         super.finalizeLayoutTransition()
     }
     
     deinit {
-        print("---\(type(of: self)) Dead")
+        print("---\(name) Dead")
     }
 }

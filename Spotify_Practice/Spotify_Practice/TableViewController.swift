@@ -51,7 +51,6 @@ class TableViewController: UITableViewController {
         let headerContainer = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 350))
         headerContainer.addSubview(header)
         header.frame = headerContainer.bounds
-        tableView.tableHeaderView?.translatesAutoresizingMaskIntoConstraints = false
         tableView.tableHeaderView = headerContainer
         tableView.tableHeaderView?.backgroundColor = .clear
     }
@@ -108,6 +107,7 @@ class TableViewController: UITableViewController {
             }
             sectionView.gradientView.alpha = 0
         }
+        
         if y < 0 {
             imageView.frame.size = .init(width: view.frame.width * (1-y/375), height: 375 - y)
             imageView.frame.origin.y = y
