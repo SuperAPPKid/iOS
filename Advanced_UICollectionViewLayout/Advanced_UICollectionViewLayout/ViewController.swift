@@ -144,7 +144,14 @@ class ViewController: UIViewController {
             return layout
         }
         
-        myLayouts += [LazyTuple("Layout3", layout3),
+        let ringLayout = RingLayout.lazy {
+            let layout = RingLayout()
+            layout.space = 10
+            return layout
+        }
+        
+        myLayouts += [LazyTuple("RingLayout", ringLayout),
+                      LazyTuple("Layout3", layout3),
                       LazyTuple("Layout4", layout4),
                       LazyTuple("RotationLayout", layoutRotation),
                       LazyTuple("NewLayout Vertical", newOneLayoutV),
@@ -157,7 +164,7 @@ class ViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.register(MyCell.self, forCellWithReuseIdentifier: "Cell")
-        collectionView.setCollectionViewLayout(layout3.layout, animated: true)
+        collectionView.setCollectionViewLayout(myLayouts.first!.value.layout, animated: true)
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {

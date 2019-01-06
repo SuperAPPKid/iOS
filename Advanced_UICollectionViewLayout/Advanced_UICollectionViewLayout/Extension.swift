@@ -56,6 +56,6 @@ extension UIColor {
     }
     
     static func random(alpha: CGFloat) -> UIColor {
-        return UIColor(displayP3Red: CGFloat.random(in: 0.7...0.9), green: CGFloat.random(in: 0.7...0.9), blue: CGFloat.random(in: 0.7...0.9), alpha: alpha)
+        return UIColor(displayP3Red: CGFloat.random(in: 0.8...1), green: CGFloat.random(in: 0.8...1), blue: CGFloat.random(in: 0.8...1), alpha: alpha)
     }
 }

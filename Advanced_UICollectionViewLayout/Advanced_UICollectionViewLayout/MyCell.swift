@@ -31,6 +31,8 @@ class MyCell: UICollectionViewCell {
         
         clipsToBounds = true
         layer.cornerRadius = 20
+        layer.borderColor = UIColor.black.cgColor
+        layer.borderWidth = 1
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
