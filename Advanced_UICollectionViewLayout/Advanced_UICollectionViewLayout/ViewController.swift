@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     var cellViewModel: [UIColor] = {
         var colorArr = [UIColor]()
-        for i in 0 ..< 30 {
+        for i in 0 ..< 4 {
             colorArr.append(UIColor.random(alpha: 1))
         }
         return colorArr
@@ -146,7 +146,6 @@ class ViewController: UIViewController {
         
         let ringLayout = RingLayout.lazy {
             let layout = RingLayout()
-            layout.space = 10
             return layout
         }
         
