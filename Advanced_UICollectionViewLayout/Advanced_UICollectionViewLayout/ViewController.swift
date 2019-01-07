@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     var cellViewModel: [UIColor] = {
         var colorArr = [UIColor]()
-        for i in 0 ..< 4 {
+        for i in 0 ..< 8 {
             colorArr.append(UIColor.random(alpha: 1))
         }
         return colorArr
