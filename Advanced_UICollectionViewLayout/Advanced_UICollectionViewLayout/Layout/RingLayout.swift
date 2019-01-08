@@ -9,12 +9,18 @@
 import UIKit
 
 class RingLayout: UICollectionViewLayout {
-    var size = CGSize(width: 50, height: 50)
+    var size: CGSize = CGSize(width: 50, height: 50)
+    var roteRate: CGFloat = 1.0
+    var radius = CGFloat(200)
+    var visualSpace = CGFloat(300)
     
     private var _count = 0
     private var _center = CGPoint.zero
-    private var _radius = CGFloat(50)
     private var _contentWidth = CGFloat(0)
+    
+    private var fixNum: CGFloat {
+        return CGFloat(_count - 1) / CGFloat(_count)
+    }
     
     override var collectionViewContentSize: CGSize {
         return CGSize(width: _contentWidth, height: collectionView?.bounds.height ?? 0)
@@ -29,7 +35,7 @@ class RingLayout: UICollectionViewLayout {
         guard let collectionView = collectionView else { return }
         _count = collectionView.numberOfItems(inSection: 0)
         _center = CGPoint(x: collectionView.bounds.width / 2, y: collectionView.bounds.height / 2)
-        _contentWidth = (_radius * CGFloat(_count) - collectionView.bounds.width) / (_radius * CGFloat(_count))
+        _contentWidth =  .pi * 2.0 * radius * roteRate * fixNum + collectionView.bounds.width
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -49,16 +55,19 @@ class RingLayout: UICollectionViewLayout {
         
         attribute.center = CGPoint(x: collectionView.bounds.width / 2 + collectionView.bounds.minX, y: _center.y)
         var transform3D = CATransform3DIdentity
-        transform3D.m34 = -1 / 1000
+        transform3D.m34 = -1 / (radius + visualSpace)
         let perAngle = 2 * CGFloat.pi / CGFloat(_count)
-        let fixAngle = 2 * CGFloat.pi  * collectionView.bounds.minX / _contentWidth
-        print("\(collectionView.bounds.minX) + \(collectionView.bounds.width) = \(collectionView.bounds.minX + collectionView.bounds.width)")
-        print(_contentWidth)
+        let fixAngle = 2 * CGFloat.pi * fixNum * collectionView.bounds.minX / (_contentWidth - collectionView.bounds.width)
+//        print("\(collectionView.bounds.minX) + \(collectionView.bounds.width) = \(collectionView.bounds.minX + collectionView.bounds.width)")
+//        print(_contentWidth)
         let finalAngle = perAngle * CGFloat(indexPath.row) - fixAngle
 //        print("修正\(fixAngle / (2 * .pi) * 360)度")
 //        print("item:\(indexPath.row)=\(finalAngle / (2 * .pi) * 360)度")
         transform3D = CATransform3DRotate(transform3D, finalAngle, 0, 1, 0)
-        transform3D = CATransform3DTranslate(transform3D, 0, 0, _radius)
+        transform3D = CATransform3DTranslate(transform3D, 0, 0, radius)
+        
+//        transform3D = CATransform3DRotate(transform3D, .pi / 6, 1, 0, 0)
+//        transform3D = CATransform3DTranslate(transform3D, 0, 0, 20)
         attribute.transform3D = transform3D
         return attribute
     }

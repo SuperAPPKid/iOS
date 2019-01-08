@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     var cellViewModel: [UIColor] = {
         var colorArr = [UIColor]()
-        for i in 0 ..< 8 {
+        for i in 0 ..< 30 {
             colorArr.append(UIColor.random(alpha: 1))
         }
         return colorArr
@@ -146,13 +146,17 @@ class ViewController: UIViewController {
         
         let ringLayout = RingLayout.lazy {
             let layout = RingLayout()
+            layout.radius = 400
+            layout.visualSpace = 1500
+            layout.size = CGSize(width: 50, height: 150)
+            layout.roteRate = 2.5
             return layout
         }
         
-        myLayouts += [LazyTuple("RingLayout", ringLayout),
-                      LazyTuple("Layout3", layout3),
+        myLayouts += [LazyTuple("Layout3", layout3),
                       LazyTuple("Layout4", layout4),
                       LazyTuple("RotationLayout", layoutRotation),
+                      LazyTuple("RingLayout", ringLayout),
                       LazyTuple("NewLayout Vertical", newOneLayoutV),
                       LazyTuple("NewLayout Horizontal", newOneLayoutH),
                       LazyTuple("stackLayout", stackLayout),
@@ -161,6 +165,7 @@ class ViewController: UIViewController {
                       LazyTuple("waterfallLayout5", waterfallLayout5),
                       LazyTuple("CircleLayout", circleLayout)]
         
+        collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(MyCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.setCollectionViewLayout(myLayouts.first!.value.layout, animated: true)
@@ -207,7 +212,7 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 }
 
-extension ViewController: UICollectionViewDataSource {
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cellViewModel.count
     }
@@ -218,6 +223,10 @@ extension ViewController: UICollectionViewDataSource {
         let text = String(indexPath.row).compactMap{Int(String($0))}.compactMap{hashTable[$0]}.joined()
         cell.text = text
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("\(indexPath.row) CLICK!!")
     }
 }
 
