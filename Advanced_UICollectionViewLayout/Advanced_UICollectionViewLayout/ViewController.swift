@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     var cellViewModel: [UIColor] = {
         var colorArr = [UIColor]()
-        for i in 0 ..< 30 {
+        for i in 0 ..< 12 {
             colorArr.append(UIColor.random(alpha: 1))
         }
         return colorArr
@@ -146,17 +146,24 @@ class ViewController: UIViewController {
         
         let ringLayout = RingLayout.lazy {
             let layout = RingLayout()
-            layout.radius = 400
+            layout.radius = 300
             layout.visualSpace = 1500
             layout.size = CGSize(width: 50, height: 150)
             layout.roteRate = 2.5
             return layout
         }
         
-        myLayouts += [LazyTuple("Layout3", layout3),
+        let rollerLayout = RollerLayout.lazy {
+            let layout = RollerLayout()
+            layout.size = CGSize(width: 275, height: 100)
+            return layout
+        }
+        
+        myLayouts += [LazyTuple("RollerLayout", rollerLayout),
+                      LazyTuple("RingLayout", ringLayout),
+                      LazyTuple("Layout3", layout3),
                       LazyTuple("Layout4", layout4),
                       LazyTuple("RotationLayout", layoutRotation),
-                      LazyTuple("RingLayout", ringLayout),
                       LazyTuple("NewLayout Vertical", newOneLayoutV),
                       LazyTuple("NewLayout Horizontal", newOneLayoutH),
                       LazyTuple("stackLayout", stackLayout),

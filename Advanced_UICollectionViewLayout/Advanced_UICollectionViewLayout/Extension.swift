@@ -59,3 +59,9 @@ extension UIColor {
         return UIColor(displayP3Red: CGFloat.random(in: 0.8...1), green: CGFloat.random(in: 0.8...1), blue: CGFloat.random(in: 0.8...1), alpha: alpha)
     }
 }
+
+extension CGFloat {
+    static var twoPi: CGFloat {
+        return 2 * CGFloat.pi
+    }
+}

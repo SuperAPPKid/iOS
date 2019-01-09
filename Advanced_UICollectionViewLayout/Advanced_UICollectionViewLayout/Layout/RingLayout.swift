@@ -63,6 +63,7 @@ class RingLayout: UICollectionViewLayout {
         let finalAngle = perAngle * CGFloat(indexPath.row) - fixAngle
 //        print("修正\(fixAngle / (2 * .pi) * 360)度")
 //        print("item:\(indexPath.row)=\(finalAngle / (2 * .pi) * 360)度")
+        transform3D = CATransform3DTranslate(transform3D, 0, 0, -CGFloat(_count) * 15)
         transform3D = CATransform3DRotate(transform3D, finalAngle, 0, 1, 0)
         transform3D = CATransform3DTranslate(transform3D, 0, 0, radius)
         

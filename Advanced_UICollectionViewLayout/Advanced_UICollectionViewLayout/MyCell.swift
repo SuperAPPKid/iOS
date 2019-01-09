@@ -73,6 +73,7 @@ class MyCell: UICollectionViewCell {
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        ///to fix StackLayout
         layer.zPosition = CGFloat(layoutAttributes.zIndex)
     }
 }

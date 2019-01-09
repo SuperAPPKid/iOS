@@ -80,10 +80,10 @@
 				360C7ADE21DC540F00A17FC4 /* CircleLayout.swift */,
 				360C7AE221DC5BF600A17FC4 /* WaterFallLayout.swift */,
 				360C7AE621DC999D00A17FC4 /* StackLayout.swift */,
-				360C7AE421DC5C3D00A17FC4 /* DynamicFlowLayout.swift */,
 				36C87EBD21DDAF4E00E7184F /* RingLayout.swift */,
 				36C87EC121DDAF8B00E7184F /* RollerLayout.swift */,
 				36C87EBF21DDAF6700E7184F /* BallLayout.swift */,
+				360C7AE421DC5C3D00A17FC4 /* DynamicFlowLayout.swift */,
 				36C87EC321DDAFA400E7184F /* TimeMachineLayout.swift */,
 				36C87EC521DDAFBC00E7184F /* StageLayout.swift */,
 			);
