@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		275DD35D21E674C4003E5F9C /* TestTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275DD35C21E674C4003E5F9C /* TestTextField.swift */; };
 		36B2EB29212C20880000973C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B2EB28212C20880000973C /* AppDelegate.swift */; };
 		36B2EB2B212C20880000973C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B2EB2A212C20880000973C /* ViewController.swift */; };
 		36B2EB2E212C20880000973C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36B2EB2C212C20880000973C /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		275DD35C21E674C4003E5F9C /* TestTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTextField.swift; sourceTree = "<group>"; };
 		36B2EB25212C20880000973C /* Gestures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gestures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36B2EB28212C20880000973C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36B2EB2A212C20880000973C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				36B2EB2F212C20890000973C /* Assets.xcassets */,
 				36B2EB31212C20890000973C /* LaunchScreen.storyboard */,
 				36B2EB34212C20890000973C /* Info.plist */,
+				275DD35C21E674C4003E5F9C /* TestTextField.swift */,
 			);
 			path = Gestures;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36B2EB3F212C2CF50000973C /* ExpandTouchView.swift in Sources */,
+				275DD35D21E674C4003E5F9C /* TestTextField.swift in Sources */,
 				36B2EB2B212C20880000973C /* ViewController.swift in Sources */,
 				36B2EB3B212C246E0000973C /* TouchView.swift in Sources */,
 				36CE5C54212CFA370094B4B6 /* RedTabBar.swift in Sources */,

@@ -59,9 +59,7 @@ class PaintingView: UIView {
         
         undoCheckObservation = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSUndoManagerCheckpoint, object: myUndoManager, queue: nil, using: {
             [unowned self] (notification) in
-            guard let manager = notification.object as? UndoManager else {
-                return
-            }
+            guard let manager = notification.object as? UndoManager else { return }
             self.delegate?.undoAble(self, enable: manager.canUndo)
             self.delegate?.redoAble(self, enable: manager.canRedo)
         })
