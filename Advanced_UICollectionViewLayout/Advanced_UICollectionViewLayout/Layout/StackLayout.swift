@@ -12,7 +12,7 @@ class StackLayout: UICollectionViewLayout {
     var height: CGFloat = 150
     var overlapSpace: CGFloat = 0
     
-    private var cachedAttributes:[UICollectionViewLayoutAttributes] = []
+    private var cachedAttributes: [UICollectionViewLayoutAttributes] = []
     private var contentSize: CGSize = .zero
     
     override var collectionViewContentSize: CGSize {
@@ -51,7 +51,13 @@ class StackLayout: UICollectionViewLayout {
         return cachedAttributes[safe: indexPath.row]
     }
     
-    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        return proposedContentOffset
+    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attribute = layoutAttributesForItem(at: itemIndexPath)
+        return attribute
+    }
+    
+    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attribute = layoutAttributesForItem(at: itemIndexPath)
+        return attribute
     }
 }

@@ -18,6 +18,7 @@
 		360C7AE321DC5BF600A17FC4 /* WaterFallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C7AE221DC5BF600A17FC4 /* WaterFallLayout.swift */; };
 		360C7AE521DC5C3D00A17FC4 /* DynamicFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C7AE421DC5C3D00A17FC4 /* DynamicFlowLayout.swift */; };
 		360C7AE721DC999D00A17FC4 /* StackLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C7AE621DC999D00A17FC4 /* StackLayout.swift */; };
+		362E438421E6F9A6008767CE /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362E438321E6F9A6008767CE /* Protocol.swift */; };
 		36BA8CFE21CB35D600B371E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA8CFD21CB35D600B371E0 /* AppDelegate.swift */; };
 		36BA8D0021CB35D600B371E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA8CFF21CB35D600B371E0 /* ViewController.swift */; };
 		36BA8D0321CB35D600B371E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36BA8D0121CB35D600B371E0 /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 		360C7AE221DC5BF600A17FC4 /* WaterFallLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterFallLayout.swift; sourceTree = "<group>"; };
 		360C7AE421DC5C3D00A17FC4 /* DynamicFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFlowLayout.swift; sourceTree = "<group>"; };
 		360C7AE621DC999D00A17FC4 /* StackLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackLayout.swift; sourceTree = "<group>"; };
+		362E438321E6F9A6008767CE /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		36BA8CFA21CB35D600B371E0 /* Advanced_UICollectionViewLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Advanced_UICollectionViewLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36BA8CFD21CB35D600B371E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36BA8CFF21CB35D600B371E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				36C82FA521CDD373006BD615 /* LazyLayoutCore.swift */,
 				360C7AE021DC54A400A17FC4 /* MyCell.swift */,
 				27AD7A6721D9449100DE3F8B /* Extension.swift */,
+				362E438321E6F9A6008767CE /* Protocol.swift */,
 			);
 			path = Advanced_UICollectionViewLayout;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				36BA8CFE21CB35D600B371E0 /* AppDelegate.swift in Sources */,
 				36C87EC621DDAFBC00E7184F /* StageLayout.swift in Sources */,
 				27AD7A8621DA814400DE3F8B /* TestFlowLayout.swift in Sources */,
+				362E438421E6F9A6008767CE /* Protocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

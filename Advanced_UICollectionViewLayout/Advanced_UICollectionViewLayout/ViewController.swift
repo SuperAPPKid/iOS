@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     var cellViewModel: [UIColor] = {
         var colorArr = [UIColor]()
-        for i in 0 ..< 12 {
+        for i in 0 ..< 13 {
             colorArr.append(UIColor.random(alpha: 1))
         }
         return colorArr
@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         picker.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         picker.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         picker.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        picker.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        picker.heightAnchor.constraint(equalToConstant: 400).isActive = true
         pickerView = picker
         
         let layout3 = TestFlowLayout.lazy {
@@ -95,14 +95,15 @@ class ViewController: UIViewController {
         //        }
         
         let newOneLayoutV = NewOnelineLayout.lazy {
-            let layout = NewOnelineLayout(size: CGSize(width: 187, height: 87), space: 15)
+            let layout = NewOnelineLayout(size: CGSize(width: 187, height: 75), space: 20)
+            layout.maxZoomScale = (x: 1.4, y: 1.2)
             return layout
         }
         
         let newOneLayoutH = NewOnelineLayout.lazy {
             let layout = NewOnelineLayout(size: CGSize(width: 185, height: 350), space: 100)
-            layout.preferDirection = .horizon
-            layout.maxZoomScale = 1.65
+            layout.preferDirection = .horizontal
+            layout.maxZoomScale = (x: 1.65, y: 1.65)
             return layout
         }
         
@@ -146,10 +147,10 @@ class ViewController: UIViewController {
         
         let ringLayout = RingLayout.lazy {
             let layout = RingLayout()
-            layout.radius = 300
-            layout.visualSpace = 1500
-            layout.size = CGSize(width: 50, height: 150)
-            layout.roteRate = 2.5
+            layout.radius = 275
+            layout.visualSpace = 500
+            layout.size = CGSize(width: 100, height: 150)
+            layout.roteRate = 0.8
             return layout
         }
         
@@ -159,18 +160,20 @@ class ViewController: UIViewController {
             return layout
         }
         
-        myLayouts += [LazyTuple("RollerLayout", rollerLayout),
-                      LazyTuple("RingLayout", ringLayout),
-                      LazyTuple("Layout3", layout3),
-                      LazyTuple("Layout4", layout4),
-                      LazyTuple("RotationLayout", layoutRotation),
-                      LazyTuple("NewLayout Vertical", newOneLayoutV),
-                      LazyTuple("NewLayout Horizontal", newOneLayoutH),
-                      LazyTuple("stackLayout", stackLayout),
-                      LazyTuple("MosaicLayout", mosaicLayout),
-                      LazyTuple("waterfallLayout3", waterfallLayout3),
-                      LazyTuple("waterfallLayout5", waterfallLayout5),
-                      LazyTuple("CircleLayout", circleLayout)]
+        myLayouts += [
+            LazyTuple("NewLayout Vertical", newOneLayoutV),
+            LazyTuple("NewLayout Horizontal", newOneLayoutH),
+            LazyTuple("Layout3", layout3),
+            LazyTuple("Layout4", layout4),
+            LazyTuple("stackLayout", stackLayout),
+            LazyTuple("CircleLayout", circleLayout),
+            LazyTuple("RotationLayout", layoutRotation),
+            LazyTuple("RingLayout", ringLayout),
+            LazyTuple("RollerLayout", rollerLayout),
+            LazyTuple("MosaicLayout", mosaicLayout),
+            LazyTuple("waterfallLayout3", waterfallLayout3),
+            LazyTuple("waterfallLayout5", waterfallLayout5)
+        ]
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -234,6 +237,32 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("\(indexPath.row) CLICK!!")
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let collectionView = scrollView as? UICollectionView,
+            let bothSide = collectionView.collectionViewLayout as? BothSideScrollable {
+            let offset = collectionView.contentOffset
+            
+            switch bothSide.fixBound {
+            case .Horizontal(let lowerBound, let upperBound):
+                if offset.x < lowerBound {
+                    collectionView.contentOffset.x = upperBound + offset.x
+                } else if offset.x > upperBound {
+                    collectionView.contentOffset.x = offset.x - upperBound + lowerBound
+                }
+            case .Vertical(let lowerBound, let upperBound):
+                if offset.y < lowerBound {
+                    collectionView.contentOffset.y = upperBound + offset.y
+                } else if offset.y > upperBound {
+                    collectionView.contentOffset.y = offset.y - upperBound + lowerBound
+                }
+                return
+            case .None:
+                return
+            }
+            
+        }
     }
 }
 

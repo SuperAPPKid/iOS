@@ -82,7 +82,7 @@ class TestFlowLayout: UICollectionViewFlowLayout {
         print("---\(name) \(#function) \(context)")
         
         ///this line cause crash
-        super.invalidateLayout(with: context)
+//        super.invalidateLayout(with: context)
     }
     
     override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {

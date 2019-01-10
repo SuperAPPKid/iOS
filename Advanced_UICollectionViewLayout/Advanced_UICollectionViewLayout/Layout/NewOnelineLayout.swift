@@ -9,23 +9,24 @@
 import UIKit
 
 class NewOnelineLayout: UICollectionViewLayout {
+    typealias Scale = (x: CGFloat, y: CGFloat)
     enum Direction {
-        case vertical, horizon
+        case vertical, horizontal
     }
     
     var preferDirection: Direction = .vertical
-    
     var preferSpace: CGFloat
     var preferSize: CGSize
-    
-    var maxZoomScale: CGFloat = 0.87
+    var maxZoomScale: Scale = (0.87, 0.87)
     var minimumZoomScope: CGFloat?
     
-    private var cachedAttributes: [UICollectionViewLayoutAttributes] = []
-    private var contentSize: CGSize = .zero
+    private var _count: Int = 0
+    private var _contentSize: CGSize = .zero
+    private var _collectionViewBounds: CGRect = .zero
+    private var cachedAttributes: [UICollectionViewLayoutAttributes?] = []
     
     override var collectionViewContentSize: CGSize {
-        return contentSize
+        return _contentSize
     }
     
     init(size: CGSize, space: CGFloat) {
@@ -40,59 +41,75 @@ class NewOnelineLayout: UICollectionViewLayout {
     
     override func prepare() {
         super.prepare()
-        guard let collectionView = collectionView else { return }
-        
         cachedAttributes.removeAll()
-        contentSize = .zero
-        
-        for i in 0 ..< collectionView.numberOfItems(inSection: 0) {
-            let attribute = UICollectionViewLayoutAttributes(forCellWith: .init(row: i, section: 0))
-            var rect = CGRect.zero
-            rect.size = preferSize
-            switch preferDirection {
-            case .horizon:
-                rect.origin = CGPoint(x: (preferSize.width + preferSpace) * CGFloat(i) + (collectionView.bounds.width - preferSize.width) / 2,
-                                      y: (collectionView.bounds.height - preferSize.height) / 2)
-                contentSize = CGSize(width: rect.maxX, height: collectionView.bounds.height)
-            case .vertical:
-                rect.origin = CGPoint(x: (collectionView.bounds.width - preferSize.width) / 2,
-                                      y: (preferSize.height + preferSpace) * CGFloat(i) + (collectionView.bounds.height - preferSize.height) / 2)
-                contentSize = CGSize(width: collectionView.bounds.width, height: rect.maxY)
-            }
-            
-            attribute.frame = rect
-            setTransform(attribute: attribute)
-            cachedAttributes.append(attribute)
+        guard let collectionView = collectionView else {
+            _contentSize = .zero
+            _collectionViewBounds = .zero
+            return
         }
         
+        _count = collectionView.numberOfItems(inSection: 0)
+        cachedAttributes = Array(repeating: nil, count: _count)
+        _collectionViewBounds = collectionView.bounds
+        
         switch preferDirection {
-        case .horizon:
-            contentSize.width += (collectionView.bounds.width - preferSize.width) / 2
+        case .horizontal:
+            _contentSize.width = (preferSize.width + preferSpace) * CGFloat(_count) - preferSpace + _collectionViewBounds.width - preferSize.width
+            _contentSize.height = _collectionViewBounds.height
         case .vertical:
-            contentSize.height += (collectionView.bounds.height - preferSize.height) / 2
+            _contentSize.width = _collectionViewBounds.width
+            _contentSize.height = (preferSize.height + preferSpace) * CGFloat(_count) - preferSpace + _collectionViewBounds.height - preferSize.height
         }
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        return cachedAttributes
+        var attributes = [UICollectionViewLayoutAttributes]()
+        for i in 0 ..< _count {
+            let index = IndexPath(row: i, section: 0)
+            guard let attribute = layoutAttributesForItem(at: index) else { continue }
+            attributes.append(attribute)
+        }
+        return attributes
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return cachedAttributes[safe: indexPath.row]
+        if let cached = cachedAttributes[indexPath.row] { return cached }
+        let attribute = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+        var rect = CGRect.zero
+        rect.size = preferSize
+        switch preferDirection {
+        case .horizontal:
+            rect.origin = CGPoint(x: (preferSize.width + preferSpace) * CGFloat(indexPath.row) + (_collectionViewBounds.width - preferSize.width) / 2,
+                                  y: (_collectionViewBounds.height - preferSize.height) / 2)
+        case .vertical:
+            rect.origin = CGPoint(x: (_collectionViewBounds.width - preferSize.width) / 2,
+                                  y: (preferSize.height + preferSpace) * CGFloat(indexPath.row) + (_collectionViewBounds.height - preferSize.height) / 2)
+        }
+        attribute.frame = rect
+        transform(attribute: attribute)
+        cachedAttributes[indexPath.row] = attribute
+        if attribute.indexPath.row == 2 {
+            print("notcached \(attribute)")
+        }
+        return attribute
     }
     
-    func setTransform(attribute: UICollectionViewLayoutAttributes?) {
-        guard let collectionView = collectionView, let attribute = attribute else { return }
+    func transform(attribute: UICollectionViewLayoutAttributes?) {
+        guard let attribute = attribute else { return }
+        if attribute.indexPath.row == 2 {
+            print("transform \(attribute)")
+            print("\(_collectionViewBounds) \(_contentSize)")
+        }
         var activeDistance = CGFloat(0)
         switch preferDirection {
         case .vertical:
-            activeDistance = abs((minimumZoomScope ?? collectionView.bounds.height) / 2)
-        case .horizon:
-            activeDistance = abs((minimumZoomScope ?? collectionView.bounds.width) / 2)
+            activeDistance = abs((minimumZoomScope ?? _collectionViewBounds.height) / 2)
+        case .horizontal:
+            activeDistance = abs((minimumZoomScope ?? _collectionViewBounds.width) / 2)
         }
         
-        let triggerRect = CGRect(x: collectionView.bounds.midX,
-                                 y: collectionView.bounds.midY,
+        let triggerRect = CGRect(x: _collectionViewBounds.midX,
+                                 y: _collectionViewBounds.midY,
                                  width: 0,
                                  height: 0).insetBy(dx: -activeDistance, dy: -activeDistance)
         if triggerRect.intersects(attribute.frame) {
@@ -100,14 +117,15 @@ class NewOnelineLayout: UICollectionViewLayout {
             switch preferDirection {
             case .vertical:
                 distance = (attribute.center.y - triggerRect.midY)
-            case .horizon:
+            case .horizontal:
                 distance = (attribute.center.x - triggerRect.midX)
             }
             
             if abs(distance) < activeDistance {
                 let stdDistance = abs(distance / activeDistance)
-                let zoom =  1 + (maxZoomScale - 1) * (1 - stdDistance)
-                attribute.transform = CGAffineTransform(scaleX: zoom, y: zoom)
+                let zoomX =  1 + (maxZoomScale.x - 1) * (1 - stdDistance)
+                let zoomY =  1 + (maxZoomScale.y - 1) * (1 - stdDistance)
+                attribute.transform = CGAffineTransform(scaleX: zoomX, y: zoomY)
             }
         }
     }
@@ -117,18 +135,15 @@ class NewOnelineLayout: UICollectionViewLayout {
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        guard let collectionView = collectionView else { return proposedContentOffset }
-        
-        let targetCenter = CGPoint(x: proposedContentOffset.x + collectionView.bounds.width / 2,
-                                   y: proposedContentOffset.y + collectionView.bounds.height / 2)
-        
+        let targetCenter = CGPoint(x: proposedContentOffset.x + _collectionViewBounds.width / 2,
+                                   y: proposedContentOffset.y + _collectionViewBounds.height / 2)
+
         let targetRect = CGRect(origin: proposedContentOffset,
-                                size: collectionView.bounds.size).insetBy(dx: -collectionView.bounds.width,
-                                                                          dy: -collectionView.bounds.height)
-        
+                                size: _collectionViewBounds.size)
+
         var fixCenter = CGPoint(x: CGFloat.greatestFiniteMagnitude,
                                 y: CGFloat.greatestFiniteMagnitude)
-        
+
         for attribute in layoutAttributesForElements(in: targetRect) ?? [] {
             if abs(attribute.center.x - targetCenter.x) < abs(fixCenter.x)  {
                 fixCenter.x = attribute.center.x - targetCenter.x
@@ -137,30 +152,26 @@ class NewOnelineLayout: UICollectionViewLayout {
                 fixCenter.y = attribute.center.y - targetCenter.y
             }
         }
-        
+
         switch preferDirection {
         case .vertical:
             fixCenter.x = 0
-        case .horizon:
+        case .horizontal:
             fixCenter.y = 0
         }
-        
+
         return CGPoint(x: proposedContentOffset.x + fixCenter.x,
                        y: proposedContentOffset.y + fixCenter.y)
     }
     
     override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attr = cachedAttributes[safe: itemIndexPath.row]
-        setTransform(attribute: attr)
-        return attr
+        let attribute = layoutAttributesForItem(at: itemIndexPath)
+        return attribute
     }
     
     override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attr = cachedAttributes[safe: itemIndexPath.row]
-        setTransform(attribute: attr)
-        return attr
+        let attribute = layoutAttributesForItem(at: itemIndexPath)
+        return attribute
     }
-    
-    
 }
 

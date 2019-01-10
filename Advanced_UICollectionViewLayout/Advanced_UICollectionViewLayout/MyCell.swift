@@ -31,6 +31,7 @@ class MyCell: UICollectionViewCell {
         
         clipsToBounds = true
         layer.cornerRadius = 20
+//        layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         layer.borderColor = UIColor.black.cgColor
         layer.borderWidth = 1
         

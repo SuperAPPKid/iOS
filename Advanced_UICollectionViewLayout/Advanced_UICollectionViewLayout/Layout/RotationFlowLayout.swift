@@ -39,4 +39,8 @@ class RotationFlowLayout: UICollectionViewFlowLayout, HasDefaultLazyLayout {
         
         return attribute
     }
+    
+    override func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
+        print("\(#function) \(context)")
+    }
 }
