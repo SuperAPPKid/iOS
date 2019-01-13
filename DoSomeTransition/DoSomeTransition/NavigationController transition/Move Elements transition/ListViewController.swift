@@ -52,16 +52,18 @@ class ListViewController: UICollectionViewController {
         }
         
         collectionView?.register(ImageCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        let width = (view.bounds.width - 40) / 3
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100, height: 100)
+        layout.itemSize = CGSize(width: width, height: width)
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 20
-        layout.minimumInteritemSpacing = 20
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         collectionView.collectionViewLayout = layout
         
         navigationController?.delegate = self
     }
+    
 
     // MARK: UICollectionViewDataSource
 
@@ -82,13 +84,23 @@ class ListViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        let VC = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        VC.image = UIImage(named: animals[indexPath.row].name)
-        navigationController?.pushViewController(VC, animated: true)
+        UIGraphicsBeginImageContext(CGSize(width: 200, height: 200))
+        cell.drawHierarchy(in: cell.bounds, afterScreenUpdates: true)
+        let snap = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        let imageView = UIImageView(frame: .init(x: 100, y: 200, width: 200, height: 200))
+        imageView.backgroundColor = .red
+        imageView.image = snap
+        view.addSubview(imageView)
+//        let VC = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+//        VC.image = UIImage(named: animals[indexPath.row].name)
+//        navigationController?.pushViewController(VC, animated: true)
     }
 }
 
 extension ListViewController: UINavigationControllerDelegate {
+    
+    
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         switch operation {
         case .push:

@@ -136,7 +136,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         let rec = CGRect.init(x: 0, y: 0, width: image.size.width, height: image.size.height)
         image.draw(in: rec)
         frameImage?.draw(in: rec)
-        let text = "大便嘻嘻\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}" as NSString
+        let text = "嘻嘻\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}\u{1F4A9}" as NSString
         let color = UIColor.purple
         let font = UIFont.systemFont(ofSize: 80)
         let attribute:[NSAttributedStringKey:Any] = [.font:font,.foregroundColor:color]

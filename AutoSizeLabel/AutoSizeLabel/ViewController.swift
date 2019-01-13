@@ -51,12 +51,12 @@ class ViewController: UIViewController {
         ///sizeWithAttributes法 效果同boundingRect的usesLineFragmentOrigin option
         let sizeWithAttrLabel = UILabel()
         sizeWithAttrLabel.numberOfLines = 0
-        sizeWithAttrLabel.text = "SizeWithAttributes\nSizeWithAttributes\nSizeWithAttributes\nSizeWithAttributes\nSizeWithAttributes\nSizeWithAttributes"
+        sizeWithAttrLabel.text = "SizeWithAttributes\nSizeWithAttributes\nSizeWithAttributes\nSizeWithAttributes\nSizeWithAttributes"
         sizeWithAttrLabel.numberOfLines = 0
         sizeWithAttrLabel.font = UIFont.systemFont(ofSize: 24)
         sizeWithAttrLabel.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         let attrLabelSize = (sizeWithAttrLabel.text! as NSString).size(withAttributes: [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 24)])
-        sizeWithAttrLabel.frame = CGRect(origin: .init(x: 50, y: 500), size: attrLabelSize)
+        sizeWithAttrLabel.frame = CGRect(origin: .init(x: 25, y: 500), size: attrLabelSize)
         print("sizeWithAttrLabel:\(sizeWithAttrLabel.frame)")
         view.addSubview(sizeWithAttrLabel)
         
@@ -67,7 +67,6 @@ class ViewController: UIViewController {
         sizeLabel.text = "SizeToFitLabel\nSizeToFitLabel\nSizeToFitLabel\nSizeToFitLabel\nSizeToFitLabel"
         sizeLabel.lineBreakMode = .byWordWrapping
         sizeLabel.sizeToFit()
-        
         let sizeToFitLabel = UILabel(frame: CGRect(x: 30, y: 320, width: sizeLabel.frame.width, height: sizeLabel.frame.height))
         sizeToFitLabel.text = "SizeToFitLabel\nSizeToFitLabel\nSizeToFitLabel\nSizeToFitLabel\nSizeToFitLabel"
         sizeToFitLabel.numberOfLines = 0
@@ -76,7 +75,7 @@ class ViewController: UIViewController {
         view.addSubview(sizeToFitLabel)
         
         ///重寫label方法
-        let leftTopAlignLabel = LeftTopAlignLabel(frame: .init(x: 200, y: 450, width: 200, height: 100))
+        let leftTopAlignLabel = LeftTopAlignLabel(frame: .init(x: 225, y: 450, width: 125, height: 200))
         leftTopAlignLabel.text = "LeftTopAlignLabelLeftTopAlignLabel"
         leftTopAlignLabel.numberOfLines = 0
         leftTopAlignLabel.font = UIFont.systemFont(ofSize: 24)

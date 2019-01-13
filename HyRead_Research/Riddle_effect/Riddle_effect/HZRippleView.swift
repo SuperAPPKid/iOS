@@ -77,6 +77,8 @@ class HZRippleView: UIView {
         animGroup.delegate = self
         
         rippleLayer.add(animGroup, forKey: "animGroup")
+        rippleLayer.opacity = 0
+        
         //如果rippleLayer已經加入，會變更ripple
         layer.addSublayer(rippleLayer)
     }
