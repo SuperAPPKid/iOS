@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		360A717321EC348E00BD328A /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360A717221EC348E00BD328A /* APIConfig.swift */; };
+		360A717521EC42D300BD328A /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360A717421EC42D300BD328A /* APIProtocol.swift */; };
+		360A717721EC43EA00BD328A /* APIRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360A717621EC43EA00BD328A /* APIRequests.swift */; };
+		360A717921EC5F7000BD328A /* APIServiceTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360A717821EC5F7000BD328A /* APIServiceTask.swift */; };
+		360A717B21EC851B00BD328A /* APIEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360A717A21EC851B00BD328A /* APIEnum.swift */; };
+		360A717F21EC904500BD328A /* APIQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360A717E21EC904500BD328A /* APIQueue.swift */; };
 		362E43B021E75079008767CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362E43AF21E75079008767CE /* AppDelegate.swift */; };
 		362E43B221E75079008767CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362E43B121E75079008767CE /* ViewController.swift */; };
 		362E43B521E75079008767CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 362E43B321E75079008767CE /* Main.storyboard */; };
@@ -15,6 +21,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		360A717221EC348E00BD328A /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
+		360A717421EC42D300BD328A /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
+		360A717621EC43EA00BD328A /* APIRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequests.swift; sourceTree = "<group>"; };
+		360A717821EC5F7000BD328A /* APIServiceTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceTask.swift; sourceTree = "<group>"; };
+		360A717A21EC851B00BD328A /* APIEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEnum.swift; sourceTree = "<group>"; };
+		360A717E21EC904500BD328A /* APIQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIQueue.swift; sourceTree = "<group>"; };
 		362E43AC21E75079008767CE /* NetWorkLayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetWorkLayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		362E43AF21E75079008767CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		362E43B121E75079008767CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +72,12 @@
 				362E43B621E7507A008767CE /* Assets.xcassets */,
 				362E43B821E7507A008767CE /* LaunchScreen.storyboard */,
 				362E43BB21E7507A008767CE /* Info.plist */,
+				360A717221EC348E00BD328A /* APIConfig.swift */,
+				360A717A21EC851B00BD328A /* APIEnum.swift */,
+				360A717821EC5F7000BD328A /* APIServiceTask.swift */,
+				360A717621EC43EA00BD328A /* APIRequests.swift */,
+				360A717421EC42D300BD328A /* APIProtocol.swift */,
+				360A717E21EC904500BD328A /* APIQueue.swift */,
 			);
 			path = NetWorkLayer;
 			sourceTree = "<group>";
@@ -135,7 +153,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				360A717F21EC904500BD328A /* APIQueue.swift in Sources */,
+				360A717521EC42D300BD328A /* APIProtocol.swift in Sources */,
+				360A717921EC5F7000BD328A /* APIServiceTask.swift in Sources */,
 				362E43B221E75079008767CE /* ViewController.swift in Sources */,
+				360A717721EC43EA00BD328A /* APIRequests.swift in Sources */,
+				360A717B21EC851B00BD328A /* APIEnum.swift in Sources */,
+				360A717321EC348E00BD328A /* APIConfig.swift in Sources */,
 				362E43B021E75079008767CE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +307,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2Q9UN2MUUV;
 				INFOPLIST_FILE = NetWorkLayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -300,6 +325,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2Q9UN2MUUV;
 				INFOPLIST_FILE = NetWorkLayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

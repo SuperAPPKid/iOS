@@ -12,9 +12,17 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        DefaultAPIService.shared.request(LoginRequest(account: "Hank", password: "8787878787"))?.then({ (state) in
+            switch state {
+            case .Success(let data, let code, let header):
+                if let data = data { print(data) }
+                print(code)
+                print(header)
+            case .Failure(let error):
+                print(error)
+            }
+        })
     }
-
 
 }
 
