@@ -37,3 +37,8 @@ enum ResponseCode {
         }
     }
 }
+
+enum APIResponseState<T> {
+    case Success(data: T?, code: ResponseCode, header: [String:String])
+    case Failure(error: Error)
+}

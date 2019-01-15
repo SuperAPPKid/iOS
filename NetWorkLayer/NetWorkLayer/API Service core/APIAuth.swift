@@ -1,5 +1,5 @@
 //
-//  APIQueue.swift
+//  APIProtocol.swift
 //  NetWorkLayer
 //
 //  Created by Hank_Zhong on 2019/1/14.
@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
-class APIQueue: OperationQueue {
-    
+protocol APIAuth {
+    var token: String { get }
 }
+

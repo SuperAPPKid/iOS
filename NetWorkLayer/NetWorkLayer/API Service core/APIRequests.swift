@@ -8,6 +8,13 @@
 
 import Foundation
 
+protocol APIRequest {
+    var method: HttpMethod { get }
+    var endPoint: String { get }
+    var headers: [String:String] { get }
+    var parameters: [String:Any] { get }
+}
+
 class GeneralRequest: APIRequest {
     var method: HttpMethod
     

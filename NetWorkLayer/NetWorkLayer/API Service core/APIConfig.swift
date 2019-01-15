@@ -9,5 +9,5 @@
 import Foundation
 
 class APIConfiguration {
-    static let baseURL = URL(string: "https://webhook.site/f9ce7b87-1906-413e-b662-29e1278545cd")
+    static let baseURL = URL(string: "https://www.mocky.io/v2")
 }
