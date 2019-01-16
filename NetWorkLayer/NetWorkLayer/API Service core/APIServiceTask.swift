@@ -78,11 +78,10 @@ class AsyncOperation: Operation {
     }
     
     override func start() {
-        guard !isExecuting else { return }
+        guard !isExecuting && !isCancelled else { return }
         _isReady = false
         _isExecuting = true
         _isFinished = false
-        _isCancelled = false
     }
     
     override func cancel() {
@@ -90,32 +89,75 @@ class AsyncOperation: Operation {
         isCancelled = true
     }
     
-    func finish() {
+    fileprivate func finish() {
         isExecuting = false
         isFinished = true
     }
+    
+    func resume() {
+        guard !isExecuting && isCancelled else { return }
+        _isReady = false
+        _isExecuting = true
+        _isFinished = false
+        _isCancelled = false
+    }
+    
+    func pause() {
+        guard isExecuting && isCancelled else { return }
+        _isReady = false
+        _isExecuting = false
+        _isFinished = false
+        _isCancelled = true
+    }
+}
+
+protocol APITask {
+    var queue: OperationQueue { get }
+    var request: APIRequest { get }
+    var error: APICoreError? { get }
 }
 
 ///Use subclass of it instead of using directly.
-class APIGenericTask<E>: AsyncOperation {
+class APIGenericTask<DataType>: AsyncOperation, APITask {
     
-    fileprivate(set) var callback:((E) -> Void)
-    var queue: OperationQueue? {
+    var request: APIRequest
+    
+    fileprivate var retryTimes: UInt = 0
+    fileprivate(set) var error: APICoreError? = nil
+    fileprivate var callback:((APIResponseState<DataType>) -> Void)
+    
+    var queue: OperationQueue {
         return APIQueue.shared
     }
     
-    override init() {
+    init(request: APIRequest) {
         self.callback = { state in
             fatalError("no callback assigned")
         }
+        self.request = request
         super.init()
         self.qualityOfService = .utility
     }
     
     @discardableResult
-    func then(_ callback: @escaping ((E) -> Void)) -> APIGenericTask {
+    func then(_ callback: @escaping ((APIResponseState<DataType>) -> Void)) -> APIGenericTask {
         self.callback = callback
-        queue?.addOperation(self)
+        
+        for op in queue.operations {
+            guard let apiTaskInQueue = op as? APITask else { continue }
+            
+            if apiTaskInQueue.error == nil {
+                guard request != apiTaskInQueue.request else {
+                    let errorTask = APIErrorTask<DataType>(request: request, error: APICoreError.DuplicatedRequest(message: "Dublicated request"))
+                    errorTask.callback = self.callback
+                    queue.addOperation(errorTask)
+                    finish()
+                    return errorTask
+                }
+            }
+        }
+        
+        queue.addOperation(self)
         return self
     }
     
@@ -125,95 +167,146 @@ class APIGenericTask<E>: AsyncOperation {
         return self
     }
     
-    deinit {
-        print("Dead")
-    }
-}
-
-class APIDataTask: APIGenericTask<APIResponseState<Data>> {
-    
-    weak var task: URLSessionTask?
-    
-    override func then(_ callback: @escaping ((APIResponseState<Data>) -> Void)) -> Self {
-        self.callback = callback
-        queue?.addOperation(self)
+    func retry(times: UInt) -> APIGenericTask {
+        retryTimes = times
         return self
     }
     
+    func executeCallback(state: APIResponseState<DataType>) {
+        if case let APIResponseState.Failure(error: e) = state, retryTimes > 0 {
+            let errorTask = APIErrorTask<DataType>(request: request, error: .RetryOperation(message: e.message))
+            errorTask.callback = self.callback
+            queue.addOperation(errorTask)
+            start()
+            retryTimes -= 1
+        } else {
+            callback(state)
+            finish()
+            return
+        }
+    }
+    
+    override func cancel() {
+        super.cancel()
+        retryTimes = 0
+    }
+    
+}
+
+class APIDataTask: APIGenericTask<Data> {
+    
+    var lazyTask: (() -> URLSessionTask)?
+    private weak var task: URLSessionTask?
+    private var priority: Float = 0.0
+    
     override func with(priority: Float) -> Self {
-        guard let queuePriority = QueuePriority(priority: priority) else { return self }
-        self.queuePriority = queuePriority
+        _ = super.with(priority: priority)
+        self.priority = priority
+        return self
+    }
+    
+    override func start() {
+        print("Start: \(queuePriority.debug) \(priority)")
+        super.start()
+        
+        if isCancelled {
+            callback(.Failure(error: APICoreError.OperationIsCancelled(message: "Operation is cancelled")))
+            finish()
+            return
+        }
+        
+        guard let lazyTask = lazyTask else {
+            callback(.Failure(error: APICoreError.CannotStartTask(message: "Can't start an URLSessionTask")))
+            finish()
+            return
+        }
+        
+        guard task == nil || retryTimes > 0 else { return }
+        let lTask = lazyTask()
+        lTask.priority = priority
+        task = lTask
+        lTask.resume()
+    }
+    
+    override func cancel() {
+        super.cancel()
+        error = APICoreError.OperationIsCancelled(message: "Operation is cancelled")
+        task?.cancel()
+    }
+    
+    override func resume() {
+        super.resume()
+        task?.resume()
+    }
+    
+    override func pause() {
+        super.pause()
+        task?.suspend()
+    }
+}
+
+class APIDecodableTask<D:Decodable>: APIGenericTask<D> {
+    
+    var lazyTask: (() -> URLSessionTask)?
+    private weak var task: URLSessionTask?
+    private var priority: Float = 0.0
+    
+    override func with(priority: Float) -> Self {
+        _ = super.with(priority: priority)
         task?.priority = priority
         return self
     }
     
     override func start() {
-        print("Start: \(queuePriority.debug) \(task!.priority)")
+        print("Start: \(queuePriority.debug) \(priority)")
         super.start()
-        guard let task = task else {
-            callback(.Failure(error: NSError(domain: "Can not start a urlsessionTask", code: 9999, userInfo: nil)))
+        
+        if isCancelled {
+            callback(.Failure(error: APICoreError.OperationIsCancelled(message: "Operation is cancelled")))
+            finish()
             return
         }
-        task.resume()
+        
+        guard let lazyTask = lazyTask else {
+            callback(.Failure(error: APICoreError.CannotStartTask(message: "Can't start an URLSessionTask")))
+            finish()
+            return
+        }
+        
+        guard task == nil || retryTimes > 0 else { return }
+        let lTask = lazyTask()
+        lTask.priority = priority
+        task = lTask
+        lTask.resume()
     }
     
     override func cancel() {
-        task?.cancel()
         super.cancel()
+        error = APICoreError.OperationIsCancelled(message: "Operation is cancelled")
+        task?.cancel()
+    }
+    
+    override func resume() {
+        super.resume()
+        task?.resume()
+    }
+    
+    override func pause() {
+        super.pause()
+        task?.suspend()
     }
 }
 
-class APIDecodableTask<T:Decodable>: APIGenericTask<APIResponseState<T>> {
-    
-    weak var task: URLSessionTask?
-    
-    override func then(_ callback: @escaping ((APIResponseState<T>) -> Void)) -> Self {
-        self.callback = callback
-        queue?.addOperation(self)
-        return self
-    }
-    
-    override func with(priority: Float) -> Self {
-        guard let queuePriority = QueuePriority(priority: priority) else { return self }
-        self.queuePriority = queuePriority
-        task?.priority = priority
-        return self
-    }
-    
-    override func start() {
-        print("Start: \(queuePriority.debug) \(task!.priority)")
-        super.start()
-        guard let task = task else {
-            callback(.Failure(error: NSError(domain: "Can not start a urlsessionTask", code: 9999, userInfo: nil)))
-            return
-        }
-        task.resume()
-    }
-    
-    override func cancel() {
-        task?.cancel()
-        super.cancel()
-    }
-}
-
-class APIErrorTask<D>: APIGenericTask<APIResponseState<D>> {
-    
-    private var error: Error
-    
-    init(error: Error) {
+class APIErrorTask<D>: APIGenericTask<D> {
+    init(request: APIRequest, error: APICoreError? = nil) {
+        super.init(request: request)
         self.error = error
-        super.init()
     }
     
     override func start() {
         super.start()
-        callback(.Failure(error: error))
-    }
-    
-    override func then(_ callback: @escaping (APIResponseState<D>) -> Void) -> Self {
-        self.callback = callback
-        queue?.addOperation(self)
-        return self
+        callback(APIResponseState.Failure(error: error ?? APICoreError.Unhandled(message: "Unhandled Error Occured")))
+        finish()
     }
 }
 

@@ -12,7 +12,7 @@ enum HttpMethod: String {
     case GET, POST, PUT, DELETE
 }
 
-enum ResponseCode {
+enum HttpResponseCode {
     case Information(Int)
     case Success(Int)
     case Redirection(Int)
@@ -39,6 +39,38 @@ enum ResponseCode {
 }
 
 enum APIResponseState<T> {
-    case Success(data: T?, code: ResponseCode, header: [String:String])
-    case Failure(error: Error)
+    case Success(data: T?, code: HttpResponseCode, header: [String:String])
+    case Failure(error: APICoreError)
+}
+
+enum APICoreError: Error {
+    case InvalidURL(message: String)
+    case DuplicatedRequest(message: String)
+    case NotHTTP(message: String)
+    case Unhandled(message: String)
+    case CannotStartTask(message: String)
+    case OperationIsCancelled(message: String)
+    case RetryOperation(message: String)
+    case URLSessionError(error: Error)
+    
+    var message: String {
+        switch self {
+        case .InvalidURL(let message):
+            return message
+        case .DuplicatedRequest(let message):
+            return message
+        case .NotHTTP(let message):
+            return message
+        case .Unhandled(let message):
+            return message
+        case .CannotStartTask(let message):
+            return message
+        case .OperationIsCancelled(let message):
+            return message
+        case .RetryOperation(let message):
+            return message
+        case .URLSessionError(let error):
+            return error.localizedDescription
+        }
+    }
 }

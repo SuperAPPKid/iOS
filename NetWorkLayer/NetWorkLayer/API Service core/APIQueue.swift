@@ -13,7 +13,15 @@ class APIQueue: OperationQueue {
     
     private override init() {
         super.init()
-//        maxConcurrentOperationCount = 3
+//        maxConcurrentOperationCount = 1
         maxConcurrentOperationCount = OperationQueue.defaultMaxConcurrentOperationCount
+    }
+    
+    override func addOperations(_ ops: [Operation], waitUntilFinished wait: Bool) {
+        return
+    }
+    
+    override func addOperation(_ block: @escaping () -> Void) {
+        return
     }
 }
