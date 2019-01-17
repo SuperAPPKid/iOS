@@ -78,51 +78,59 @@ class AsyncOperation: Operation {
     }
     
     override func start() {
-        guard !isExecuting && !isCancelled else { return }
-        _isReady = false
-        _isExecuting = true
-        _isFinished = false
+        guard isReady && !isExecuting && !isCancelled && !isFinished else { return }
+        isReady = false
+        isExecuting = true
+        isCancelled = false
+        isFinished = false
     }
     
     override func cancel() {
+        guard !isCancelled && !isFinished else { return }
+        isReady = false
         isExecuting = false
         isCancelled = true
+        isFinished = false
     }
     
     fileprivate func finish() {
+        guard !isCancelled && !isFinished else { return }
+        isReady = false
         isExecuting = false
+        isCancelled = false
         isFinished = true
     }
     
-    func resume() {
-        guard !isExecuting && isCancelled else { return }
-        _isReady = false
-        _isExecuting = true
-        _isFinished = false
-        _isCancelled = false
+    fileprivate func resume() {
+        guard isReady && !isExecuting && !isCancelled && !isFinished else { return }
+        isReady = false
+        isExecuting = true
+        isFinished = false
+        isCancelled = false
     }
     
-    func pause() {
-        guard isExecuting && isCancelled else { return }
-        _isReady = false
-        _isExecuting = false
-        _isFinished = false
-        _isCancelled = true
+    fileprivate func pause() {
+        guard isExecuting && !isCancelled && !isFinished else { return }
+        isReady = true
+        isExecuting = false
+        isFinished = false
+        isCancelled = false
     }
 }
 
-protocol APITask {
+protocol APIInnerTask {
     var queue: OperationQueue { get }
     var request: APIRequest { get }
     var error: APICoreError? { get }
 }
 
 ///Use subclass of it instead of using directly.
-class APIGenericTask<DataType>: AsyncOperation, APITask {
+class APIGenericTask<DataType>: AsyncOperation, APIInnerTask {
     
     var request: APIRequest
     
-    fileprivate var retryTimes: UInt = 0
+    fileprivate(set) var retryTimes: UInt = 0
+    fileprivate(set) var priority: Float = 0.0
     fileprivate(set) var error: APICoreError? = nil
     fileprivate var callback:((APIResponseState<DataType>) -> Void)
     
@@ -140,11 +148,11 @@ class APIGenericTask<DataType>: AsyncOperation, APITask {
     }
     
     @discardableResult
-    func then(_ callback: @escaping ((APIResponseState<DataType>) -> Void)) -> APIGenericTask {
+    func onComplete(_ callback: @escaping ((APIResponseState<DataType>) -> Void)) -> APIGenericTask {
         self.callback = callback
         
         for op in queue.operations {
-            guard let apiTaskInQueue = op as? APITask else { continue }
+            guard let apiTaskInQueue = op as? APIInnerTask else { continue }
             
             if apiTaskInQueue.error == nil {
                 guard request != apiTaskInQueue.request else {
@@ -161,18 +169,17 @@ class APIGenericTask<DataType>: AsyncOperation, APITask {
         return self
     }
     
-    func with(priority: Float) -> APIGenericTask {
-        guard let queuePriority = QueuePriority(priority: priority) else { return self }
+    func with(priority: Float) {
+        guard let queuePriority = QueuePriority(priority: priority) else { return }
         self.queuePriority = queuePriority
-        return self
+        self.priority = priority
     }
     
-    func retry(times: UInt) -> APIGenericTask {
+    func retry(times: UInt) {
         retryTimes = times
-        return self
     }
     
-    func executeCallback(state: APIResponseState<DataType>) {
+    func executeRetryableCallback(state: APIResponseState<DataType>) {
         if case let APIResponseState.Failure(error: e) = state, retryTimes > 0 {
             let errorTask = APIErrorTask<DataType>(request: request, error: .RetryOperation(message: e.message))
             errorTask.callback = self.callback
@@ -191,18 +198,19 @@ class APIGenericTask<DataType>: AsyncOperation, APITask {
         retryTimes = 0
     }
     
+    deinit {
+        print("Dead")
+    }
 }
 
 class APIDataTask: APIGenericTask<Data> {
     
     var lazyTask: (() -> URLSessionTask)?
     private weak var task: URLSessionTask?
-    private var priority: Float = 0.0
     
-    override func with(priority: Float) -> Self {
-        _ = super.with(priority: priority)
+    override func with(priority: Float) {
+        super.with(priority: priority)
         self.priority = priority
-        return self
     }
     
     override func start() {
@@ -221,7 +229,6 @@ class APIDataTask: APIGenericTask<Data> {
             return
         }
         
-        guard task == nil || retryTimes > 0 else { return }
         let lTask = lazyTask()
         lTask.priority = priority
         task = lTask
@@ -249,12 +256,10 @@ class APIDecodableTask<D:Decodable>: APIGenericTask<D> {
     
     var lazyTask: (() -> URLSessionTask)?
     private weak var task: URLSessionTask?
-    private var priority: Float = 0.0
     
-    override func with(priority: Float) -> Self {
+    override func with(priority: Float) {
         _ = super.with(priority: priority)
         task?.priority = priority
-        return self
     }
     
     override func start() {
@@ -273,7 +278,6 @@ class APIDecodableTask<D:Decodable>: APIGenericTask<D> {
             return
         }
         
-        guard task == nil || retryTimes > 0 else { return }
         let lTask = lazyTask()
         lTask.priority = priority
         task = lTask
@@ -307,6 +311,22 @@ class APIErrorTask<D>: APIGenericTask<D> {
         super.start()
         callback(APIResponseState.Failure(error: error ?? APICoreError.Unhandled(message: "Unhandled Error Occured")))
         finish()
+    }
+}
+
+struct APITask<T> {
+    var innerTask: APIGenericTask<T>?
+    
+    func cancel() {
+        innerTask?.cancel()
+    }
+    
+    func resume() {
+        innerTask?.resume()
+    }
+    
+    func pause() {
+        innerTask?.pause()
     }
 }
 

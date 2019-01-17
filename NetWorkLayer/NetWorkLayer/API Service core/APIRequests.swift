@@ -13,6 +13,7 @@ protocol APIRequest {
     var endPoint: String { get }
     var headers: [String:String] { get }
     var parameters: [String:AnyHashable] { get }
+    var urlRequest: URLRequest? { get }
 }
 
 func != (lhs: APIRequest, rhs: APIRequest) -> Bool {
@@ -24,6 +25,7 @@ func != (lhs: APIRequest, rhs: APIRequest) -> Bool {
 }
 
 class GeneralRequest: APIRequest {
+    
     var method: HttpMethod
     
     var endPoint: String
@@ -39,6 +41,34 @@ class GeneralRequest: APIRequest {
         return apiBaseUrl.appendingPathComponent(endPoint)
     }
     
+    var urlRequest: URLRequest? {
+        guard let apiURL = self.url else { return nil }
+        
+        var usedRequest = URLRequest(url: apiURL,
+                                     cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+                                     timeoutInterval: 5)
+        
+        usedRequest.httpMethod = self.method.rawValue
+        
+        usedRequest.allHTTPHeaderFields = self.headers
+        
+        switch self.method {
+        case .GET, .PUT, .DELETE:
+            guard let urlString = usedRequest.url?.absoluteString else { return nil }
+            
+            var components = URLComponents(string: urlString)
+            components?.queryItems = []
+            for (key, value) in self.parameters {
+                components?.queryItems?.append(URLQueryItem(name: key, value: "\(value)"))
+            }
+            
+            usedRequest.url = components?.url
+        case .POST:
+            usedRequest.httpBody = try? JSONSerialization.data(withJSONObject: self.parameters, options: [])
+        }
+        return usedRequest
+    }
+    
     init(method: HttpMethod, endPoint: String, parameters: [String:AnyHashable]) {
         self.method = method
         self.endPoint = endPoint
@@ -49,6 +79,6 @@ class GeneralRequest: APIRequest {
 class LoginRequest: GeneralRequest {
     init(account: String, password: String) {
         super.init(method: .GET, endPoint: "/Login", parameters: ["Account":account,
-                                                                   "Password":password])
+                                                                  "Password":password])
     }
 }

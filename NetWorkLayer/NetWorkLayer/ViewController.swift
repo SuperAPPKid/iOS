@@ -19,7 +19,6 @@ class ViewController: UIViewController {
                                   8:"8️⃣",
                                   9:"9️⃣",
                                   0:"0️⃣",]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let request1 = GeneralRequest(method: .GET, endPoint: "/5c3daae63500006d003e94e2", parameters: ["mocky-delay":"10000ms"])
@@ -27,8 +26,8 @@ class ViewController: UIViewController {
         for i in 0..<3 {
             DefaultAPIService.shared.send(request1)
                 .with(priority: 1)
-                .retry(times: 3)
-                .then { (state) in
+                .retry(times: 1)
+                .onComplete { (state) in
                     switch state {
                     case .Success(let data, let code, let header):
                         print("\n🦄\(self.hashTable[i]!) 👍👍👍 \(code) \(header.keys)")
@@ -38,15 +37,17 @@ class ViewController: UIViewController {
                     }
             }
             
-            DefaultAPIService.shared.send(request2, decode: Account.self)
-                .then { (state) in
-                switch state {
-                case .Success(let data, let code, let header):
-                    print("\n🍙\(self.hashTable[i]!) 👍👍👍 \(code) \(header.keys)")
-                    if let data = data { print(data) }
-                case .Failure(let error):
-                    print("\n🍙\(self.hashTable[i]!) 👎🏻👎🏻👎🏻 \(error.message)")
-                }
+            DefaultAPIService.shared.send(request2)
+                .with(priority: 0.87)
+                .decode(to: Account.self)
+                .onComplete { (state) in
+                    switch state {
+                    case .Success(let data, let code, let header):
+                        print("\n🍙\(self.hashTable[i]!) 👍👍👍 \(code) \(header.keys)")
+                        if let data = data { print(data) }
+                    case .Failure(let error):
+                        print("\n🍙\(self.hashTable[i]!) 👎🏻👎🏻👎🏻 \(error.message)")
+                    }
             }
         }
     }
