@@ -1,9 +1,9 @@
 
 /* Class = "UILabel"; text = "Facebook Token"; ObjectID = "52V-j1-39k"; */
-"52V-j1-39k.text" = "Facebook Token";
+"52V-j1-39k.text" = "Facebook 資訊";
 
 /* Class = "UIBarButtonItem"; title = "Sign Out"; ObjectID = "N6n-bd-e0W"; */
-"N6n-bd-e0W.title" = "Sign Out";
+"N6n-bd-e0W.title" = "登出";
 
 /* Class = "UILabel"; text = "Google Token"; ObjectID = "Qa4-ss-yuN"; */
-"Qa4-ss-yuN.text" = "Google Token";
+"Qa4-ss-yuN.text" = "Google 資訊";

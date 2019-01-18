@@ -1,4 +1,14 @@
 PODS:
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.9.0)
+  - FBSDKCoreKit (4.39.1):
+    - Bolts (~> 1.9)
+  - FBSDKLoginKit (4.39.1):
+    - FBSDKCoreKit
   - GoogleSignIn (4.4.0):
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
@@ -14,19 +24,26 @@ PODS:
   - GTMSessionFetcher/Core (1.2.1)
 
 DEPENDENCIES:
+  - FBSDKLoginKit
   - GoogleSignIn
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Bolts
+    - FBSDKCoreKit
+    - FBSDKLoginKit
     - GoogleSignIn
     - GoogleToolboxForMac
     - GTMSessionFetcher
 
 SPEC CHECKSUMS:
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  FBSDKCoreKit: f442aa96179cc9b382bb4abeb7e340a47cca8f91
+  FBSDKLoginKit: c3079d9a4db27c492287b1eed7a4272b28cf8a59
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
 
-PODFILE CHECKSUM: f2eb0157e22bf3b9350fce906406b242199a199c
+PODFILE CHECKSUM: ffedb04211c8c684d9ac2dc2044f2b48a42e1765
 
 COCOAPODS: 1.5.3

@@ -8,5 +8,6 @@ target 'GoogleAndFacebookLogin' do
   use_frameworks!
 
 pod 'GoogleSignIn'
+pod 'FBSDKLoginKit'
 
 end
