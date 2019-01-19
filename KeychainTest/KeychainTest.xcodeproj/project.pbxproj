@@ -15,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		369493E421F2F12E00079625 /* KeychainTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KeychainTest.entitlements; sourceTree = "<group>"; };
 		36F9DD6221F1CF0A0069764A /* KeychainTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeychainTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36F9DD6521F1CF0A0069764A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36F9DD6721F1CF0A0069764A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +55,7 @@
 		36F9DD6421F1CF0A0069764A /* KeychainTest */ = {
 			isa = PBXGroup;
 			children = (
+				369493E421F2F12E00079625 /* KeychainTest.entitlements */,
 				36F9DD6521F1CF0A0069764A /* AppDelegate.swift */,
 				36F9DD6721F1CF0A0069764A /* ViewController.swift */,
 				36F9DD6921F1CF0A0069764A /* Main.storyboard */,
@@ -96,6 +98,11 @@
 				TargetAttributes = {
 					36F9DD6121F1CF0A0069764A = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -282,6 +289,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = KeychainTest/KeychainTest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2Q9UN2MUUV;
 				INFOPLIST_FILE = KeychainTest/Info.plist;
@@ -289,7 +297,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Hank-Zhong.KeychainTest";
+				PRODUCT_BUNDLE_IDENTIFIER = com.independant.KeychainTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -300,6 +308,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = KeychainTest/KeychainTest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2Q9UN2MUUV;
 				INFOPLIST_FILE = KeychainTest/Info.plist;
@@ -307,7 +316,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Hank-Zhong.KeychainTest";
+				PRODUCT_BUNDLE_IDENTIFIER = com.independant.KeychainTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

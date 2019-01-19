@@ -18,8 +18,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Hy2-sF-pju">
+                                <rect key="frame" x="30" y="101" width="315" height="34"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IDFV: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlx-iX-CPd">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IDFA: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRh-km-JGN">
+                                        <rect key="frame" x="0.0" y="19.5" width="315" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="oiV-vi-fua">
-                                <rect key="frame" x="62.5" y="276" width="250" height="115"/>
+                                <rect key="frame" x="62.5" y="165" width="250" height="115"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="帳號" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="51q-va-qJ8">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
@@ -28,13 +45,13 @@
                                         </constraints>
                                         <color key="textColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="go" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="username"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="密碼" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CXJ-Jj-gM7">
                                         <rect key="frame" x="0.0" y="65" width="250" height="50"/>
                                         <color key="textColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -42,30 +59,30 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GBZ-Kg-pfj">
-                                <rect key="frame" x="70" y="406" width="235" height="41"/>
+                                <rect key="frame" x="70" y="295" width="235" height="41"/>
                                 <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="235" id="wcP-vu-cnj"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="tintColor" red="0.9192116857" green="0.38226422180000003" blue="0.18545291750000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Safe To Keychain"/>
                                 <connections>
-                                    <action selector="SafeToKeychain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dPm-st-eXo"/>
+                                    <action selector="safeToKeychain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dPm-st-eXo"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wbT-pP-bqb">
-                                <rect key="frame" x="62.5" y="523" width="250" height="110"/>
+                                <rect key="frame" x="62.5" y="390.5" width="250" height="53"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Egt-qi-8yt">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="帳號" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Egt-qi-8yt">
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bQ-tF-hFp">
-                                        <rect key="frame" x="0.0" y="60" width="250" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密碼" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bQ-tF-hFp">
+                                        <rect key="frame" x="0.0" y="31.5" width="250" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -75,33 +92,51 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4XI-gy-BzQ">
-                                <rect key="frame" x="70" y="472" width="235" height="41"/>
+                                <rect key="frame" x="70" y="458.5" width="235" height="41"/>
                                 <color key="backgroundColor" red="0.74848715659041098" green="0.38226422180000003" blue="0.18545291750000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="235" id="QEy-te-QkA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="tintColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Fetch From Keychain"/>
                                 <connections>
                                     <action selector="fetchFromKeychain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IUP-A1-GES"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmm-ay-W9p">
+                                <rect key="frame" x="70" y="514.5" width="235" height="41"/>
+                                <color key="backgroundColor" red="0.74848715659999998" green="0.38226422180000003" blue="0.18545291750000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Clean Keychain"/>
+                                <connections>
+                                    <action selector="cleanKeychain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b46-eD-7PT"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="4XI-gy-BzQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0I9-nW-Pfi"/>
-                            <constraint firstItem="wbT-pP-bqb" firstAttribute="top" secondItem="4XI-gy-BzQ" secondAttribute="bottom" constant="10" id="Cjd-DB-X9D"/>
+                            <constraint firstItem="4XI-gy-BzQ" firstAttribute="top" secondItem="wbT-pP-bqb" secondAttribute="bottom" constant="15" id="2rZ-Vr-N5Q"/>
+                            <constraint firstItem="Hy2-sF-pju" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="81K-49-5DU"/>
+                            <constraint firstItem="pmm-ay-W9p" firstAttribute="trailing" secondItem="4XI-gy-BzQ" secondAttribute="trailing" id="83t-aO-XNn"/>
+                            <constraint firstItem="oiV-vi-fua" firstAttribute="top" secondItem="Hy2-sF-pju" secondAttribute="bottom" constant="30" id="GMI-Hj-4W6"/>
                             <constraint firstItem="wbT-pP-bqb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GYJ-1L-sde"/>
-                            <constraint firstItem="oiV-vi-fua" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="SC2-dt-o02"/>
+                            <constraint firstItem="pmm-ay-W9p" firstAttribute="leading" secondItem="4XI-gy-BzQ" secondAttribute="leading" id="IdI-At-HpO"/>
+                            <constraint firstItem="pmm-ay-W9p" firstAttribute="top" secondItem="4XI-gy-BzQ" secondAttribute="bottom" constant="15" id="L0u-mm-qP9"/>
+                            <constraint firstItem="oiV-vi-fua" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="2:3" id="SC2-dt-o02"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Hy2-sF-pju" secondAttribute="trailing" constant="30" id="VVR-Ae-jWI"/>
                             <constraint firstItem="oiV-vi-fua" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cy9-Tx-UlX"/>
-                            <constraint firstItem="4XI-gy-BzQ" firstAttribute="top" secondItem="GBZ-Kg-pfj" secondAttribute="bottom" constant="25" id="dUg-yZ-E3y"/>
+                            <constraint firstItem="wbT-pP-bqb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="5:4" id="gKx-qI-e6y"/>
                             <constraint firstItem="GBZ-Kg-pfj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kMV-0m-QRC"/>
                             <constraint firstItem="GBZ-Kg-pfj" firstAttribute="top" secondItem="oiV-vi-fua" secondAttribute="bottom" constant="15" id="otf-cZ-veV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="IDFALabel" destination="lRh-km-JGN" id="eJv-xA-4DK"/>
+                        <outlet property="IDFVLabel" destination="xlx-iX-CPd" id="MrO-e0-N1L"/>
                         <outlet property="accountLabel" destination="Egt-qi-8yt" id="VVd-Qw-j6e"/>
                         <outlet property="accountTextField" destination="51q-va-qJ8" id="KL9-aB-B83"/>
                         <outlet property="passwordLabel" destination="9bQ-tF-hFp" id="NoH-pm-QeJ"/>
