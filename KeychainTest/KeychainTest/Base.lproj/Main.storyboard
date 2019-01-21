@@ -51,7 +51,7 @@
                                         <rect key="frame" x="0.0" y="65" width="250" height="50"/>
                                         <color key="textColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -59,45 +59,25 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GBZ-Kg-pfj">
-                                <rect key="frame" x="70" y="295" width="235" height="41"/>
+                                <rect key="frame" x="70" y="295" width="235" height="36"/>
                                 <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="235" id="wcP-vu-cnj"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="20"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Safe To Keychain"/>
+                                <state key="normal" title="Save To Keychain"/>
                                 <connections>
-                                    <action selector="safeToKeychain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dPm-st-eXo"/>
+                                    <action selector="saveToKeychain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dPm-st-eXo"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wbT-pP-bqb">
-                                <rect key="frame" x="62.5" y="390.5" width="250" height="53"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="帳號" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Egt-qi-8yt">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="21.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密碼" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bQ-tF-hFp">
-                                        <rect key="frame" x="0.0" y="31.5" width="250" height="21.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="aFp-cg-Noj"/>
-                                </constraints>
-                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4XI-gy-BzQ">
-                                <rect key="frame" x="70" y="458.5" width="235" height="41"/>
+                                <rect key="frame" x="70" y="456" width="235" height="36"/>
                                 <color key="backgroundColor" red="0.74848715659041098" green="0.38226422180000003" blue="0.18545291750000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="235" id="QEy-te-QkA"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="20"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Fetch From Keychain"/>
                                 <connections>
@@ -105,41 +85,65 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmm-ay-W9p">
-                                <rect key="frame" x="70" y="514.5" width="235" height="41"/>
+                                <rect key="frame" x="70" y="507" width="235" height="36"/>
                                 <color key="backgroundColor" red="0.74848715659999998" green="0.38226422180000003" blue="0.18545291750000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="20"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Clean Keychain"/>
                                 <connections>
                                     <action selector="cleanKeychain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b46-eD-7PT"/>
                                 </connections>
                             </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XGd-ai-O6j">
+                                <rect key="frame" x="0.0" y="341" width="375" height="100"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="ydW-nV-8Iy"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FzC-8Q-DZP">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="CUU-MH-Zwr">
+                                        <rect key="frame" x="0.0" y="25" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="4XI-gy-BzQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0I9-nW-Pfi"/>
-                            <constraint firstItem="4XI-gy-BzQ" firstAttribute="top" secondItem="wbT-pP-bqb" secondAttribute="bottom" constant="15" id="2rZ-Vr-N5Q"/>
+                            <constraint firstItem="XGd-ai-O6j" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2Nn-PB-8iq"/>
                             <constraint firstItem="Hy2-sF-pju" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="81K-49-5DU"/>
                             <constraint firstItem="pmm-ay-W9p" firstAttribute="trailing" secondItem="4XI-gy-BzQ" secondAttribute="trailing" id="83t-aO-XNn"/>
                             <constraint firstItem="oiV-vi-fua" firstAttribute="top" secondItem="Hy2-sF-pju" secondAttribute="bottom" constant="30" id="GMI-Hj-4W6"/>
-                            <constraint firstItem="wbT-pP-bqb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GYJ-1L-sde"/>
                             <constraint firstItem="pmm-ay-W9p" firstAttribute="leading" secondItem="4XI-gy-BzQ" secondAttribute="leading" id="IdI-At-HpO"/>
+                            <constraint firstItem="4XI-gy-BzQ" firstAttribute="top" secondItem="XGd-ai-O6j" secondAttribute="bottom" constant="15" id="KJz-rQ-uVL"/>
                             <constraint firstItem="pmm-ay-W9p" firstAttribute="top" secondItem="4XI-gy-BzQ" secondAttribute="bottom" constant="15" id="L0u-mm-qP9"/>
                             <constraint firstItem="oiV-vi-fua" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="2:3" id="SC2-dt-o02"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Hy2-sF-pju" secondAttribute="trailing" constant="30" id="VVR-Ae-jWI"/>
                             <constraint firstItem="oiV-vi-fua" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cy9-Tx-UlX"/>
-                            <constraint firstItem="wbT-pP-bqb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="5:4" id="gKx-qI-e6y"/>
+                            <constraint firstItem="XGd-ai-O6j" firstAttribute="top" secondItem="GBZ-Kg-pfj" secondAttribute="bottom" constant="10" id="fhC-g0-N2Q"/>
+                            <constraint firstItem="XGd-ai-O6j" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iBy-5x-fTs"/>
                             <constraint firstItem="GBZ-Kg-pfj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kMV-0m-QRC"/>
                             <constraint firstItem="GBZ-Kg-pfj" firstAttribute="top" secondItem="oiV-vi-fua" secondAttribute="bottom" constant="15" id="otf-cZ-veV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XGd-ai-O6j" secondAttribute="trailing" id="tHy-1c-tgF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="IDFALabel" destination="lRh-km-JGN" id="eJv-xA-4DK"/>
                         <outlet property="IDFVLabel" destination="xlx-iX-CPd" id="MrO-e0-N1L"/>
-                        <outlet property="accountLabel" destination="Egt-qi-8yt" id="VVd-Qw-j6e"/>
                         <outlet property="accountTextField" destination="51q-va-qJ8" id="KL9-aB-B83"/>
-                        <outlet property="passwordLabel" destination="9bQ-tF-hFp" id="NoH-pm-QeJ"/>
+                        <outlet property="collectionView" destination="XGd-ai-O6j" id="jyG-Jr-rWx"/>
                         <outlet property="passwordTextField" destination="CXJ-Jj-gM7" id="8hQ-gF-Nbk"/>
                     </connections>
                 </viewController>

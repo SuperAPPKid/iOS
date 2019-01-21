@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		369493E621F5612800079625 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369493E521F5612800079625 /* AccountCell.swift */; };
 		36F9DD6621F1CF0A0069764A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F9DD6521F1CF0A0069764A /* AppDelegate.swift */; };
 		36F9DD6821F1CF0A0069764A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F9DD6721F1CF0A0069764A /* ViewController.swift */; };
 		36F9DD6B21F1CF0A0069764A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36F9DD6921F1CF0A0069764A /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		369493E421F2F12E00079625 /* KeychainTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KeychainTest.entitlements; sourceTree = "<group>"; };
+		369493E521F5612800079625 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		36F9DD6221F1CF0A0069764A /* KeychainTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeychainTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36F9DD6521F1CF0A0069764A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36F9DD6721F1CF0A0069764A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 				369493E421F2F12E00079625 /* KeychainTest.entitlements */,
 				36F9DD6521F1CF0A0069764A /* AppDelegate.swift */,
 				36F9DD6721F1CF0A0069764A /* ViewController.swift */,
+				369493E521F5612800079625 /* AccountCell.swift */,
 				36F9DD6921F1CF0A0069764A /* Main.storyboard */,
 				36F9DD6C21F1CF0B0069764A /* Assets.xcassets */,
 				36F9DD6E21F1CF0B0069764A /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 			files = (
 				36F9DD6821F1CF0A0069764A /* ViewController.swift in Sources */,
 				36F9DD6621F1CF0A0069764A /* AppDelegate.swift in Sources */,
+				369493E621F5612800079625 /* AccountCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
