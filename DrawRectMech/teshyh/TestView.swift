@@ -17,21 +17,21 @@ class TestView: UIView {
         print(#function)
         super.layoutSubviews()
     }
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        print("\(#function) \(size)")
-        return super.sizeThatFits(size)
-    }
-    override func draw(_ rect: CGRect) {
-        print("\(#function) \(rect) \(UIGraphicsGetCurrentContext())")
-    }
-    override func draw(_ layer: CALayer, in ctx: CGContext) {
-        print("\(#function) \(layer) \(ctx)")
-        super.draw(layer, in: ctx)
-    }
-    override func display(_ layer: CALayer) {
-        layer.backgroundColor = UIColor.cyan.cgColor
-        print("\(#function) \(layer)")
-    }
+//    override func sizeThatFits(_ size: CGSize) -> CGSize {
+//        print("\(#function) \(size)")
+//        return super.sizeThatFits(size)
+//    }
+//    override func draw(_ rect: CGRect) {
+//        print("\(#function) \(rect) \(UIGraphicsGetCurrentContext())")
+//    }
+//    override func draw(_ layer: CALayer, in ctx: CGContext) {
+//        print("\(#function) \(layer) \(ctx)")
+//        super.draw(layer, in: ctx)
+//    }
+//    override func display(_ layer: CALayer) {
+//        layer.backgroundColor = UIColor.cyan.cgColor
+//        print("\(#function) \(layer)")
+//    }
 }
 
 class TestLayer: CALayer {
