@@ -124,6 +124,11 @@ class RangeSlider: UIControl {
     //MARK: UIControl Override
     private var latestLocation: CGPoint = .zero
     
+    override func sendAction(_ action: Selector, to target: Any?, for event: UIEvent?) {
+        print("\(#function)")
+        super.sendAction(action, to: target, for: event)
+    }
+    
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         print("Begin")
         latestLocation = touch.location(in: self)
