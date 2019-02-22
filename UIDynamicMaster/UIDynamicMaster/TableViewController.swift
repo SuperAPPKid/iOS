@@ -43,8 +43,12 @@ class ViewController: UIViewController {
         }
         
         models.append(.init(title: "Test", lazyController: {
-            let vc = BasicDynamicViewController(preferBehavior: [.gravity,.gravityCollision], needMotionMode: false)
-            return vc
+            let lazyGravity = UIGravityBehavior.lazy {
+                let gravity = UIGravityBehavior()
+                gravity.gravityDirection = CGVector(dx: 0.1, dy: 1.0)
+                return gravity
+            }
+            return BasicDynamicViewController(preferScenario: .touch_then_drop(gravity: lazyGravity))
         }))
     }
     

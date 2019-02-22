@@ -8,48 +8,30 @@
 
 import UIKit
 
-struct BasicDynamicBehavior: OptionSet {
-    let rawValue: Int
+enum Scenario {
+    case touch_then_drop(gravity: LazyBehavior<UIGravityBehavior>)
     
-    static let attachment: BasicDynamicBehavior            = BasicDynamicBehavior(rawValue: 1 << 0)
-    fileprivate static let collision: BasicDynamicBehavior = BasicDynamicBehavior(rawValue: 1 << 1)
-    static let field: BasicDynamicBehavior                 = BasicDynamicBehavior(rawValue: 1 << 2)
-    static let gravity: BasicDynamicBehavior               = BasicDynamicBehavior(rawValue: 1 << 3)
-    static let push: BasicDynamicBehavior                  = BasicDynamicBehavior(rawValue: 1 << 4)
-    static let snap: BasicDynamicBehavior                  = BasicDynamicBehavior(rawValue: 1 << 5)
-    
-    static let gravityCollision: BasicDynamicBehavior  = [.gravity]
 }
 
 class BasicDynamicViewController: MyViewController {
-    private enum Scenario {
-        case touch_then_drop
-        case none
+    
+    private enum BehaviorKey: String {
+        case attachment
+        case collision
+        case field
+        case gravity
+        case push
+        case snap
     }
     
     private var preferScenario: Scenario
-    private var isMotionMode: Bool
     private var animator: UIDynamicAnimator?
-    private var gravity: UIGravityBehavior?
+    private var beforeToolbarItems:[UIBarButtonItem] = []
+    private var afterToolbarItems:[UIBarButtonItem] = []
+    private var usingBehaviors:[BehaviorKey: UIDynamicBehavior] = [:]
     
-    init(preferBehavior: BasicDynamicBehavior, needMotionMode: Bool) {
-        
-        if preferBehavior.isEmpty {
-            preferScenario = .none
-        } else if preferBehavior.contains([.gravity, .attachment, .collision]) {
-            preferScenario = .none
-        } else if preferBehavior.contains([.gravity, .attachment]) {
-            preferScenario = .none
-        } else if preferBehavior.contains([.gravity, .collision]) {
-            preferScenario = .none
-        } else if preferBehavior.contains([.gravity]) {
-            preferScenario = .touch_then_drop
-        } else {
-            preferScenario = .none
-        }
-        
-        isMotionMode = needMotionMode
-        
+    init(preferScenario: Scenario) {
+        self.preferScenario = preferScenario
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -59,48 +41,61 @@ class BasicDynamicViewController: MyViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let animator = UIDynamicAnimator(referenceView: view)
+        
         switch preferScenario {
-        case .touch_then_drop:
-            let demoView = DemoView(frame: .init(x: 50, y: 25, width: 50, height: 50))
-            demoView.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)
+        case .touch_then_drop(let gravity):
+            let tap = UITapGestureRecognizer(target: self, action: #selector(singleTap(gesture:)))
+            view.addGestureRecognizer(tap)
+            usingBehaviors[.gravity] = gravity.behavior
+        }
+        
+        self.animator = animator
+        
+        let resetButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(resetButtonClick(sender:)))
+        let pauseButton = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(pauseButtonClick(sender:)))
+        let playButton = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(playButtonClick(sender:)))
+        beforeToolbarItems = [resetButton, playButton]
+        afterToolbarItems = [resetButton, pauseButton]
+    }
+    
+    @objc func resetButtonClick(sender: UIBarButtonItem) {
+        ///here remove subviews and behavior
+    }
+    
+    @objc func pauseButtonClick(sender: UIBarButtonItem) {
+        ///here remove behavior
+    }
+    
+    @objc func playButtonClick(sender: UIBarButtonItem) {
+        ///here add
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setToolbarItems(beforeToolbarItems, animated: true)
+        
+        switch preferScenario {
+        case .touch_then_drop(_):
+            let demoView = DemoView(frame: .init(x: 100, y: 50, width: 50, height: 50))
             view.addSubview(demoView)
-            
-            let singleTap = UITapGestureRecognizer(target: self, action: #selector(singleTapForTouch_Then_Drop(gesture:)))
-            view.addGestureRecognizer(singleTap)
-            
-            let animator = UIDynamicAnimator(referenceView: view)
-            let behavior = UIGravityBehavior(items: [demoView])
-            behavior.action = { [unowned self, weak demoView] in
-                guard let demoView = demoView else { return }
-                if !self.view.bounds.contains(demoView.frame.origin) {
-                    demoView.removeFromSuperview()
-                    behavior.removeItem(demoView)
-                }
-            }
-            behavior.gravityDirection = .init(dx: 0, dy: 1)
-            behavior.magnitude = 0.5
-            
-            self.gravity = behavior
-            animator.addBehavior(behavior)
-            self.animator = animator
-        case .none:
-             let alert = UIAlertController(title: "Invalid Behavior Group", message: nil, preferredStyle: .alert)
-             alert.addAction(.init(title: "OK", style: .default, handler: { (_) in
-                self.navigationController?.popViewController(animated: true)
-             }))
-            present(alert, animated: true, completion: nil)
+            ///here add item
+            usingBehaviors[.gravity] as? 
         }
     }
     
-    @objc func singleTapForTouch_Then_Drop(gesture: UITapGestureRecognizer) {
+    @objc func singleTap(gesture: UITapGestureRecognizer) {
         if case UIGestureRecognizer.State.ended = gesture.state {
-            let demoView = DemoView()
-            demoView.bounds.size = CGSize(width: 50, height: 50)
-            demoView.center = gesture.location(in: view)
-            demoView.backgroundColor = UIColor.random(alpha: 1)
-            view.addSubview(demoView)
-            
-            gravity?.addItem(demoView)
+            if case Scenario.touch_then_drop(let gravity) = preferScenario {
+                let location = gesture.location(in: view)
+                let demoView = DemoView()
+                demoView.bounds.size = CGSize(width: [50, 100].randomElement() ?? 50, height: [50, 100].randomElement() ?? 50)
+                demoView.center = location
+                view.addSubview(demoView)
+                ///here add item
+            }
         }
     }
 
@@ -112,6 +107,7 @@ class BasicDynamicViewController: MyViewController {
 class DemoView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = UIColor.random(alpha: 0.8)
         print("🥚🥚🥚🥚")
     }
     
@@ -124,8 +120,33 @@ class DemoView: UIView {
     }
 }
 
-extension UIColor {
-    static func random(alpha: CGFloat) -> UIColor {
-        return UIColor(displayP3Red: CGFloat.random(in: 0.8...1), green: CGFloat.random(in: 0.8...1), blue: CGFloat.random(in: 0.8...1), alpha: alpha)
+struct LazyBehavior<Behavior: UIDynamicBehavior> {
+    var behavior: Behavior {
+        return insideClz()
+    }
+    private var insideClz: () -> (Behavior)
+    
+    init(clz: @escaping () -> (Behavior)) {
+        self.insideClz = clz
     }
 }
+
+protocol HasLazyBehavior {
+    associatedtype Behavior: UIDynamicBehavior
+    static func lazy(_ clz: @escaping () -> (Behavior)) -> LazyBehavior<Behavior>
+}
+
+extension HasLazyBehavior where Self: UIDynamicBehavior {
+    static func lazy(_ clz: @escaping () -> (Self)) -> LazyBehavior<Self> {
+        return LazyBehavior(clz: clz)
+    }
+}
+
+extension UIDynamicBehavior: HasLazyBehavior {}
+
+extension UIColor {
+    static func random(alpha: CGFloat) -> UIColor {
+        return UIColor(displayP3Red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: alpha)
+    }
+}
+
