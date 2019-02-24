@@ -54,47 +54,67 @@ class BasicDynamicViewController: MyViewController {
         self.animator = animator
         
         let resetButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(resetButtonClick(sender:)))
-        let pauseButton = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(pauseButtonClick(sender:)))
+        let pauseButton = UIBarButtonItem(barButtonSystemItem: .pause, target: self, action: #selector(pauseButtonClick(sender:)))
         let playButton = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(playButtonClick(sender:)))
-        beforeToolbarItems = [resetButton, playButton]
-        afterToolbarItems = [resetButton, pauseButton]
+        let fixWidth = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        fixWidth.width = 15
+        beforeToolbarItems = [resetButton, fixWidth, playButton]
+        afterToolbarItems = [resetButton, fixWidth, pauseButton]
+        
+        executeWhenAppear = { [unowned self] in
+            self.setToolbarItems(self.beforeToolbarItems, animated: true)
+            
+            switch self.preferScenario {
+            case .touch_then_drop(_):
+                let demoView = DemoView(frame: .init(x: 100, y: 50, width: 50, height: 50))
+                self.view.addSubview(demoView)
+                (self.usingBehaviors[.gravity] as? UIGravityBehavior)?.addItem(demoView)
+            }
+        }
     }
     
     @objc func resetButtonClick(sender: UIBarButtonItem) {
         ///here remove subviews and behavior
+        setToolbarItems(beforeToolbarItems, animated: false)
+        view.subviews.forEach{ $0.removeFromSuperview() }
+        animator?.removeAllBehaviors()
+        switch preferScenario {
+        case .touch_then_drop(let gravity):
+            usingBehaviors[.gravity] = gravity.behavior
+        }
     }
     
     @objc func pauseButtonClick(sender: UIBarButtonItem) {
         ///here remove behavior
+        setToolbarItems(beforeToolbarItems, animated: false)
+        animator?.removeAllBehaviors()
     }
     
     @objc func playButtonClick(sender: UIBarButtonItem) {
         ///here add
+        setToolbarItems(afterToolbarItems, animated: false)
+        for behavior in usingBehaviors.values {
+            animator?.addBehavior(behavior)
+        }
     }
     
+    private var executeWhenAppear: (() -> Void)?
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        setToolbarItems(beforeToolbarItems, animated: true)
-        
-        switch preferScenario {
-        case .touch_then_drop(_):
-            let demoView = DemoView(frame: .init(x: 100, y: 50, width: 50, height: 50))
-            view.addSubview(demoView)
-            ///here add item
-            usingBehaviors[.gravity] as? 
-        }
+        executeWhenAppear?()
+        executeWhenAppear = nil
     }
     
     @objc func singleTap(gesture: UITapGestureRecognizer) {
         if case UIGestureRecognizer.State.ended = gesture.state {
-            if case Scenario.touch_then_drop(let gravity) = preferScenario {
+            if case Scenario.touch_then_drop(_) = preferScenario {
                 let location = gesture.location(in: view)
                 let demoView = DemoView()
                 demoView.bounds.size = CGSize(width: [50, 100].randomElement() ?? 50, height: [50, 100].randomElement() ?? 50)
                 demoView.center = location
                 view.addSubview(demoView)
-                ///here add item
+                (usingBehaviors[.gravity] as? UIGravityBehavior)?.addItem(demoView)
             }
         }
     }
