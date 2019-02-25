@@ -12,7 +12,7 @@
 		364639CB221E8C5E00FED47F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 364639CA221E8C5E00FED47F /* Assets.xcassets */; };
 		364639CE221E8C5E00FED47F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 364639CC221E8C5E00FED47F /* LaunchScreen.storyboard */; };
 		364639D6221E8C9200FED47F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364639D5221E8C9200FED47F /* TableViewController.swift */; };
-		364639DA221EA42A00FED47F /* BasicDynamicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364639D9221EA42A00FED47F /* BasicDynamicViewController.swift */; };
+		364639DA221EA42A00FED47F /* GravityDynamicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364639D9221EA42A00FED47F /* GravityDynamicViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +23,7 @@
 		364639CD221E8C5E00FED47F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		364639CF221E8C5E00FED47F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		364639D5221E8C9200FED47F /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		364639D9221EA42A00FED47F /* BasicDynamicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDynamicViewController.swift; sourceTree = "<group>"; };
+		364639D9221EA42A00FED47F /* GravityDynamicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityDynamicViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +62,7 @@
 				364639CC221E8C5E00FED47F /* LaunchScreen.storyboard */,
 				364639CF221E8C5E00FED47F /* Info.plist */,
 				364639D5221E8C9200FED47F /* TableViewController.swift */,
-				364639D9221EA42A00FED47F /* BasicDynamicViewController.swift */,
+				364639D9221EA42A00FED47F /* GravityDynamicViewController.swift */,
 			);
 			path = UIDynamicMaster;
 			sourceTree = "<group>";
@@ -140,7 +140,7 @@
 			files = (
 				364639C4221E8C5D00FED47F /* AppDelegate.swift in Sources */,
 				364639D6221E8C9200FED47F /* TableViewController.swift in Sources */,
-				364639DA221EA42A00FED47F /* BasicDynamicViewController.swift in Sources */,
+				364639DA221EA42A00FED47F /* GravityDynamicViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,6 +28,7 @@ class ViewController: UIViewController {
         edgesForExtendedLayout = [.top]
 //        extendedLayoutIncludesOpaqueBars = true
         
+        //hack to navigationController edgePanGesture
         if let target = (navigationController?.interactivePopGestureRecognizer?.value(forKey: "_targets") as? [AnyObject])?.first,
             let _target = target.value(forKey: "_target"),
             (_target as AnyObject).responds(to: Selector(("handleNavigationTransition:"))) {
@@ -42,13 +43,33 @@ class ViewController: UIViewController {
             navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         }
         
-        models.append(.init(title: "Test", lazyController: {
+        models.append(.init(title: "Gravity", controller: {
             let lazyGravity = UIGravityBehavior.lazy {
                 let gravity = UIGravityBehavior()
                 gravity.gravityDirection = CGVector(dx: 0.1, dy: 1.0)
                 return gravity
             }
-            return BasicDynamicViewController(preferScenario: .touch_then_drop(gravity: lazyGravity))
+            return GravityDynamicViewController(preferScenario: .touch_then_drop(gravity: lazyGravity))
+        }))
+        
+        models.append(.init(title: "Gravity and Collision", controller: {
+            let lazyGravity = UIGravityBehavior.lazy {
+                let gravity = UIGravityBehavior()
+                gravity.magnitude = 5
+                return gravity
+            }
+            let lazyCollision = UICollisionBehavior.lazy { return UICollisionBehavior() }
+            return GravityDynamicViewController(preferScenario: .touch_then_drop_and_collision(gravity: lazyGravity, collision: lazyCollision))
+        }))
+        
+        models.append(.init(title: "Gravity and Collision with barrier", controller: {
+            let lazyGravity = UIGravityBehavior.lazy {
+                let gravity = UIGravityBehavior()
+                gravity.magnitude = 0.5
+                return gravity
+            }
+            let lazyCollision = UICollisionBehavior.lazy { return UICollisionBehavior() }
+            return GravityDynamicViewController(preferScenario: .touch_then_drop_and_collision_withBarrier(gravity: lazyGravity, collision: lazyCollision, barrierSize: CGSize(width: 150, height: 30)))
         }))
     }
     
@@ -77,7 +98,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         UIView.animate(withDuration: 0.2, animations: {
             tableView.deselectRow(at: indexPath, animated: true)
         }) { (_) in
-            let vc = model.lazyController()
+            let vc = model.controller()
             vc.title = model.title
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -98,7 +119,7 @@ extension ViewController: UIGestureRecognizerDelegate {
 
 struct Model {
     var title: String
-    var lazyController: (() -> (MyViewController))
+    var controller: (() -> (MyViewController))
 }
 
 class MyViewController: UIViewController {
@@ -114,5 +135,15 @@ class MyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setToolbarHidden(false, animated: true)
+    }
+}
+
+class NavigationController: UINavigationController {
+    override var shouldAutorotate: Bool {
+        return topViewController?.shouldAutorotate ?? super.shouldAutorotate
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
     }
 }
