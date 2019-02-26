@@ -123,6 +123,7 @@ struct Model {
 }
 
 class MyViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -130,6 +131,7 @@ class MyViewController: UIViewController {
         
         navigationItem.largeTitleDisplayMode = .never
         view.backgroundColor = .white
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,12 +140,3 @@ class MyViewController: UIViewController {
     }
 }
 
-class NavigationController: UINavigationController {
-    override var shouldAutorotate: Bool {
-        return topViewController?.shouldAutorotate ?? super.shouldAutorotate
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
-    }
-}

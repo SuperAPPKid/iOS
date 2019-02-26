@@ -13,6 +13,8 @@
 		364639CE221E8C5E00FED47F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 364639CC221E8C5E00FED47F /* LaunchScreen.storyboard */; };
 		364639D6221E8C9200FED47F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364639D5221E8C9200FED47F /* TableViewController.swift */; };
 		364639DA221EA42A00FED47F /* GravityDynamicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364639D9221EA42A00FED47F /* GravityDynamicViewController.swift */; };
+		36D015CF2225299A006E8126 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D015CE2225299A006E8126 /* NavigationController.swift */; };
+		36D015D122252AF4006E8126 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D015D022252AF4006E8126 /* VisualEffectView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		364639CF221E8C5E00FED47F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		364639D5221E8C9200FED47F /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		364639D9221EA42A00FED47F /* GravityDynamicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityDynamicViewController.swift; sourceTree = "<group>"; };
+		36D015CE2225299A006E8126 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		36D015D022252AF4006E8126 /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				364639CF221E8C5E00FED47F /* Info.plist */,
 				364639D5221E8C9200FED47F /* TableViewController.swift */,
 				364639D9221EA42A00FED47F /* GravityDynamicViewController.swift */,
+				36D015CE2225299A006E8126 /* NavigationController.swift */,
+				36D015D022252AF4006E8126 /* VisualEffectView.swift */,
 			);
 			path = UIDynamicMaster;
 			sourceTree = "<group>";
@@ -138,7 +144,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36D015D122252AF4006E8126 /* VisualEffectView.swift in Sources */,
 				364639C4221E8C5D00FED47F /* AppDelegate.swift in Sources */,
+				36D015CF2225299A006E8126 /* NavigationController.swift in Sources */,
 				364639D6221E8C9200FED47F /* TableViewController.swift in Sources */,
 				364639DA221EA42A00FED47F /* GravityDynamicViewController.swift in Sources */,
 			);

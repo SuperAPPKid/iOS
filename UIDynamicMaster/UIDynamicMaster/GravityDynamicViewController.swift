@@ -51,6 +51,7 @@ class GravityDynamicViewController: MyViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.1215686275, green: 0.1294117647, blue: 0.1411764706, alpha: 1)
         
         let animator = UIDynamicAnimator(referenceView: view)
         self.animator = animator
@@ -71,38 +72,30 @@ class GravityDynamicViewController: MyViewController {
         executeOnceWhenAppear = { [unowned self] in
             self.setToolbarItems(self.beforeToolbarItems, animated: true)
             let demoView = DemoView(frame: .init(x: 135, y: 20, width: 50, height: 50))
-            self.view.addSubview(demoView)
+            demoView.alpha = 0
             
             switch self.preferScenario {
             case .touch_then_drop(_):
+                self.view.addSubview(demoView)
+                UIView.animate(withDuration: 0.2, animations: {
+                    demoView.alpha = 1
+                })
                 (self.usingBehaviors[.gravity] as? UIGravityBehavior)?.addItem(demoView)
-                
             case .touch_then_drop_and_collision(_, _):
+                self.view.addSubview(demoView)
+                UIView.animate(withDuration: 0.2, animations: {
+                    demoView.alpha = 1
+                })
                 (self.usingBehaviors[.gravity] as? UIGravityBehavior)?.addItem(demoView)
                 (self.usingBehaviors[.collision] as? UICollisionBehavior)?.addItem(demoView)
-                
             case .touch_then_drop_and_collision_withBarrier(_, _, _):
-                (self.usingBehaviors[.gravity] as? UIGravityBehavior)?.addItem(demoView)
-                (self.usingBehaviors[.collision] as? UICollisionBehavior)?.addItem(demoView)
-                var updateCount = 0
-                (self.usingBehaviors[.collision] as? UICollisionBehavior)?.action =  {
-                    if (updateCount % 3 == 0) {
-                        let outline = UIView(frame: demoView.bounds);
-                        outline.transform = demoView.transform
-                        outline.center = demoView.center
-                        outline.alpha = 0.5
-                        outline.backgroundColor = .clear
-                        outline.layer.borderColor = demoView.layer.presentation()?.backgroundColor
-                        outline.layer.borderWidth = 1.0;
-                        self.view.addSubview(outline);
-                    }
-                    updateCount += 1
-                }
+                break
             }
         }
     }
     
     private func initilizeBehaviors() {
+        recordActions.removeAll()
         switch preferScenario {
         case .touch_then_drop(let gravity):
             usingBehaviors[.gravity] = gravity.behavior
@@ -119,7 +112,7 @@ class GravityDynamicViewController: MyViewController {
             let barrier = UIView()
             barrier.frame.origin = CGPoint(x: 0, y: 200)
             barrier.frame.size = barrierSize
-            barrier.backgroundColor = .black
+            barrier.backgroundColor = #colorLiteral(red: 0.9414251447, green: 0.9516633153, blue: 0.8205869794, alpha: 1)
             view.addSubview(barrier)
             let collisionBehavior = collision.behavior
             collisionBehavior.translatesReferenceBoundsIntoBoundary = true
@@ -135,7 +128,6 @@ class GravityDynamicViewController: MyViewController {
         view.subviews.forEach{ $0.removeFromSuperview() }
         animator?.removeAllBehaviors()
         initilizeBehaviors()
-        executeOnceWhenAppear?()
     }
     
     @objc func pauseButtonClick(sender: UIBarButtonItem) {
@@ -159,6 +151,24 @@ class GravityDynamicViewController: MyViewController {
         executeOnceWhenAppear?()
     }
     
+    private var recordActions: [(() -> Void)] = []
+    private func addRecord(of demoView: DemoView) {
+        var updateCount = 0
+        recordActions.append { [unowned self] in
+            if (updateCount % 3 == 0) {
+                let outline = UIView(frame: demoView.bounds);
+                outline.transform = demoView.transform
+                outline.center = demoView.center
+                outline.alpha = 0.5
+                outline.backgroundColor = .clear
+                outline.layer.borderColor = demoView.layer.presentation()?.backgroundColor
+                outline.layer.borderWidth = 1.0;
+                self.view.addSubview(outline);
+            }
+            updateCount += 1
+        }
+    }
+    
     @objc func singleTap(gesture: UITapGestureRecognizer) {
         if case UIGestureRecognizer.State.ended = gesture.state {
             
@@ -172,9 +182,17 @@ class GravityDynamicViewController: MyViewController {
             switch preferScenario {
             case .touch_then_drop(_):
                 (usingBehaviors[.gravity] as? UIGravityBehavior)?.addItem(demoView)
-            case .touch_then_drop_and_collision(_, _), .touch_then_drop_and_collision_withBarrier(_, _, _):
+            case .touch_then_drop_and_collision(_, _):
                 (usingBehaviors[.gravity] as? UIGravityBehavior)?.addItem(demoView)
                 (usingBehaviors[.collision] as? UICollisionBehavior)?.addItem(demoView)
+                
+            case .touch_then_drop_and_collision_withBarrier(_, _, _):
+                (usingBehaviors[.gravity] as? UIGravityBehavior)?.addItem(demoView)
+                (usingBehaviors[.collision] as? UICollisionBehavior)?.addItem(demoView)
+                addRecord(of: demoView)
+                (self.usingBehaviors[.collision] as? UICollisionBehavior)?.action =  { [unowned self] in
+                    self.recordActions.forEach{ $0() }
+                }
             }
         }
     }
@@ -259,14 +277,14 @@ extension Collection {
 extension UIColor {
     var reversed: UIColor {
         let components = self.cgColor.components
-        return UIColor(displayP3Red: 1 - (components?[safe: 0] ?? 0),
+        return UIColor(red: 1 - (components?[safe: 0] ?? 0),
                        green: 1 - (components?[safe: 1] ?? 0),
                        blue: 1 - (components?[safe: 2] ?? 0),
                        alpha: components?[safe: 3] ?? 1)
     }
     
     static func random(alpha: CGFloat) -> UIColor {
-        return UIColor(displayP3Red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: alpha)
+        return UIColor(red: CGFloat.random(in: 0.3...0.8), green: CGFloat.random(in: 0.3...0.8), blue: CGFloat.random(in: 0.3...0.8), alpha: alpha)
     }
 }
 
