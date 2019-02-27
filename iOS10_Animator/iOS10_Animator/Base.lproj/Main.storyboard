@@ -53,27 +53,50 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starry-night" translatesAutoresizingMaskIntoConstraints="NO" id="huF-GR-Ivl">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CN" translatesAutoresizingMaskIntoConstraints="NO" id="jzD-ck-9W2">
-                                <rect key="frame" x="70" y="50" width="235" height="235"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSH-hz-bnK">
+                                <rect key="frame" x="77.5" y="50" width="220" height="220"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CN" translatesAutoresizingMaskIntoConstraints="NO" id="jzD-ck-9W2">
+                                        <rect key="frame" x="0.0" y="0.0" width="220" height="220"/>
+                                    </imageView>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mqM-lr-bJp" customClass="VisualEffectView" customModule="iOS10_Animator" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="220" height="220"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cpF-8S-YYa">
+                                            <rect key="frame" x="0.0" y="0.0" width="220" height="220"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                        <blurEffect style="light"/>
+                                    </visualEffectView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="235" id="1w3-5D-zW7"/>
-                                    <constraint firstAttribute="height" constant="235" id="AxB-9N-JHt"/>
+                                    <constraint firstAttribute="height" constant="220" id="9Te-ac-14q"/>
+                                    <constraint firstItem="jzD-ck-9W2" firstAttribute="top" secondItem="RSH-hz-bnK" secondAttribute="top" id="CDX-DQ-7sh"/>
+                                    <constraint firstAttribute="bottom" secondItem="mqM-lr-bJp" secondAttribute="bottom" id="I0K-Ih-eF8"/>
+                                    <constraint firstItem="jzD-ck-9W2" firstAttribute="leading" secondItem="RSH-hz-bnK" secondAttribute="leading" id="P2p-a5-VIK"/>
+                                    <constraint firstAttribute="trailing" secondItem="mqM-lr-bJp" secondAttribute="trailing" id="Ymi-nX-hrB"/>
+                                    <constraint firstAttribute="trailing" secondItem="jzD-ck-9W2" secondAttribute="trailing" id="bhx-J9-yS3"/>
+                                    <constraint firstAttribute="bottom" secondItem="jzD-ck-9W2" secondAttribute="bottom" id="g0G-Rc-y5m"/>
+                                    <constraint firstItem="mqM-lr-bJp" firstAttribute="top" secondItem="RSH-hz-bnK" secondAttribute="top" id="uIE-d9-7eY"/>
+                                    <constraint firstAttribute="width" constant="220" id="wFE-a4-qJN"/>
+                                    <constraint firstItem="mqM-lr-bJp" firstAttribute="leading" secondItem="RSH-hz-bnK" secondAttribute="leading" id="x0f-PI-tLg"/>
                                 </constraints>
-                            </imageView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="jzD-ck-9W2" firstAttribute="centerX" secondItem="IDu-P9-9XI" secondAttribute="centerX" id="23C-Uh-lHd"/>
                             <constraint firstItem="huF-GR-Ivl" firstAttribute="leading" secondItem="U8v-Ny-01R" secondAttribute="leading" id="Jzs-pc-9fg"/>
                             <constraint firstItem="U8v-Ny-01R" firstAttribute="trailing" secondItem="huF-GR-Ivl" secondAttribute="trailing" id="WNf-qK-Lzr"/>
-                            <constraint firstItem="jzD-ck-9W2" firstAttribute="top" secondItem="U8v-Ny-01R" secondAttribute="top" constant="30" id="Y5E-n6-ICH"/>
                             <constraint firstItem="U8v-Ny-01R" firstAttribute="bottom" secondItem="huF-GR-Ivl" secondAttribute="bottom" id="hyw-75-Rcj"/>
+                            <constraint firstItem="RSH-hz-bnK" firstAttribute="top" secondItem="U8v-Ny-01R" secondAttribute="top" constant="30" id="n4e-bC-9bv"/>
                             <constraint firstItem="huF-GR-Ivl" firstAttribute="top" secondItem="IDu-P9-9XI" secondAttribute="top" id="rEt-Oy-ZKo"/>
+                            <constraint firstItem="RSH-hz-bnK" firstAttribute="centerX" secondItem="IDu-P9-9XI" secondAttribute="centerX" id="wZe-jg-rYl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="U8v-Ny-01R"/>
                     </view>
                     <connections>
-                        <outlet property="blurImageView" destination="jzD-ck-9W2" id="SVU-Fd-NgC"/>
+                        <outlet property="blurView" destination="mqM-lr-bJp" id="g9o-lG-DHc"/>
+                        <outlet property="imageContainer" destination="RSH-hz-bnK" id="xAf-T7-cWF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zRN-IL-nLH" userLabel="First Responder" sceneMemberID="firstResponder"/>

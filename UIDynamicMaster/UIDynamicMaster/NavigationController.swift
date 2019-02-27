@@ -68,6 +68,8 @@ class SideViewController: UIViewController {
         view.addSubview(rightSideView)
         rightSideView.backgroundColor = .white
         hideSideView(animate: false)
+        
+        view.isUserInteractionEnabled = false
     }
     
     var isToggleingSideView: Bool = false

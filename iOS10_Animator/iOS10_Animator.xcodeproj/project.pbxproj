@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3637F99122263A2B008E82FF /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3637F99022263A2B008E82FF /* VisualEffectView.swift */; };
 		36BA8CEF21CB344D00B371E0 /* ConsoleAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA8CED21CB344D00B371E0 /* ConsoleAction.swift */; };
 		36BA8CF021CB344D00B371E0 /* ConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA8CEE21CB344D00B371E0 /* ConsoleViewController.swift */; };
 		36F516312182AF880035E869 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F516302182AF880035E869 /* AppDelegate.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3637F99022263A2B008E82FF /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisualEffectView.swift; path = ../../UIDynamicMaster/UIDynamicMaster/VisualEffectView.swift; sourceTree = "<group>"; };
 		36BA8CED21CB344D00B371E0 /* ConsoleAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleAction.swift; sourceTree = "<group>"; };
 		36BA8CEE21CB344D00B371E0 /* ConsoleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleViewController.swift; sourceTree = "<group>"; };
 		36F5162D2182AF880035E869 /* iOS10_Animator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS10_Animator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +75,7 @@
 				36F516372182AF890035E869 /* Assets.xcassets */,
 				36F516392182AF890035E869 /* LaunchScreen.storyboard */,
 				36F5163C2182AF890035E869 /* Info.plist */,
+				3637F99022263A2B008E82FF /* VisualEffectView.swift */,
 				36BA8CEC21CB344D00B371E0 /* ConsoleViewController */,
 			);
 			path = iOS10_Animator;
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3637F99122263A2B008E82FF /* VisualEffectView.swift in Sources */,
 				36BA8CF021CB344D00B371E0 /* ConsoleViewController.swift in Sources */,
 				36BA8CEF21CB344D00B371E0 /* ConsoleAction.swift in Sources */,
 				36F516332182AF880035E869 /* ViewController.swift in Sources */,
